@@ -54,14 +54,14 @@ ADMIN_EMAIL="adminxmel2394@gmail.com"
 ADMIN_PASSWORD="admin1234"
 
 # Source Account (The account to copy trades from)
-SOURCE_BINANCE_API_KEY="guOC851LwX9GoziDStNlvbRDLxsR7nQCacFfKYyMkytcFEFX8ZIMlb3WzSNjPLGg"
-SOURCE_BINANCE_SECRET="LELD3xEhuqzldHYSS8nBSp4pPGLo9xgmFOHV9v8ddG915FTJxXp1dwFv2FFj7nmG"
+SOURCE_BINANCE_API_KEY="guOC851LwX9GoziDdfStNlvbRDLxsR7nQCacFfKYyMkytcFEFX8ZIMlb3WzSNjPLGg"
+SOURCE_BINANCE_SECRET="LELD3xEhuqzldHdfYSS8nBSp4pPGLo9xgmFOHV9v8ddG915FTJxXp1dwFv2FFj7nmG"
 
 # Database Configuration
 DB_HOST=localhost
 DB_NAME=copy_trading
 DB_USER=root
-DB_PASSWORD=player.123
+DB_PASSWORD=.123
 ```
 
 ### 3. **Run Database Migration**
