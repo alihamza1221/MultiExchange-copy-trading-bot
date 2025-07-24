@@ -1,0 +1,1909 @@
+2025-07-23 14:03:08,491 - ERROR - Error while connecting to MySQL: 1049 (42000): Unknown database 'copy_trading'
+2025-07-23 14:03:08,503 - ERROR - Error while connecting to MySQL: 1049 (42000): Unknown database 'copy_trading'
+2025-07-23 14:03:08,505 - ERROR - Failed to initialize database
+2025-07-23 14:05:22,420 - INFO - Successfully connected to MySQL database
+2025-07-23 14:05:22,616 - INFO - Database tables created successfully
+2025-07-23 14:05:22,617 - INFO - MySQL connection is closed
+2025-07-23 14:05:22,627 - INFO - Successfully connected to MySQL database
+2025-07-23 14:05:22,629 - INFO - MySQL connection is closed
+2025-07-23 14:05:22,644 - INFO - Successfully connected to MySQL database
+2025-07-23 14:05:22,664 - INFO - Database tables created successfully
+2025-07-23 14:05:22,665 - INFO - MySQL connection is closed
+2025-07-23 14:05:22,666 - INFO - Database initialized successfully
+2025-07-23 14:18:27,783 - INFO - Successfully connected to MySQL database
+2025-07-23 14:18:27,788 - INFO - MySQL connection is closed
+2025-07-23 14:18:27,851 - INFO - Successfully connected to MySQL database
+2025-07-23 14:18:27,854 - INFO - MySQL connection is closed
+2025-07-23 14:18:43,017 - INFO - Successfully connected to MySQL database
+2025-07-23 14:18:43,019 - INFO - MySQL connection is closed
+2025-07-23 14:20:59,750 - INFO - Successfully connected to MySQL database
+2025-07-23 14:20:59,769 - INFO - MySQL connection is closed
+2025-07-23 14:21:01,839 - ERROR - Binance API Error - Code: -2015, Message: Invalid API-key, IP, or permissions for action, request ip: 104.28.244.124
+2025-07-23 14:24:34,393 - INFO - Successfully connected to MySQL database
+2025-07-23 14:24:34,409 - INFO - MySQL connection is closed
+2025-07-23 14:24:36,341 - INFO - Binance connection test successful for target account
+2025-07-23 14:24:36,352 - INFO - Successfully connected to MySQL database
+2025-07-23 14:24:36,359 - INFO - Binance account added for user: admin@test.com
+2025-07-23 14:24:36,360 - INFO - MySQL connection is closed
+2025-07-23 14:24:37,418 - INFO - Successfully connected to MySQL database
+2025-07-23 14:24:37,421 - INFO - MySQL connection is closed
+2025-07-23 14:24:45,187 - INFO - Successfully connected to MySQL database
+2025-07-23 14:24:45,191 - INFO - MySQL connection is closed
+2025-07-23 14:24:45,276 - INFO - Successfully connected to MySQL database
+2025-07-23 14:24:45,278 - INFO - MySQL connection is closed
+2025-07-23 14:26:49,994 - INFO - Successfully connected to MySQL database
+2025-07-23 14:26:49,999 - INFO - MySQL connection is closed
+2025-07-23 14:26:50,078 - INFO - Successfully connected to MySQL database
+2025-07-23 14:26:50,083 - INFO - MySQL connection is closed
+2025-07-23 14:33:29,723 - INFO - Successfully connected to MySQL database
+2025-07-23 14:33:29,747 - INFO - Database tables created successfully
+2025-07-23 14:33:29,751 - INFO - MySQL connection is closed
+2025-07-23 14:33:29,751 - INFO - Database initialized successfully
+2025-07-23 14:33:31,848 - ERROR - Binance API Error - Code: -2015, Message: Invalid API-key, IP, or permissions for action, request ip: 104.28.244.124
+2025-07-23 14:33:31,849 - ERROR - Source account connection failed
+2025-07-23 14:33:31,952 - INFO - Successfully connected to MySQL database
+2025-07-23 14:33:31,964 - INFO - MySQL connection is closed
+2025-07-23 15:23:25,684 - INFO - Successfully connected to MySQL database
+2025-07-23 15:23:25,717 - INFO - Database tables created successfully
+2025-07-23 15:23:25,728 - INFO - MySQL connection is closed
+2025-07-23 15:23:25,734 - INFO - Database initialized successfully
+2025-07-23 15:23:28,304 - INFO - Binance connection test successful for source account
+2025-07-23 15:23:29,186 - INFO - Copy trading bot started successfully
+2025-07-23 15:23:29,319 - INFO - Successfully connected to MySQL database
+2025-07-23 15:23:29,323 - INFO - MySQL connection is closed
+2025-07-23 15:23:30,046 - INFO - Listen key created: aEH5FOkyD5qOlKaHuKpMa2Ewvzf9AAfTFSWuHvLrjr7S8SVl48Lxk0CaOeaQnXiv
+2025-07-23 15:23:30,048 - ERROR - Unexpected error creating listen key: string indices must be integers, not 'str'
+2025-07-23 15:23:30,055 - ERROR - Failed to create listen key
+2025-07-23 15:29:23,496 - INFO - Successfully connected to MySQL database
+2025-07-23 15:29:23,533 - INFO - MySQL connection is closed
+2025-07-23 15:29:25,643 - INFO - Successfully connected to MySQL database
+2025-07-23 15:29:25,658 - INFO - Database tables created successfully
+2025-07-23 15:29:25,661 - INFO - MySQL connection is closed
+2025-07-23 15:29:25,664 - INFO - Database initialized successfully
+2025-07-23 15:29:27,950 - INFO - Binance connection test successful for source account
+2025-07-23 15:29:28,751 - INFO - Copy trading bot started successfully
+2025-07-23 15:29:28,834 - INFO - Successfully connected to MySQL database
+2025-07-23 15:29:28,836 - INFO - MySQL connection is closed
+2025-07-23 15:29:29,652 - INFO - Listen key created: aEH5FOkyD5qOlKaHuKpMa2Ewvzf9AAfTFSWuHvLrjr7S8SVl48Lxk0CaOeaQnXiv
+2025-07-23 15:29:29,654 - ERROR - Error starting listener: ThreadedWebsocketManager.start_futures_user_socket() got an unexpected keyword argument 'listen_key'
+2025-07-23 15:32:05,850 - INFO - Successfully connected to MySQL database
+2025-07-23 15:32:05,853 - INFO - MySQL connection is closed
+2025-07-23 15:32:05,950 - INFO - Successfully connected to MySQL database
+2025-07-23 15:32:05,960 - INFO - MySQL connection is closed
+2025-07-23 15:32:14,998 - INFO - Successfully connected to MySQL database
+2025-07-23 15:32:15,038 - INFO - Database tables created successfully
+2025-07-23 15:32:15,076 - INFO - MySQL connection is closed
+2025-07-23 15:32:15,081 - INFO - Database initialized successfully
+2025-07-23 15:32:17,621 - INFO - Binance connection test successful for source account
+2025-07-23 15:32:18,615 - INFO - Copy trading bot started successfully
+2025-07-23 15:32:18,682 - INFO - Successfully connected to MySQL database
+2025-07-23 15:32:18,684 - INFO - MySQL connection is closed
+2025-07-23 15:32:19,594 - INFO - Listen key created: aEH5FOkyD5qOlKaHuKpMa2Ewvzf9AAfTFSWuHvLrjr7S8SVl48Lxk0CaOeaQnXiv
+2025-07-23 15:32:19,596 - ERROR - Error starting listener: ThreadedWebsocketManager.start_futures_user_socket() got an unexpected keyword argument 'listen_key'
+2025-07-23 15:53:19,148 - INFO - Successfully connected to MySQL database
+2025-07-23 15:53:19,159 - INFO - MySQL connection is closed
+2025-07-23 15:53:24,212 - INFO - Successfully connected to MySQL database
+2025-07-23 15:53:24,215 - INFO - MySQL connection is closed
+2025-07-23 15:53:24,304 - INFO - Successfully connected to MySQL database
+2025-07-23 15:53:24,307 - INFO - MySQL connection is closed
+2025-07-23 15:53:29,150 - INFO - Successfully connected to MySQL database
+2025-07-23 15:53:29,171 - INFO - Database tables created successfully
+2025-07-23 15:53:29,173 - INFO - MySQL connection is closed
+2025-07-23 15:53:29,178 - INFO - Database initialized successfully
+2025-07-23 15:53:31,257 - INFO - Binance connection test successful for source account
+2025-07-23 15:53:32,068 - INFO - Copy trading bot started successfully
+2025-07-23 15:53:32,166 - INFO - Successfully connected to MySQL database
+2025-07-23 15:53:32,169 - INFO - MySQL connection is closed
+2025-07-23 15:53:33,261 - INFO - Started listening to source account order updates
+2025-07-23 16:13:59,073 - INFO - Received order update: SEIUSDT SELL NEW
+2025-07-23 16:13:59,100 - INFO - Successfully connected to MySQL database
+2025-07-23 16:13:59,104 - INFO - MySQL connection is closed
+2025-07-23 16:14:01,232 - ERROR - Error placing order - Code: -1106, Message: Parameter 'timeinforce' sent when not required.
+2025-07-23 16:14:01,234 - INFO - Received order update: SEIUSDT SELL FILLED
+2025-07-23 16:24:50,872 - INFO - Successfully connected to MySQL database
+2025-07-23 16:24:50,876 - INFO - MySQL connection is closed
+2025-07-23 16:24:50,989 - INFO - Successfully connected to MySQL database
+2025-07-23 16:24:51,008 - INFO - MySQL connection is closed
+2025-07-23 16:24:55,958 - INFO - Successfully connected to MySQL database
+2025-07-23 16:24:55,973 - INFO - Database tables created successfully
+2025-07-23 16:24:55,985 - INFO - MySQL connection is closed
+2025-07-23 16:24:55,988 - INFO - Database initialized successfully
+2025-07-23 16:24:58,232 - INFO - Binance connection test successful for source account
+2025-07-23 16:24:59,127 - INFO - Copy trading bot started successfully
+2025-07-23 16:24:59,227 - INFO - Successfully connected to MySQL database
+2025-07-23 16:24:59,253 - INFO - MySQL connection is closed
+2025-07-23 16:25:00,431 - INFO - Started listening to source account order updates
+2025-07-23 16:26:42,527 - INFO - Received order update: WAXPUSDT SELL CANCELED
+2025-07-23 16:26:42,540 - INFO - Successfully connected to MySQL database
+2025-07-23 16:26:42,543 - INFO - MySQL connection is closed
+2025-07-23 16:26:43,630 - INFO - Order cancelled in source account: WAXPUSDT 1549295092
+2025-07-23 16:26:43,653 - INFO - Received order update: WAXPUSDT SELL CANCELED
+2025-07-23 16:26:43,681 - INFO - Successfully connected to MySQL database
+2025-07-23 16:26:43,688 - INFO - MySQL connection is closed
+2025-07-23 16:26:44,733 - INFO - Order cancelled in source account: WAXPUSDT 1549295241
+2025-07-23 16:26:44,741 - INFO - Received order update: ARBUSDT SELL CANCELED
+2025-07-23 16:26:44,760 - INFO - Successfully connected to MySQL database
+2025-07-23 16:26:44,764 - INFO - MySQL connection is closed
+2025-07-23 16:26:49,987 - INFO - Order cancelled in source account: ARBUSDT 12764644108
+2025-07-23 16:26:49,992 - INFO - Received order update: SPELLUSDT SELL CANCELED
+2025-07-23 16:26:50,018 - INFO - Successfully connected to MySQL database
+2025-07-23 16:26:50,073 - INFO - MySQL connection is closed
+2025-07-23 16:26:51,906 - INFO - Order cancelled in source account: SPELLUSDT 3497885703
+2025-07-23 16:26:51,971 - INFO - Received order update: SPELLUSDT SELL CANCELED
+2025-07-23 16:26:52,081 - INFO - Successfully connected to MySQL database
+2025-07-23 16:26:52,141 - INFO - MySQL connection is closed
+2025-07-23 16:26:53,393 - INFO - Order cancelled in source account: SPELLUSDT 3497885884
+2025-07-23 16:26:53,401 - INFO - Received order update: XCNUSDT SELL CANCELED
+2025-07-23 16:26:53,419 - INFO - Successfully connected to MySQL database
+2025-07-23 16:26:53,448 - INFO - MySQL connection is closed
+2025-07-23 16:26:54,494 - INFO - Order cancelled in source account: XCNUSDT 132810649
+2025-07-23 16:26:54,495 - INFO - Received order update: XCNUSDT SELL CANCELED
+2025-07-23 16:26:54,509 - INFO - Successfully connected to MySQL database
+2025-07-23 16:26:54,511 - INFO - MySQL connection is closed
+2025-07-23 16:26:55,503 - INFO - Order cancelled in source account: XCNUSDT 132810662
+2025-07-23 16:26:55,505 - INFO - Received order update: XCNUSDT SELL CANCELED
+2025-07-23 16:26:55,518 - INFO - Successfully connected to MySQL database
+2025-07-23 16:26:55,521 - INFO - MySQL connection is closed
+2025-07-23 16:26:56,355 - INFO - Order cancelled in source account: XCNUSDT 132810710
+2025-07-23 16:26:56,356 - INFO - Received order update: OPUSDT SELL CANCELED
+2025-07-23 16:26:56,367 - INFO - Successfully connected to MySQL database
+2025-07-23 16:26:56,371 - INFO - MySQL connection is closed
+2025-07-23 16:26:57,269 - INFO - Order cancelled in source account: OPUSDT 16356093278
+2025-07-23 16:26:57,270 - INFO - Received order update: XRPUSDT SELL CANCELED
+2025-07-23 16:26:57,285 - INFO - Successfully connected to MySQL database
+2025-07-23 16:26:57,286 - INFO - MySQL connection is closed
+2025-07-23 16:26:58,109 - INFO - Order cancelled in source account: XRPUSDT 112442169294
+2025-07-23 16:26:58,110 - INFO - Received order update: XRPUSDT SELL CANCELED
+2025-07-23 16:26:58,125 - INFO - Successfully connected to MySQL database
+2025-07-23 16:26:58,127 - INFO - MySQL connection is closed
+2025-07-23 16:26:59,015 - INFO - Order cancelled in source account: XRPUSDT 112442159263
+2025-07-23 16:26:59,021 - INFO - Received order update: XRPUSDT SELL CANCELED
+2025-07-23 16:26:59,038 - INFO - Successfully connected to MySQL database
+2025-07-23 16:26:59,041 - INFO - MySQL connection is closed
+2025-07-23 16:27:00,190 - INFO - Order cancelled in source account: XRPUSDT 112442172057
+2025-07-23 16:27:00,220 - INFO - Received order update: CHZUSDT SELL CANCELED
+2025-07-23 16:27:00,321 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:00,336 - INFO - MySQL connection is closed
+2025-07-23 16:27:01,274 - INFO - Order cancelled in source account: CHZUSDT 14206738052
+2025-07-23 16:27:01,275 - INFO - Received order update: CHZUSDT SELL CANCELED
+2025-07-23 16:27:01,291 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:01,294 - INFO - MySQL connection is closed
+2025-07-23 16:27:02,305 - INFO - Order cancelled in source account: CHZUSDT 14206738440
+2025-07-23 16:27:02,307 - INFO - Received order update: SAHARAUSDT SELL CANCELED
+2025-07-23 16:27:02,332 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:02,347 - INFO - MySQL connection is closed
+2025-07-23 16:27:03,970 - INFO - Order cancelled in source account: SAHARAUSDT 373240982
+2025-07-23 16:27:04,023 - INFO - Received order update: LEVERUSDT SELL CANCELED
+2025-07-23 16:27:04,036 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:04,077 - INFO - MySQL connection is closed
+2025-07-23 16:27:05,040 - INFO - Order cancelled in source account: LEVERUSDT 4020199817
+2025-07-23 16:27:05,041 - INFO - Received order update: LEVERUSDT SELL CANCELED
+2025-07-23 16:27:05,057 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:05,059 - INFO - MySQL connection is closed
+2025-07-23 16:27:06,059 - INFO - Order cancelled in source account: LEVERUSDT 4020199726
+2025-07-23 16:27:06,062 - INFO - Received order update: FLMUSDT SELL CANCELED
+2025-07-23 16:27:06,091 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:06,095 - INFO - MySQL connection is closed
+2025-07-23 16:27:07,293 - INFO - Order cancelled in source account: FLMUSDT 8579060132
+2025-07-23 16:27:07,295 - INFO - Received order update: FLMUSDT SELL CANCELED
+2025-07-23 16:27:07,316 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:07,370 - INFO - MySQL connection is closed
+2025-07-23 16:27:08,386 - INFO - Order cancelled in source account: FLMUSDT 8579060543
+2025-07-23 16:27:08,387 - INFO - Received order update: TURBOUSDT SELL CANCELED
+2025-07-23 16:27:08,400 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:08,402 - INFO - MySQL connection is closed
+2025-07-23 16:27:09,349 - INFO - Order cancelled in source account: TURBOUSDT 6212316896
+2025-07-23 16:27:09,350 - INFO - Received order update: TURBOUSDT SELL CANCELED
+2025-07-23 16:27:09,362 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:09,366 - INFO - MySQL connection is closed
+2025-07-23 16:27:10,381 - INFO - Order cancelled in source account: TURBOUSDT 6212317582
+2025-07-23 16:27:10,391 - INFO - Received order update: SUIUSDT SELL CANCELED
+2025-07-23 16:27:10,403 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:10,405 - INFO - MySQL connection is closed
+2025-07-23 16:27:11,285 - INFO - Order cancelled in source account: SUIUSDT 28825353484
+2025-07-23 16:27:11,286 - INFO - Received order update: SUIUSDT SELL CANCELED
+2025-07-23 16:27:11,302 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:11,305 - INFO - MySQL connection is closed
+2025-07-23 16:27:12,512 - INFO - Order cancelled in source account: SUIUSDT 28825361036
+2025-07-23 16:27:12,513 - INFO - Received order update: 1000SHIBUSDT SELL CANCELED
+2025-07-23 16:27:12,522 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:12,523 - INFO - MySQL connection is closed
+2025-07-23 16:27:13,445 - INFO - Order cancelled in source account: 1000SHIBUSDT 26980528580
+2025-07-23 16:27:13,446 - INFO - Received order update: 1000SHIBUSDT SELL CANCELED
+2025-07-23 16:27:13,457 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:13,460 - INFO - MySQL connection is closed
+2025-07-23 16:27:14,311 - INFO - Order cancelled in source account: 1000SHIBUSDT 26980526743
+2025-07-23 16:27:14,312 - INFO - Received order update: IOSTUSDT SELL CANCELED
+2025-07-23 16:27:14,321 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:14,323 - INFO - MySQL connection is closed
+2025-07-23 16:27:15,200 - INFO - Order cancelled in source account: IOSTUSDT 8314159240
+2025-07-23 16:27:15,201 - INFO - Received order update: IOSTUSDT SELL CANCELED
+2025-07-23 16:27:15,219 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:15,221 - INFO - MySQL connection is closed
+2025-07-23 16:27:16,093 - INFO - Order cancelled in source account: IOSTUSDT 8314159301
+2025-07-23 16:27:16,094 - INFO - Received order update: SOPHUSDT SELL CANCELED
+2025-07-23 16:27:16,110 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:16,113 - INFO - MySQL connection is closed
+2025-07-23 16:27:17,280 - INFO - Order cancelled in source account: SOPHUSDT 786625937
+2025-07-23 16:27:17,284 - INFO - Received order update: BANANAS31USDT SELL CANCELED
+2025-07-23 16:27:17,302 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:17,304 - INFO - MySQL connection is closed
+2025-07-23 16:27:18,204 - INFO - Order cancelled in source account: BANANAS31USDT 926999501
+2025-07-23 16:27:18,207 - INFO - Received order update: BANANAS31USDT SELL CANCELED
+2025-07-23 16:27:18,244 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:18,246 - INFO - MySQL connection is closed
+2025-07-23 16:27:19,085 - INFO - Order cancelled in source account: BANANAS31USDT 926999447
+2025-07-23 16:27:19,086 - INFO - Received order update: EPTUSDT SELL CANCELED
+2025-07-23 16:27:19,098 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:19,099 - INFO - MySQL connection is closed
+2025-07-23 16:27:20,088 - INFO - Order cancelled in source account: EPTUSDT 255323078
+2025-07-23 16:27:20,088 - INFO - Received order update: EPTUSDT SELL CANCELED
+2025-07-23 16:27:20,099 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:20,101 - INFO - MySQL connection is closed
+2025-07-23 16:27:21,576 - INFO - Order cancelled in source account: EPTUSDT 255323159
+2025-07-23 16:27:21,577 - INFO - Received order update: XLMUSDT SELL CANCELED
+2025-07-23 16:27:21,592 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:21,593 - INFO - MySQL connection is closed
+2025-07-23 16:27:22,553 - INFO - Order cancelled in source account: XLMUSDT 18410066076
+2025-07-23 16:27:22,554 - INFO - Received order update: XLMUSDT SELL CANCELED
+2025-07-23 16:27:22,568 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:22,576 - INFO - MySQL connection is closed
+2025-07-23 16:27:23,483 - INFO - Order cancelled in source account: XLMUSDT 18410065255
+2025-07-23 16:27:23,484 - INFO - Received order update: GPSUSDT SELL CANCELED
+2025-07-23 16:27:23,495 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:23,497 - INFO - MySQL connection is closed
+2025-07-23 16:27:24,497 - INFO - Order cancelled in source account: GPSUSDT 620593306
+2025-07-23 16:27:24,500 - INFO - Received order update: GPSUSDT SELL CANCELED
+2025-07-23 16:27:24,517 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:24,518 - INFO - MySQL connection is closed
+2025-07-23 16:27:25,343 - INFO - Order cancelled in source account: GPSUSDT 620594023
+2025-07-23 16:27:25,344 - INFO - Received order update: MEMEUSDT SELL CANCELED
+2025-07-23 16:27:25,362 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:25,364 - INFO - MySQL connection is closed
+2025-07-23 16:27:26,191 - INFO - Order cancelled in source account: MEMEUSDT 6233954733
+2025-07-23 16:27:26,192 - INFO - Received order update: MEMEUSDT SELL CANCELED
+2025-07-23 16:27:26,203 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:26,206 - INFO - MySQL connection is closed
+2025-07-23 16:27:27,152 - INFO - Order cancelled in source account: MEMEUSDT 6233955129
+2025-07-23 16:27:27,161 - INFO - Received order update: DOGEUSDT SELL CANCELED
+2025-07-23 16:27:27,176 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:27,180 - INFO - MySQL connection is closed
+2025-07-23 16:27:28,139 - INFO - Order cancelled in source account: DOGEUSDT 77242390784
+2025-07-23 16:27:28,140 - INFO - Received order update: BEAMXUSDT SELL CANCELED
+2025-07-23 16:27:28,152 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:28,154 - INFO - MySQL connection is closed
+2025-07-23 16:27:29,000 - INFO - Order cancelled in source account: BEAMXUSDT 2750367496
+2025-07-23 16:27:29,001 - INFO - Received order update: BEAMXUSDT SELL CANCELED
+2025-07-23 16:27:29,014 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:29,015 - INFO - MySQL connection is closed
+2025-07-23 16:27:29,826 - INFO - Order cancelled in source account: BEAMXUSDT 2750367119
+2025-07-23 16:27:29,827 - INFO - Received order update: ONEUSDT SELL CANCELED
+2025-07-23 16:27:29,841 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:29,844 - INFO - MySQL connection is closed
+2025-07-23 16:27:30,846 - INFO - Order cancelled in source account: ONEUSDT 7214861192
+2025-07-23 16:27:30,848 - INFO - Received order update: HBARUSDT SELL CANCELED
+2025-07-23 16:27:30,863 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:30,864 - INFO - MySQL connection is closed
+2025-07-23 16:27:31,911 - INFO - Order cancelled in source account: HBARUSDT 11967483596
+2025-07-23 16:27:31,916 - INFO - Received order update: HBARUSDT SELL CANCELED
+2025-07-23 16:27:31,975 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:31,981 - INFO - MySQL connection is closed
+2025-07-23 16:27:32,821 - INFO - Order cancelled in source account: HBARUSDT 11967485204
+2025-07-23 16:27:32,823 - INFO - Received order update: BABYUSDT SELL CANCELED
+2025-07-23 16:27:32,838 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:32,845 - INFO - MySQL connection is closed
+2025-07-23 16:27:33,684 - INFO - Order cancelled in source account: BABYUSDT 825476367
+2025-07-23 16:27:33,685 - INFO - Received order update: RSRUSDT SELL CANCELED
+2025-07-23 16:27:33,696 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:33,699 - INFO - MySQL connection is closed
+2025-07-23 16:27:34,562 - INFO - Order cancelled in source account: RSRUSDT 633327758667082516
+2025-07-23 16:27:34,563 - INFO - Received order update: RSRUSDT SELL CANCELED
+2025-07-23 16:27:34,575 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:34,577 - INFO - MySQL connection is closed
+2025-07-23 16:27:35,646 - INFO - Order cancelled in source account: RSRUSDT 633327758667082265
+2025-07-23 16:27:35,648 - INFO - Received order update: TRXUSDT SELL CANCELED
+2025-07-23 16:27:35,666 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:35,669 - INFO - MySQL connection is closed
+2025-07-23 16:27:36,473 - INFO - Order cancelled in source account: TRXUSDT 15544722525
+2025-07-23 16:27:36,473 - INFO - Received order update: TRXUSDT SELL CANCELED
+2025-07-23 16:27:36,488 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:36,490 - INFO - MySQL connection is closed
+2025-07-23 16:27:37,354 - INFO - Order cancelled in source account: TRXUSDT 15544722122
+2025-07-23 16:27:37,355 - INFO - Received order update: TLMUSDT SELL CANCELED
+2025-07-23 16:27:37,371 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:37,376 - INFO - MySQL connection is closed
+2025-07-23 16:27:38,254 - INFO - Order cancelled in source account: TLMUSDT 2337412434
+2025-07-23 16:27:38,255 - INFO - Received order update: TLMUSDT SELL CANCELED
+2025-07-23 16:27:38,269 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:38,274 - INFO - MySQL connection is closed
+2025-07-23 16:27:39,106 - INFO - Order cancelled in source account: TLMUSDT 2337412567
+2025-07-23 16:27:39,107 - INFO - Received order update: MEMEFIUSDT SELL CANCELED
+2025-07-23 16:27:39,123 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:39,138 - INFO - MySQL connection is closed
+2025-07-23 16:27:39,956 - INFO - Order cancelled in source account: MEMEFIUSDT 310709568
+2025-07-23 16:27:39,957 - INFO - Received order update: MEMEFIUSDT SELL CANCELED
+2025-07-23 16:27:39,971 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:39,973 - INFO - MySQL connection is closed
+2025-07-23 16:27:40,802 - INFO - Order cancelled in source account: MEMEFIUSDT 310709636
+2025-07-23 16:27:40,805 - INFO - Received order update: FUNUSDT SELL CANCELED
+2025-07-23 16:27:40,820 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:40,821 - INFO - MySQL connection is closed
+2025-07-23 16:27:41,761 - INFO - Order cancelled in source account: FUNUSDT 1263126366
+2025-07-23 16:27:41,762 - INFO - Received order update: NOTUSDT SELL CANCELED
+2025-07-23 16:27:41,786 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:41,789 - INFO - MySQL connection is closed
+2025-07-23 16:27:42,627 - INFO - Order cancelled in source account: NOTUSDT 7328887802
+2025-07-23 16:27:42,628 - INFO - Received order update: SEIUSDT SELL CANCELED
+2025-07-23 16:27:42,641 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:42,643 - INFO - MySQL connection is closed
+2025-07-23 16:27:43,545 - INFO - Order cancelled in source account: SEIUSDT 7078321141
+2025-07-23 16:27:43,546 - INFO - Received order update: SEIUSDT SELL CANCELED
+2025-07-23 16:27:43,557 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:43,559 - INFO - MySQL connection is closed
+2025-07-23 16:27:44,348 - INFO - Order cancelled in source account: SEIUSDT 7078321942
+2025-07-23 16:27:44,351 - INFO - Received order update: DENTUSDT SELL CANCELED
+2025-07-23 16:27:44,363 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:44,365 - INFO - MySQL connection is closed
+2025-07-23 16:27:45,272 - INFO - Order cancelled in source account: DENTUSDT 4775192537
+2025-07-23 16:27:45,275 - INFO - Received order update: DENTUSDT BUY CANCELED
+2025-07-23 16:27:45,290 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:45,293 - INFO - MySQL connection is closed
+2025-07-23 16:27:46,379 - INFO - Order cancelled in source account: DENTUSDT 4775192306
+2025-07-23 16:27:46,383 - INFO - Received order update: DENTUSDT SELL CANCELED
+2025-07-23 16:27:46,397 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:46,401 - INFO - MySQL connection is closed
+2025-07-23 16:27:47,541 - INFO - Order cancelled in source account: DENTUSDT 4775192614
+2025-07-23 16:27:47,544 - INFO - Received order update: GALAUSDT SELL CANCELED
+2025-07-23 16:27:47,565 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:47,568 - INFO - MySQL connection is closed
+2025-07-23 16:27:48,792 - INFO - Order cancelled in source account: GALAUSDT 19640524548
+2025-07-23 16:27:48,793 - INFO - Received order update: GALAUSDT SELL CANCELED
+2025-07-23 16:27:48,806 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:48,808 - INFO - MySQL connection is closed
+2025-07-23 16:27:49,851 - INFO - Order cancelled in source account: GALAUSDT 19640524873
+2025-07-23 16:27:49,852 - INFO - Received order update: HMSTRUSDT SELL CANCELED
+2025-07-23 16:27:49,861 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:49,863 - INFO - MySQL connection is closed
+2025-07-23 16:27:50,909 - INFO - Order cancelled in source account: HMSTRUSDT 1372684011
+2025-07-23 16:27:50,917 - INFO - Received order update: HMSTRUSDT SELL CANCELED
+2025-07-23 16:27:50,934 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:50,979 - INFO - MySQL connection is closed
+2025-07-23 16:27:52,051 - INFO - Order cancelled in source account: HMSTRUSDT 1372684259
+2025-07-23 16:27:52,053 - INFO - Received order update: HMSTRUSDT BUY CANCELED
+2025-07-23 16:27:52,070 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:52,072 - INFO - MySQL connection is closed
+2025-07-23 16:27:53,386 - INFO - Order cancelled in source account: HMSTRUSDT 1372683595
+2025-07-23 16:27:53,386 - INFO - Received order update: REZUSDT SELL CANCELED
+2025-07-23 16:27:53,399 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:53,401 - INFO - MySQL connection is closed
+2025-07-23 16:27:54,385 - INFO - Order cancelled in source account: REZUSDT 2242360528
+2025-07-23 16:27:54,386 - INFO - Received order update: REZUSDT SELL CANCELED
+2025-07-23 16:27:54,399 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:54,402 - INFO - MySQL connection is closed
+2025-07-23 16:27:56,142 - INFO - Order cancelled in source account: REZUSDT 2242360593
+2025-07-23 16:27:56,143 - INFO - Received order update: MOCAUSDT SELL CANCELED
+2025-07-23 16:27:56,155 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:56,157 - INFO - MySQL connection is closed
+2025-07-23 16:27:57,465 - INFO - Order cancelled in source account: MOCAUSDT 635154185
+2025-07-23 16:27:57,468 - INFO - Received order update: MOCAUSDT SELL CANCELED
+2025-07-23 16:27:57,507 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:57,514 - INFO - MySQL connection is closed
+2025-07-23 16:27:58,302 - INFO - Order cancelled in source account: MOCAUSDT 635154863
+2025-07-23 16:27:58,303 - INFO - Received order update: ZILUSDT SELL CANCELED
+2025-07-23 16:27:58,315 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:58,317 - INFO - MySQL connection is closed
+2025-07-23 16:27:59,179 - INFO - Order cancelled in source account: ZILUSDT 10943597872
+2025-07-23 16:27:59,180 - INFO - Received order update: ZILUSDT SELL CANCELED
+2025-07-23 16:27:59,196 - INFO - Successfully connected to MySQL database
+2025-07-23 16:27:59,197 - INFO - MySQL connection is closed
+2025-07-23 16:28:00,426 - INFO - Order cancelled in source account: ZILUSDT 10943597703
+2025-07-23 16:28:00,429 - INFO - Received order update: ANIMEUSDT SELL CANCELED
+2025-07-23 16:28:00,461 - INFO - Successfully connected to MySQL database
+2025-07-23 16:28:00,467 - INFO - MySQL connection is closed
+2025-07-23 16:28:01,449 - INFO - Order cancelled in source account: ANIMEUSDT 1608971663
+2025-07-23 16:28:01,450 - INFO - Received order update: ANIMEUSDT SELL CANCELED
+2025-07-23 16:28:01,460 - INFO - Successfully connected to MySQL database
+2025-07-23 16:28:01,462 - INFO - MySQL connection is closed
+2025-07-23 16:28:02,444 - INFO - Order cancelled in source account: ANIMEUSDT 1608971793
+2025-07-23 16:28:02,445 - INFO - Received order update: FUSDT SELL NEW
+2025-07-23 16:28:02,460 - INFO - Successfully connected to MySQL database
+2025-07-23 16:28:02,462 - INFO - MySQL connection is closed
+2025-07-23 16:28:04,452 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:28:04,456 - INFO - Received order update: FUSDT SELL FILLED
+2025-07-23 16:28:04,457 - INFO - Received order update: NOTUSDT BUY NEW
+2025-07-23 16:28:04,481 - INFO - Successfully connected to MySQL database
+2025-07-23 16:28:04,483 - INFO - MySQL connection is closed
+2025-07-23 16:28:06,303 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:28:06,306 - INFO - Received order update: NOTUSDT BUY CANCELED
+2025-07-23 16:28:06,318 - INFO - Successfully connected to MySQL database
+2025-07-23 16:28:06,324 - INFO - MySQL connection is closed
+2025-07-23 16:28:07,489 - INFO - Order cancelled in source account: NOTUSDT 7331902363
+2025-07-23 16:28:07,491 - INFO - Received order update: NOTUSDT BUY NEW
+2025-07-23 16:28:07,502 - INFO - Successfully connected to MySQL database
+2025-07-23 16:28:07,504 - INFO - MySQL connection is closed
+2025-07-23 16:28:09,163 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:28:09,167 - INFO - Received order update: NOTUSDT BUY FILLED
+2025-07-23 16:28:09,169 - ERROR - BinanceWebsocketClosed (Connection closed. Reconnecting...)
+2025-07-23 16:32:10,613 - INFO - Successfully connected to MySQL database
+2025-07-23 16:32:10,615 - INFO - MySQL connection is closed
+2025-07-23 16:32:10,709 - INFO - Successfully connected to MySQL database
+2025-07-23 16:32:10,714 - INFO - MySQL connection is closed
+2025-07-23 16:40:02,574 - INFO - Successfully connected to MySQL database
+2025-07-23 16:40:02,606 - INFO - Database tables created successfully
+2025-07-23 16:40:02,694 - INFO - MySQL connection is closed
+2025-07-23 16:40:02,776 - INFO - Database initialized successfully
+2025-07-23 16:40:05,377 - ERROR - Binance API Error - Code: -2015, Message: Invalid API-key, IP, or permissions for action, request ip: 104.28.244.123
+2025-07-23 16:40:05,379 - ERROR - Source account connection failed
+2025-07-23 16:40:05,459 - INFO - Successfully connected to MySQL database
+2025-07-23 16:40:05,461 - INFO - MySQL connection is closed
+2025-07-23 16:42:18,417 - INFO - Successfully connected to MySQL database
+2025-07-23 16:42:18,488 - INFO - Database tables created successfully
+2025-07-23 16:42:18,560 - INFO - MySQL connection is closed
+2025-07-23 16:42:18,560 - INFO - Database initialized successfully
+2025-07-23 16:42:20,956 - ERROR - Binance API Error - Code: -2015, Message: Invalid API-key, IP, or permissions for action, request ip: 104.28.244.131
+2025-07-23 16:42:20,961 - ERROR - Source account connection failed
+2025-07-23 16:42:21,041 - INFO - Successfully connected to MySQL database
+2025-07-23 16:42:21,043 - INFO - MySQL connection is closed
+2025-07-23 16:42:31,963 - INFO - Successfully connected to MySQL database
+2025-07-23 16:42:31,991 - INFO - Database tables created successfully
+2025-07-23 16:42:32,068 - INFO - MySQL connection is closed
+2025-07-23 16:42:32,080 - INFO - Database initialized successfully
+2025-07-23 16:42:33,288 - INFO - Binance connection test successful for source account
+2025-07-23 16:42:33,606 - INFO - Copy trading bot started successfully
+2025-07-23 16:42:33,710 - INFO - Successfully connected to MySQL database
+2025-07-23 16:42:33,715 - INFO - MySQL connection is closed
+2025-07-23 16:42:34,343 - INFO - Started listening to source account order updates
+2025-07-23 16:42:36,972 - INFO - Received order update: XLMUSDT SELL NEW
+2025-07-23 16:42:36,982 - INFO - Successfully connected to MySQL database
+2025-07-23 16:42:36,984 - INFO - MySQL connection is closed
+2025-07-23 16:42:37,573 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:42:42,177 - INFO - Received order update: XLMUSDT SELL NEW
+2025-07-23 16:42:42,198 - INFO - Successfully connected to MySQL database
+2025-07-23 16:42:42,204 - INFO - MySQL connection is closed
+2025-07-23 16:42:42,854 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:42:46,805 - INFO - Received order update: ARBUSDT SELL NEW
+2025-07-23 16:42:46,818 - INFO - Successfully connected to MySQL database
+2025-07-23 16:42:46,820 - INFO - MySQL connection is closed
+2025-07-23 16:42:47,438 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:42:52,039 - INFO - Received order update: ARBUSDT SELL NEW
+2025-07-23 16:42:52,048 - INFO - Successfully connected to MySQL database
+2025-07-23 16:42:52,050 - INFO - MySQL connection is closed
+2025-07-23 16:42:52,716 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:42:57,240 - INFO - Received order update: ARBUSDT SELL NEW
+2025-07-23 16:42:57,254 - INFO - Successfully connected to MySQL database
+2025-07-23 16:42:57,256 - INFO - MySQL connection is closed
+2025-07-23 16:42:57,879 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:43:00,283 - INFO - Received order update: XCNUSDT SELL NEW
+2025-07-23 16:43:00,297 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:00,303 - INFO - MySQL connection is closed
+2025-07-23 16:43:00,959 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:43:05,553 - INFO - Received order update: XCNUSDT SELL NEW
+2025-07-23 16:43:05,564 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:05,566 - INFO - MySQL connection is closed
+2025-07-23 16:43:06,383 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:43:10,758 - INFO - Received order update: XCNUSDT SELL NEW
+2025-07-23 16:43:10,778 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:10,780 - INFO - MySQL connection is closed
+2025-07-23 16:43:11,402 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:43:12,305 - INFO - Received order update: BABYUSDT SELL NEW
+2025-07-23 16:43:12,318 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:12,320 - INFO - MySQL connection is closed
+2025-07-23 16:43:12,931 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:43:17,519 - INFO - Received order update: BABYUSDT SELL NEW
+2025-07-23 16:43:17,530 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:17,532 - INFO - MySQL connection is closed
+2025-07-23 16:43:18,164 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:43:22,718 - INFO - Received order update: BABYUSDT SELL NEW
+2025-07-23 16:43:22,728 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:22,731 - INFO - MySQL connection is closed
+2025-07-23 16:43:23,335 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:43:25,525 - INFO - Received order update: ROSEUSDT SELL NEW
+2025-07-23 16:43:25,544 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:25,547 - INFO - MySQL connection is closed
+2025-07-23 16:43:26,180 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:43:33,344 - INFO - Received order update: GUNUSDT SELL NEW
+2025-07-23 16:43:33,372 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:33,375 - INFO - MySQL connection is closed
+2025-07-23 16:43:34,006 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:43:38,590 - INFO - Received order update: GUNUSDT SELL NEW
+2025-07-23 16:43:38,616 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:38,619 - INFO - MySQL connection is closed
+2025-07-23 16:43:39,224 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:43:43,790 - INFO - Received order update: GUNUSDT SELL NEW
+2025-07-23 16:43:43,801 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:43,803 - INFO - MySQL connection is closed
+2025-07-23 16:43:44,420 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:43:45,309 - INFO - Received order update: TUSDT SELL NEW
+2025-07-23 16:43:45,332 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:45,335 - INFO - MySQL connection is closed
+2025-07-23 16:43:45,933 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:43:50,522 - INFO - Received order update: TUSDT SELL NEW
+2025-07-23 16:43:50,543 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:50,546 - INFO - MySQL connection is closed
+2025-07-23 16:43:51,154 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:43:55,785 - INFO - Received order update: TUSDT SELL NEW
+2025-07-23 16:43:55,800 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:55,803 - INFO - MySQL connection is closed
+2025-07-23 16:43:56,415 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:43:57,250 - INFO - Received order update: CELRUSDT SELL NEW
+2025-07-23 16:43:57,258 - INFO - Successfully connected to MySQL database
+2025-07-23 16:43:57,260 - INFO - MySQL connection is closed
+2025-07-23 16:43:57,859 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:44:02,509 - INFO - Received order update: CELRUSDT SELL NEW
+2025-07-23 16:44:02,521 - INFO - Successfully connected to MySQL database
+2025-07-23 16:44:02,539 - INFO - MySQL connection is closed
+2025-07-23 16:44:03,179 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:44:07,744 - INFO - Received order update: CELRUSDT SELL NEW
+2025-07-23 16:44:07,757 - INFO - Successfully connected to MySQL database
+2025-07-23 16:44:07,759 - INFO - MySQL connection is closed
+2025-07-23 16:44:08,558 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:44:11,203 - INFO - Received order update: AERGOUSDT BUY NEW
+2025-07-23 16:44:11,214 - INFO - Successfully connected to MySQL database
+2025-07-23 16:44:11,216 - INFO - MySQL connection is closed
+2025-07-23 16:44:12,142 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:44:12,147 - INFO - Received order update: AERGOUSDT BUY FILLED
+2025-07-23 16:44:16,798 - INFO - Received order update: AERGOUSDT SELL NEW
+2025-07-23 16:44:16,827 - INFO - Successfully connected to MySQL database
+2025-07-23 16:44:16,830 - INFO - MySQL connection is closed
+2025-07-23 16:44:17,471 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:44:22,094 - INFO - Received order update: AERGOUSDT SELL NEW
+2025-07-23 16:44:22,105 - INFO - Successfully connected to MySQL database
+2025-07-23 16:44:22,107 - INFO - MySQL connection is closed
+2025-07-23 16:44:22,756 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:44:28,171 - INFO - Received order update: SEIUSDT SELL NEW
+2025-07-23 16:44:28,201 - INFO - Successfully connected to MySQL database
+2025-07-23 16:44:28,208 - INFO - MySQL connection is closed
+2025-07-23 16:44:28,809 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:44:33,396 - INFO - Received order update: SEIUSDT SELL NEW
+2025-07-23 16:44:33,417 - INFO - Successfully connected to MySQL database
+2025-07-23 16:44:33,419 - INFO - MySQL connection is closed
+2025-07-23 16:44:34,033 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:44:38,594 - INFO - Received order update: SEIUSDT SELL NEW
+2025-07-23 16:44:38,605 - INFO - Successfully connected to MySQL database
+2025-07-23 16:44:38,607 - INFO - MySQL connection is closed
+2025-07-23 16:44:39,217 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:44:40,545 - INFO - Received order update: SXTUSDT BUY NEW
+2025-07-23 16:44:40,558 - INFO - Successfully connected to MySQL database
+2025-07-23 16:44:40,560 - INFO - MySQL connection is closed
+2025-07-23 16:44:41,178 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:44:41,180 - INFO - Received order update: SXTUSDT BUY FILLED
+2025-07-23 16:44:45,761 - INFO - Received order update: SXTUSDT SELL NEW
+2025-07-23 16:44:45,776 - INFO - Successfully connected to MySQL database
+2025-07-23 16:44:45,778 - INFO - MySQL connection is closed
+2025-07-23 16:44:46,379 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:44:50,972 - INFO - Received order update: SXTUSDT SELL NEW
+2025-07-23 16:44:50,994 - INFO - Successfully connected to MySQL database
+2025-07-23 16:44:50,996 - INFO - MySQL connection is closed
+2025-07-23 16:44:51,605 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:44:52,679 - INFO - Received order update: BAKEUSDT BUY NEW
+2025-07-23 16:44:52,692 - INFO - Successfully connected to MySQL database
+2025-07-23 16:44:52,694 - INFO - MySQL connection is closed
+2025-07-23 16:44:53,300 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:44:53,304 - INFO - Received order update: BAKEUSDT BUY FILLED
+2025-07-23 16:45:00,026 - INFO - Received order update: GMTUSDT SELL NEW
+2025-07-23 16:45:00,040 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:00,047 - INFO - MySQL connection is closed
+2025-07-23 16:45:00,685 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:45:02,482 - INFO - Received order update: MEMEUSDT SELL FILLED
+2025-07-23 16:45:05,265 - INFO - Received order update: GMTUSDT SELL NEW
+2025-07-23 16:45:05,284 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:05,287 - INFO - MySQL connection is closed
+2025-07-23 16:45:05,913 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:45:10,462 - INFO - Received order update: GMTUSDT SELL NEW
+2025-07-23 16:45:10,485 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:10,488 - INFO - MySQL connection is closed
+2025-07-23 16:45:11,184 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:45:12,745 - INFO - Received order update: WUSDT SELL NEW
+2025-07-23 16:45:12,755 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:12,757 - INFO - MySQL connection is closed
+2025-07-23 16:45:13,406 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:45:18,568 - INFO - Received order update: WUSDT SELL NEW
+2025-07-23 16:45:18,579 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:18,583 - INFO - MySQL connection is closed
+2025-07-23 16:45:19,190 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:45:23,770 - INFO - Received order update: WUSDT SELL NEW
+2025-07-23 16:45:23,783 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:23,785 - INFO - MySQL connection is closed
+2025-07-23 16:45:24,385 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:45:25,394 - INFO - Received order update: CHZUSDT SELL NEW
+2025-07-23 16:45:25,418 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:25,421 - INFO - MySQL connection is closed
+2025-07-23 16:45:26,021 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:45:30,616 - INFO - Received order update: CHZUSDT SELL NEW
+2025-07-23 16:45:30,627 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:30,629 - INFO - MySQL connection is closed
+2025-07-23 16:45:31,231 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:45:35,829 - INFO - Received order update: CHZUSDT SELL NEW
+2025-07-23 16:45:35,838 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:35,840 - INFO - MySQL connection is closed
+2025-07-23 16:45:36,464 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:45:37,452 - INFO - Received order update: ONDOUSDT SELL NEW
+2025-07-23 16:45:37,464 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:37,467 - INFO - MySQL connection is closed
+2025-07-23 16:45:38,101 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:45:42,702 - INFO - Received order update: ONDOUSDT SELL NEW
+2025-07-23 16:45:42,710 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:42,712 - INFO - MySQL connection is closed
+2025-07-23 16:45:43,673 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:45:47,868 - INFO - Received order update: ONDOUSDT SELL NEW
+2025-07-23 16:45:47,879 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:47,881 - INFO - MySQL connection is closed
+2025-07-23 16:45:48,484 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:45:49,465 - INFO - Received order update: USUALUSDT SELL NEW
+2025-07-23 16:45:49,475 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:49,477 - INFO - MySQL connection is closed
+2025-07-23 16:45:50,092 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:45:54,677 - INFO - Received order update: USUALUSDT SELL NEW
+2025-07-23 16:45:54,700 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:54,703 - INFO - MySQL connection is closed
+2025-07-23 16:45:55,359 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:45:59,907 - INFO - Received order update: USUALUSDT SELL NEW
+2025-07-23 16:45:59,918 - INFO - Successfully connected to MySQL database
+2025-07-23 16:45:59,920 - INFO - MySQL connection is closed
+2025-07-23 16:46:00,569 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:46:01,713 - INFO - Received order update: GRTUSDT SELL NEW
+2025-07-23 16:46:01,724 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:01,726 - INFO - MySQL connection is closed
+2025-07-23 16:46:02,354 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:46:06,951 - INFO - Received order update: GRTUSDT SELL NEW
+2025-07-23 16:46:06,962 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:06,964 - INFO - MySQL connection is closed
+2025-07-23 16:46:07,591 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:46:12,134 - INFO - Received order update: GRTUSDT SELL NEW
+2025-07-23 16:46:12,163 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:12,165 - INFO - MySQL connection is closed
+2025-07-23 16:46:12,766 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:46:14,022 - INFO - Received order update: ZEREBROUSDT SELL NEW
+2025-07-23 16:46:14,049 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:14,059 - INFO - MySQL connection is closed
+2025-07-23 16:46:14,661 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:46:20,823 - INFO - Received order update: MAGICUSDT SELL NEW
+2025-07-23 16:46:20,832 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:20,834 - INFO - MySQL connection is closed
+2025-07-23 16:46:21,454 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:46:27,718 - INFO - Received order update: CRVUSDT SELL NEW
+2025-07-23 16:46:27,745 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:27,749 - INFO - MySQL connection is closed
+2025-07-23 16:46:28,516 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:46:32,912 - INFO - Received order update: CRVUSDT SELL NEW
+2025-07-23 16:46:32,936 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:32,939 - INFO - MySQL connection is closed
+2025-07-23 16:46:33,537 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:46:38,105 - INFO - Received order update: CRVUSDT SELL NEW
+2025-07-23 16:46:38,115 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:38,117 - INFO - MySQL connection is closed
+2025-07-23 16:46:38,735 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:46:39,871 - INFO - Received order update: SKLUSDT SELL NEW
+2025-07-23 16:46:39,892 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:39,899 - INFO - MySQL connection is closed
+2025-07-23 16:46:40,613 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:46:46,725 - INFO - Received order update: ALGOUSDT SELL NEW
+2025-07-23 16:46:46,735 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:46,737 - INFO - MySQL connection is closed
+2025-07-23 16:46:47,557 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:46:51,958 - INFO - Received order update: ALGOUSDT SELL NEW
+2025-07-23 16:46:51,968 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:51,970 - INFO - MySQL connection is closed
+2025-07-23 16:46:52,578 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:46:57,803 - INFO - Received order update: ALGOUSDT SELL NEW
+2025-07-23 16:46:57,815 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:57,819 - INFO - MySQL connection is closed
+2025-07-23 16:46:58,807 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:46:59,454 - INFO - Received order update: JUPUSDT SELL NEW
+2025-07-23 16:46:59,466 - INFO - Successfully connected to MySQL database
+2025-07-23 16:46:59,470 - INFO - MySQL connection is closed
+2025-07-23 16:47:00,445 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 16:47:04,714 - INFO - Received order update: JUPUSDT SELL NEW
+2025-07-23 16:47:04,723 - INFO - Successfully connected to MySQL database
+2025-07-23 16:47:04,724 - INFO - MySQL connection is closed
+2025-07-23 16:47:05,353 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:47:10,360 - INFO - Received order update: JUPUSDT SELL NEW
+2025-07-23 16:47:10,386 - INFO - Successfully connected to MySQL database
+2025-07-23 16:47:10,389 - INFO - MySQL connection is closed
+2025-07-23 16:47:10,984 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-23 16:47:12,429 - INFO - Received order update: GUSDT SELL NEW
+2025-07-23 16:47:12,504 - INFO - Successfully connected to MySQL database
+2025-07-23 16:47:12,510 - INFO - MySQL connection is closed
+2025-07-23 16:47:13,133 - ERROR - Error placing order - Code: -1102, Message: Mandatory parameter 'timeinforce' was not sent, was empty/null, or malformed.
+2025-07-23 17:01:03,210 - INFO - Successfully connected to MySQL database
+2025-07-23 17:01:03,212 - INFO - MySQL connection is closed
+2025-07-23 17:01:12,399 - INFO - Successfully connected to MySQL database
+2025-07-23 17:01:12,402 - INFO - MySQL connection is closed
+2025-07-23 17:01:12,469 - INFO - Successfully connected to MySQL database
+2025-07-23 17:01:12,471 - INFO - MySQL connection is closed
+2025-07-23 17:01:15,406 - INFO - Successfully connected to MySQL database
+2025-07-23 17:01:15,420 - INFO - Database tables created successfully
+2025-07-23 17:01:15,421 - INFO - MySQL connection is closed
+2025-07-23 17:01:15,422 - INFO - Database initialized successfully
+2025-07-23 17:01:16,610 - INFO - Binance connection test successful for source account
+2025-07-23 17:01:16,928 - INFO - Copy trading bot started successfully
+2025-07-23 17:01:17,006 - INFO - Successfully connected to MySQL database
+2025-07-23 17:01:17,008 - INFO - MySQL connection is closed
+2025-07-23 17:01:17,580 - INFO - Started listening to source account order updates
+2025-07-23 17:06:12,999 - INFO - Received order update: PEOPLEUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:13,008 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:13,009 - INFO - MySQL connection is closed
+2025-07-23 17:06:13,294 - INFO - Order cancelled in source account: PEOPLEUSDT 12651609961
+2025-07-23 17:06:13,294 - INFO - Received order update: PEOPLEUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:13,301 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:13,303 - INFO - MySQL connection is closed
+2025-07-23 17:06:13,601 - INFO - Order cancelled in source account: PEOPLEUSDT 12651610785
+2025-07-23 17:06:13,602 - INFO - Received order update: PEOPLEUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:13,609 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:13,611 - INFO - MySQL connection is closed
+2025-07-23 17:06:13,901 - INFO - Order cancelled in source account: PEOPLEUSDT 12651611527
+2025-07-23 17:06:13,907 - ERROR - Unknown exception: BinanceWebsocketQueueOverflow (Message queue size 100 exceeded maximum 100)
+2025-07-23 17:06:13,908 - INFO - Received order update: TUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:13,915 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:13,917 - INFO - MySQL connection is closed
+2025-07-23 17:06:14,205 - INFO - Order cancelled in source account: TUSDT 1954659587
+2025-07-23 17:06:14,205 - INFO - Received order update: TUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:14,212 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:14,214 - INFO - MySQL connection is closed
+2025-07-23 17:06:14,501 - INFO - Order cancelled in source account: TUSDT 1954659461
+2025-07-23 17:06:14,502 - INFO - Received order update: TUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:14,511 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:14,513 - INFO - MySQL connection is closed
+2025-07-23 17:06:14,798 - INFO - Order cancelled in source account: TUSDT 1954659431
+2025-07-23 17:06:14,799 - INFO - Received order update: CELRUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:14,805 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:14,807 - INFO - MySQL connection is closed
+2025-07-23 17:06:15,090 - INFO - Order cancelled in source account: CELRUSDT 4469283656
+2025-07-23 17:06:15,090 - INFO - Received order update: CELRUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:15,097 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:15,099 - INFO - MySQL connection is closed
+2025-07-23 17:06:15,386 - INFO - Order cancelled in source account: CELRUSDT 4469283698
+2025-07-23 17:06:15,387 - INFO - Received order update: RSRUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:15,395 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:15,396 - INFO - MySQL connection is closed
+2025-07-23 17:06:15,698 - INFO - Order cancelled in source account: RSRUSDT 633327758670431741
+2025-07-23 17:06:15,698 - INFO - Received order update: RSRUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:15,706 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:15,707 - INFO - MySQL connection is closed
+2025-07-23 17:06:16,003 - INFO - Order cancelled in source account: RSRUSDT 633327758670431623
+2025-07-23 17:06:16,004 - INFO - Received order update: RSRUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:16,011 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:16,013 - INFO - MySQL connection is closed
+2025-07-23 17:06:16,301 - INFO - Order cancelled in source account: RSRUSDT 633327758670431691
+2025-07-23 17:06:16,302 - INFO - Received order update: SPELLUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:16,309 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:16,310 - INFO - MySQL connection is closed
+2025-07-23 17:06:16,614 - INFO - Order cancelled in source account: SPELLUSDT 3499011837
+2025-07-23 17:06:16,614 - INFO - Received order update: SPELLUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:16,623 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:16,625 - INFO - MySQL connection is closed
+2025-07-23 17:06:16,924 - INFO - Order cancelled in source account: SPELLUSDT 3499011882
+2025-07-23 17:06:16,925 - INFO - Received order update: SPELLUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:16,932 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:16,934 - INFO - MySQL connection is closed
+2025-07-23 17:06:17,228 - INFO - Order cancelled in source account: SPELLUSDT 3499012067
+2025-07-23 17:06:17,229 - INFO - Received order update: SKLUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:17,236 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:17,238 - INFO - MySQL connection is closed
+2025-07-23 17:06:17,537 - INFO - Order cancelled in source account: SKLUSDT 5854015596
+2025-07-23 17:06:17,538 - INFO - Received order update: DEGENUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:17,547 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:17,548 - INFO - MySQL connection is closed
+2025-07-23 17:06:17,840 - INFO - Order cancelled in source account: DEGENUSDT 915057033
+2025-07-23 17:06:17,841 - INFO - Received order update: DEGENUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:17,849 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:17,850 - INFO - MySQL connection is closed
+2025-07-23 17:06:18,159 - INFO - Order cancelled in source account: DEGENUSDT 915057002
+2025-07-23 17:06:18,160 - INFO - Received order update: 1000PEPEUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:18,167 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:18,169 - INFO - MySQL connection is closed
+2025-07-23 17:06:18,491 - INFO - Order cancelled in source account: 1000PEPEUSDT 45169829267
+2025-07-23 17:06:18,492 - INFO - Received order update: 1000PEPEUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:18,499 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:18,503 - INFO - MySQL connection is closed
+2025-07-23 17:06:18,820 - INFO - Order cancelled in source account: 1000PEPEUSDT 45169832843
+2025-07-23 17:06:18,821 - INFO - Received order update: 1000PEPEUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:18,828 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:18,830 - INFO - MySQL connection is closed
+2025-07-23 17:06:19,178 - INFO - Order cancelled in source account: 1000PEPEUSDT 45169822911
+2025-07-23 17:06:19,179 - INFO - Received order update: GUNUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:19,186 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:19,187 - INFO - MySQL connection is closed
+2025-07-23 17:06:19,688 - INFO - Order cancelled in source account: GUNUSDT 631072925
+2025-07-23 17:06:19,689 - INFO - Received order update: GUNUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:19,696 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:19,697 - INFO - MySQL connection is closed
+2025-07-23 17:06:21,145 - INFO - Order cancelled in source account: GUNUSDT 631072986
+2025-07-23 17:06:21,146 - INFO - Received order update: GUNUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:21,153 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:21,155 - INFO - MySQL connection is closed
+2025-07-23 17:06:21,485 - INFO - Order cancelled in source account: GUNUSDT 631073062
+2025-07-23 17:06:21,486 - INFO - Received order update: ZEREBROUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:21,497 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:21,500 - INFO - MySQL connection is closed
+2025-07-23 17:06:21,845 - INFO - Order cancelled in source account: ZEREBROUSDT 1347693677
+2025-07-23 17:06:21,845 - INFO - Received order update: DOGSUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:21,853 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:21,854 - INFO - MySQL connection is closed
+2025-07-23 17:06:22,140 - INFO - Order cancelled in source account: DOGSUSDT 3279946360
+2025-07-23 17:06:22,141 - INFO - Received order update: DOGSUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:22,151 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:22,163 - INFO - MySQL connection is closed
+2025-07-23 17:06:22,498 - INFO - Order cancelled in source account: DOGSUSDT 3279946502
+2025-07-23 17:06:22,499 - INFO - Received order update: DOGSUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:22,506 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:22,507 - INFO - MySQL connection is closed
+2025-07-23 17:06:22,816 - INFO - Order cancelled in source account: DOGSUSDT 3279946747
+2025-07-23 17:06:22,817 - INFO - Received order update: BANANAS31USDT SELL CANCELED ps BOTH
+2025-07-23 17:06:22,824 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:22,825 - INFO - MySQL connection is closed
+2025-07-23 17:06:23,278 - INFO - Order cancelled in source account: BANANAS31USDT 929799705
+2025-07-23 17:06:23,279 - INFO - Received order update: BANANAS31USDT SELL CANCELED ps BOTH
+2025-07-23 17:06:23,287 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:23,289 - INFO - MySQL connection is closed
+2025-07-23 17:06:23,663 - INFO - Order cancelled in source account: BANANAS31USDT 929799878
+2025-07-23 17:06:23,664 - INFO - Received order update: BANANAS31USDT SELL CANCELED ps BOTH
+2025-07-23 17:06:23,674 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:23,675 - INFO - MySQL connection is closed
+2025-07-23 17:06:24,000 - INFO - Order cancelled in source account: BANANAS31USDT 929800091
+2025-07-23 17:06:24,002 - INFO - Received order update: JASMYUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:24,012 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:24,014 - INFO - MySQL connection is closed
+2025-07-23 17:06:24,320 - INFO - Order cancelled in source account: JASMYUSDT 7922616022
+2025-07-23 17:06:24,320 - INFO - Received order update: ALTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:24,327 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:24,329 - INFO - MySQL connection is closed
+2025-07-23 17:06:24,860 - INFO - Order cancelled in source account: ALTUSDT 3878892383
+2025-07-23 17:06:24,860 - INFO - Received order update: ALTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:24,867 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:24,869 - INFO - MySQL connection is closed
+2025-07-23 17:06:25,155 - INFO - Order cancelled in source account: ALTUSDT 3878892506
+2025-07-23 17:06:25,156 - INFO - Received order update: ALTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:25,164 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:25,166 - INFO - MySQL connection is closed
+2025-07-23 17:06:25,477 - INFO - Order cancelled in source account: ALTUSDT 3878892215
+2025-07-23 17:06:25,478 - INFO - Received order update: LEVERUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:25,485 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:25,486 - INFO - MySQL connection is closed
+2025-07-23 17:06:25,771 - INFO - Order cancelled in source account: LEVERUSDT 4020768719
+2025-07-23 17:06:25,772 - INFO - Received order update: GMTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:25,779 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:25,781 - INFO - MySQL connection is closed
+2025-07-23 17:06:26,077 - INFO - Order cancelled in source account: GMTUSDT 17757336208
+2025-07-23 17:06:26,078 - INFO - Received order update: GMTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:26,085 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:26,086 - INFO - MySQL connection is closed
+2025-07-23 17:06:26,383 - INFO - Order cancelled in source account: GMTUSDT 17757335429
+2025-07-23 17:06:26,383 - INFO - Received order update: GMTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:26,393 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:26,395 - INFO - MySQL connection is closed
+2025-07-23 17:06:26,694 - INFO - Order cancelled in source account: GMTUSDT 17757335863
+2025-07-23 17:06:26,695 - INFO - Received order update: COSUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:26,705 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:26,707 - INFO - MySQL connection is closed
+2025-07-23 17:06:27,010 - INFO - Order cancelled in source account: COSUSDT 588866134
+2025-07-23 17:06:27,010 - INFO - Received order update: COSUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:27,018 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:27,020 - INFO - MySQL connection is closed
+2025-07-23 17:06:27,311 - INFO - Order cancelled in source account: COSUSDT 588866767
+2025-07-23 17:06:27,311 - INFO - Received order update: NOTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:27,319 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:27,320 - INFO - MySQL connection is closed
+2025-07-23 17:06:27,629 - INFO - Order cancelled in source account: NOTUSDT 7331924920
+2025-07-23 17:06:27,630 - INFO - Received order update: NOTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:27,638 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:27,640 - INFO - MySQL connection is closed
+2025-07-23 17:06:27,926 - INFO - Order cancelled in source account: NOTUSDT 7331924765
+2025-07-23 17:06:27,927 - INFO - Received order update: NOTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:27,934 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:27,936 - INFO - MySQL connection is closed
+2025-07-23 17:06:28,226 - INFO - Order cancelled in source account: NOTUSDT 7331925004
+2025-07-23 17:06:28,226 - INFO - Received order update: XCNUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:28,235 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:28,237 - INFO - MySQL connection is closed
+2025-07-23 17:06:28,531 - INFO - Order cancelled in source account: XCNUSDT 133312453
+2025-07-23 17:06:28,532 - INFO - Received order update: XCNUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:28,539 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:28,540 - INFO - MySQL connection is closed
+2025-07-23 17:06:28,839 - INFO - Order cancelled in source account: XCNUSDT 133312493
+2025-07-23 17:06:28,839 - INFO - Received order update: XCNUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:28,847 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:28,848 - INFO - MySQL connection is closed
+2025-07-23 17:06:29,135 - INFO - Order cancelled in source account: XCNUSDT 133312514
+2025-07-23 17:06:29,136 - INFO - Received order update: HBARUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:29,143 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:29,145 - INFO - MySQL connection is closed
+2025-07-23 17:06:29,433 - INFO - Order cancelled in source account: HBARUSDT 11985266360
+2025-07-23 17:06:29,434 - INFO - Received order update: HBARUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:29,443 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:29,445 - INFO - MySQL connection is closed
+2025-07-23 17:06:29,733 - INFO - Order cancelled in source account: HBARUSDT 11985265789
+2025-07-23 17:06:29,734 - INFO - Received order update: HBARUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:29,743 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:29,745 - INFO - MySQL connection is closed
+2025-07-23 17:06:30,033 - INFO - Order cancelled in source account: HBARUSDT 11985267747
+2025-07-23 17:06:30,034 - INFO - Received order update: 1000SHIBUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:30,041 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:30,042 - INFO - MySQL connection is closed
+2025-07-23 17:06:30,338 - INFO - Order cancelled in source account: 1000SHIBUSDT 26994288959
+2025-07-23 17:06:30,338 - INFO - Received order update: 1000SHIBUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:30,346 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:30,347 - INFO - MySQL connection is closed
+2025-07-23 17:06:30,650 - INFO - Order cancelled in source account: 1000SHIBUSDT 26994289142
+2025-07-23 17:06:30,651 - INFO - Received order update: 1000SHIBUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:30,659 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:30,660 - INFO - MySQL connection is closed
+2025-07-23 17:06:30,966 - INFO - Order cancelled in source account: 1000SHIBUSDT 26994288707
+2025-07-23 17:06:30,967 - INFO - Received order update: USTCUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:30,975 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:30,977 - INFO - MySQL connection is closed
+2025-07-23 17:06:31,267 - INFO - Order cancelled in source account: USTCUSDT 2696015218
+2025-07-23 17:06:31,268 - INFO - Received order update: USTCUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:31,275 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:31,277 - INFO - MySQL connection is closed
+2025-07-23 17:06:31,563 - INFO - Order cancelled in source account: USTCUSDT 2696014900
+2025-07-23 17:06:31,564 - INFO - Received order update: GUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:31,571 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:31,573 - INFO - MySQL connection is closed
+2025-07-23 17:06:31,863 - INFO - Order cancelled in source account: GUSDT 598130493
+2025-07-23 17:06:31,864 - INFO - Received order update: CRVUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:31,871 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:31,873 - INFO - MySQL connection is closed
+2025-07-23 17:06:32,180 - INFO - Order cancelled in source account: CRVUSDT 42865789389
+2025-07-23 17:06:32,180 - INFO - Received order update: CRVUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:32,187 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:32,189 - INFO - MySQL connection is closed
+2025-07-23 17:06:32,482 - INFO - Order cancelled in source account: CRVUSDT 42865788326
+2025-07-23 17:06:32,483 - INFO - Received order update: CRVUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:32,491 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:32,493 - INFO - MySQL connection is closed
+2025-07-23 17:06:32,796 - INFO - Order cancelled in source account: CRVUSDT 42865787927
+2025-07-23 17:06:32,797 - INFO - Received order update: GALAUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:32,804 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:32,806 - INFO - MySQL connection is closed
+2025-07-23 17:06:33,092 - INFO - Order cancelled in source account: GALAUSDT 19646250987
+2025-07-23 17:06:33,093 - INFO - Received order update: GALAUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:33,100 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:33,101 - INFO - MySQL connection is closed
+2025-07-23 17:06:33,400 - INFO - Order cancelled in source account: GALAUSDT 19646251420
+2025-07-23 17:06:33,401 - INFO - Received order update: GALAUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:33,410 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:33,411 - INFO - MySQL connection is closed
+2025-07-23 17:06:33,710 - INFO - Order cancelled in source account: GALAUSDT 19646250803
+2025-07-23 17:06:33,711 - INFO - Received order update: SXTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:33,718 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:33,719 - INFO - MySQL connection is closed
+2025-07-23 17:06:34,024 - INFO - Order cancelled in source account: SXTUSDT 377855872
+2025-07-23 17:06:34,025 - INFO - Received order update: SXTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:34,032 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:34,034 - INFO - MySQL connection is closed
+2025-07-23 17:06:34,328 - INFO - Order cancelled in source account: SXTUSDT 377856061
+2025-07-23 17:06:34,328 - INFO - Received order update: VETUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:34,335 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:34,337 - INFO - MySQL connection is closed
+2025-07-23 17:06:34,646 - INFO - Order cancelled in source account: VETUSDT 21109682429
+2025-07-23 17:06:34,646 - INFO - Received order update: VETUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:34,653 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:34,655 - INFO - MySQL connection is closed
+2025-07-23 17:06:34,945 - INFO - Order cancelled in source account: VETUSDT 21109683375
+2025-07-23 17:06:34,946 - INFO - Received order update: VETUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:34,955 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:34,957 - INFO - MySQL connection is closed
+2025-07-23 17:06:35,293 - INFO - Order cancelled in source account: VETUSDT 21109683046
+2025-07-23 17:06:35,294 - INFO - Received order update: ONEUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:35,301 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:35,303 - INFO - MySQL connection is closed
+2025-07-23 17:06:35,589 - INFO - Order cancelled in source account: ONEUSDT 7217341375
+2025-07-23 17:06:35,589 - INFO - Received order update: ALGOUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:35,600 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:35,602 - INFO - MySQL connection is closed
+2025-07-23 17:06:35,898 - INFO - Order cancelled in source account: ALGOUSDT 13505268348
+2025-07-23 17:06:35,899 - INFO - Received order update: ALGOUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:35,906 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:35,908 - INFO - MySQL connection is closed
+2025-07-23 17:06:36,201 - INFO - Order cancelled in source account: ALGOUSDT 13505270558
+2025-07-23 17:06:36,201 - INFO - Received order update: ALGOUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:36,210 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:36,211 - INFO - MySQL connection is closed
+2025-07-23 17:06:36,510 - INFO - Order cancelled in source account: ALGOUSDT 13505269655
+2025-07-23 17:06:36,511 - INFO - Received order update: DOGEUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:36,518 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:36,519 - INFO - MySQL connection is closed
+2025-07-23 17:06:36,803 - INFO - Order cancelled in source account: DOGEUSDT 77306079794
+2025-07-23 17:06:36,803 - INFO - Received order update: DOGEUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:36,812 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:36,814 - INFO - MySQL connection is closed
+2025-07-23 17:06:37,124 - INFO - Order cancelled in source account: DOGEUSDT 77306075844
+2025-07-23 17:06:37,125 - INFO - Received order update: DOGEUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:37,135 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:37,136 - INFO - MySQL connection is closed
+2025-07-23 17:06:37,522 - INFO - Order cancelled in source account: DOGEUSDT 77306089636
+2025-07-23 17:06:37,523 - INFO - Received order update: HIPPOUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:37,530 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:37,531 - INFO - MySQL connection is closed
+2025-07-23 17:06:37,878 - INFO - Order cancelled in source account: HIPPOUSDT 1259457610
+2025-07-23 17:06:37,879 - INFO - Received order update: ZILUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:37,886 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:37,887 - INFO - MySQL connection is closed
+2025-07-23 17:06:38,175 - INFO - Order cancelled in source account: ZILUSDT 10945527712
+2025-07-23 17:06:38,176 - INFO - Received order update: ZILUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:38,183 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:38,184 - INFO - MySQL connection is closed
+2025-07-23 17:06:38,480 - INFO - Order cancelled in source account: ZILUSDT 10945527670
+2025-07-23 17:06:38,481 - INFO - Received order update: ZILUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:38,489 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:38,491 - INFO - MySQL connection is closed
+2025-07-23 17:06:38,798 - INFO - Order cancelled in source account: ZILUSDT 10945527755
+2025-07-23 17:06:38,799 - INFO - Received order update: ARBUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:38,808 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:38,810 - INFO - MySQL connection is closed
+2025-07-23 17:06:39,112 - INFO - Order cancelled in source account: ARBUSDT 12774227260
+2025-07-23 17:06:39,112 - INFO - Received order update: ARBUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:39,120 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:39,121 - INFO - MySQL connection is closed
+2025-07-23 17:06:39,445 - INFO - Order cancelled in source account: ARBUSDT 12774227830
+2025-07-23 17:06:39,446 - INFO - Received order update: ARBUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:39,453 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:39,455 - INFO - MySQL connection is closed
+2025-07-23 17:06:39,757 - INFO - Order cancelled in source account: ARBUSDT 12774226699
+2025-07-23 17:06:39,758 - INFO - Received order update: BABYUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:39,765 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:39,766 - INFO - MySQL connection is closed
+2025-07-23 17:06:40,063 - INFO - Order cancelled in source account: BABYUSDT 829602991
+2025-07-23 17:06:40,064 - INFO - Received order update: BABYUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:40,070 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:40,072 - INFO - MySQL connection is closed
+2025-07-23 17:06:40,374 - INFO - Order cancelled in source account: BABYUSDT 829602702
+2025-07-23 17:06:40,374 - INFO - Received order update: BABYUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:40,381 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:40,382 - INFO - MySQL connection is closed
+2025-07-23 17:06:40,697 - INFO - Order cancelled in source account: BABYUSDT 829602803
+2025-07-23 17:06:40,697 - INFO - Received order update: WUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:40,704 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:40,706 - INFO - MySQL connection is closed
+2025-07-23 17:06:41,019 - INFO - Order cancelled in source account: WUSDT 3720265877
+2025-07-23 17:06:41,019 - INFO - Received order update: WUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:41,026 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:41,028 - INFO - MySQL connection is closed
+2025-07-23 17:06:41,331 - INFO - Order cancelled in source account: WUSDT 3720265630
+2025-07-23 17:06:41,333 - INFO - Received order update: WUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:41,341 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:41,343 - INFO - MySQL connection is closed
+2025-07-23 17:06:41,650 - INFO - Order cancelled in source account: WUSDT 3720265371
+2025-07-23 17:06:41,652 - INFO - Received order update: SEIUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:41,663 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:41,667 - INFO - MySQL connection is closed
+2025-07-23 17:06:42,030 - INFO - Order cancelled in source account: SEIUSDT 7084819900
+2025-07-23 17:06:42,031 - INFO - Received order update: SEIUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:42,038 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:42,040 - INFO - MySQL connection is closed
+2025-07-23 17:06:42,486 - INFO - Order cancelled in source account: SEIUSDT 7084820009
+2025-07-23 17:06:42,487 - INFO - Received order update: SEIUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:42,494 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:42,495 - INFO - MySQL connection is closed
+2025-07-23 17:06:43,255 - INFO - Order cancelled in source account: SEIUSDT 7084820231
+2025-07-23 17:06:43,256 - INFO - Received order update: ONDOUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:43,263 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:43,265 - INFO - MySQL connection is closed
+2025-07-23 17:06:43,844 - INFO - Order cancelled in source account: ONDOUSDT 6468331437
+2025-07-23 17:06:43,845 - INFO - Received order update: ONDOUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:43,853 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:43,855 - INFO - MySQL connection is closed
+2025-07-23 17:06:44,161 - INFO - Order cancelled in source account: ONDOUSDT 6468332393
+2025-07-23 17:06:44,162 - INFO - Received order update: ONDOUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:44,169 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:44,170 - INFO - MySQL connection is closed
+2025-07-23 17:06:44,468 - INFO - Order cancelled in source account: ONDOUSDT 6468332879
+2025-07-23 17:06:44,470 - INFO - Received order update: GRTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:44,482 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:44,485 - INFO - MySQL connection is closed
+2025-07-23 17:06:44,798 - INFO - Order cancelled in source account: GRTUSDT 13027484792
+2025-07-23 17:06:44,798 - INFO - Received order update: GRTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:44,808 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:44,809 - INFO - MySQL connection is closed
+2025-07-23 17:06:45,413 - INFO - Order cancelled in source account: GRTUSDT 13027484445
+2025-07-23 17:06:45,414 - INFO - Received order update: GRTUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:45,422 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:45,424 - INFO - MySQL connection is closed
+2025-07-23 17:06:47,208 - INFO - Order cancelled in source account: GRTUSDT 13027485188
+2025-07-23 17:06:47,209 - INFO - Received order update: CHZUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:47,216 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:47,218 - INFO - MySQL connection is closed
+2025-07-23 17:06:48,444 - INFO - Order cancelled in source account: CHZUSDT 14209195874
+2025-07-23 17:06:48,445 - INFO - Received order update: CHZUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:48,452 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:48,454 - INFO - MySQL connection is closed
+2025-07-23 17:06:49,031 - INFO - Order cancelled in source account: CHZUSDT 14209195530
+2025-07-23 17:06:49,031 - INFO - Received order update: CHZUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:49,038 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:49,040 - INFO - MySQL connection is closed
+2025-07-23 17:06:49,387 - INFO - Order cancelled in source account: CHZUSDT 14209195782
+2025-07-23 17:06:49,388 - INFO - Received order update: JUPUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:49,397 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:49,399 - INFO - MySQL connection is closed
+2025-07-23 17:06:49,717 - INFO - Order cancelled in source account: JUPUSDT 5862276448
+2025-07-23 17:06:49,717 - INFO - Received order update: JUPUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:49,724 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:49,726 - INFO - MySQL connection is closed
+2025-07-23 17:06:50,150 - INFO - Order cancelled in source account: JUPUSDT 5862276005
+2025-07-23 17:06:50,151 - INFO - Received order update: JUPUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:50,158 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:50,159 - INFO - MySQL connection is closed
+2025-07-23 17:06:50,479 - INFO - Order cancelled in source account: JUPUSDT 5862277717
+2025-07-23 17:06:50,480 - INFO - Received order update: VTHOUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:50,487 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:50,489 - INFO - MySQL connection is closed
+2025-07-23 17:06:50,822 - INFO - Order cancelled in source account: VTHOUSDT 450531957
+2025-07-23 17:06:50,823 - INFO - Received order update: VTHOUSDT SELL CANCELED ps BOTH
+2025-07-23 17:06:50,831 - INFO - Successfully connected to MySQL database
+2025-07-23 17:06:50,833 - INFO - MySQL connection is closed
+2025-07-23 17:06:51,143 - INFO - Order cancelled in source account: VTHOUSDT 450531855
+2025-07-23 17:26:53,707 - ERROR - error in keepalive_socket: Cannot connect to host fapi.binance.com:443 ssl:default [getaddrinfo failed]
+2025-07-23 17:29:25,357 - INFO - Successfully connected to MySQL database
+2025-07-23 17:29:25,359 - INFO - MySQL connection is closed
+2025-07-23 17:29:25,435 - INFO - Successfully connected to MySQL database
+2025-07-23 17:29:25,437 - INFO - MySQL connection is closed
+2025-07-23 17:29:30,157 - INFO - Successfully connected to MySQL database
+2025-07-23 17:29:30,173 - INFO - Database tables created successfully
+2025-07-23 17:29:30,178 - INFO - MySQL connection is closed
+2025-07-23 17:29:30,180 - INFO - Database initialized successfully
+2025-07-23 17:29:33,114 - INFO - Binance connection test successful for source account
+2025-07-23 17:29:37,612 - INFO - Copy trading bot started successfully
+2025-07-23 17:29:37,762 - INFO - Successfully connected to MySQL database
+2025-07-23 17:29:37,775 - INFO - MySQL connection is closed
+2025-07-23 17:29:38,971 - INFO - Started listening to source account order updates
+2025-07-23 17:29:50,097 - ERROR - Failed to connect to websocket: timed out during opening handshake
+2025-07-23 17:31:42,371 - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-205' coro=<ThreadedApiManager.start_listener() done, defined at C:\Users\aliha\Desktop\copy_trading\trade_bot\Lib\site-packages\binance\ws\threaded_stream.py:54> exception=TimeoutError('timed out during opening handshake')>
+Traceback (most recent call last):
+  File "C:\Users\aliha\Desktop\copy_trading\trade_bot\Lib\site-packages\websockets\asyncio\client.py", line 543, in __await_impl__
+    await self.connection.handshake(
+    ...<2 lines>...
+    )
+  File "C:\Users\aliha\Desktop\copy_trading\trade_bot\Lib\site-packages\websockets\asyncio\client.py", line 104, in handshake
+    await asyncio.wait(
+    ...<2 lines>...
+    )
+  File "C:\Users\aliha\AppData\Local\Programs\Python\Python313\Lib\asyncio\tasks.py", line 451, in wait
+    return await _wait(fs, timeout, return_when, loop)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\aliha\AppData\Local\Programs\Python\Python313\Lib\asyncio\tasks.py", line 537, in _wait
+    await waiter
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\aliha\Desktop\copy_trading\trade_bot\Lib\site-packages\websockets\asyncio\client.py", line 539, in __await_impl__
+    async with asyncio_timeout(self.open_timeout):
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\aliha\AppData\Local\Programs\Python\Python313\Lib\asyncio\timeouts.py", line 116, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\aliha\Desktop\copy_trading\trade_bot\Lib\site-packages\binance\ws\threaded_stream.py", line 55, in start_listener
+    async with socket as s:
+               ^^^^^^
+  File "C:\Users\aliha\Desktop\copy_trading\trade_bot\Lib\site-packages\binance\ws\reconnecting_websocket.py", line 91, in __aenter__
+    await self.connect()
+  File "C:\Users\aliha\Desktop\copy_trading\trade_bot\Lib\site-packages\binance\ws\reconnecting_websocket.py", line 136, in connect
+    raise e
+  File "C:\Users\aliha\Desktop\copy_trading\trade_bot\Lib\site-packages\binance\ws\reconnecting_websocket.py", line 132, in connect
+    self.ws = await self._conn.__aenter__()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\aliha\Desktop\copy_trading\trade_bot\Lib\site-packages\websockets\asyncio\client.py", line 587, in __aenter__
+    return await self
+           ^^^^^^^^^^
+  File "C:\Users\aliha\Desktop\copy_trading\trade_bot\Lib\site-packages\websockets\asyncio\client.py", line 578, in __await_impl__
+    raise TimeoutError("timed out during opening handshake") from exc
+TimeoutError: timed out during opening handshake
+2025-07-23 17:32:10,063 - INFO - Successfully connected to MySQL database
+2025-07-23 17:32:10,067 - INFO - MySQL connection is closed
+2025-07-23 17:32:10,145 - INFO - Successfully connected to MySQL database
+2025-07-23 17:32:10,148 - INFO - MySQL connection is closed
+2025-07-23 17:32:14,265 - INFO - Successfully connected to MySQL database
+2025-07-23 17:32:14,280 - INFO - Database tables created successfully
+2025-07-23 17:32:14,283 - INFO - MySQL connection is closed
+2025-07-23 17:32:14,284 - INFO - Database initialized successfully
+2025-07-23 17:32:15,445 - INFO - Binance connection test successful for source account
+2025-07-23 17:32:15,759 - INFO - Copy trading bot started successfully
+2025-07-23 17:32:15,838 - INFO - Successfully connected to MySQL database
+2025-07-23 17:32:15,888 - INFO - MySQL connection is closed
+2025-07-23 17:32:16,379 - INFO - Started listening to source account order updates
+2025-07-23 17:33:16,784 - ERROR - ConnectionClosedError (no close frame received or sent)
+2025-07-23 17:33:16,803 - ERROR - BinanceWebsocketClosed (Connection closed. Reconnecting...)
+2025-07-24 12:06:40,468 - INFO - Successfully connected to MySQL database
+2025-07-24 12:06:40,537 - INFO - MySQL connection is closed
+2025-07-24 12:06:40,622 - INFO - Successfully connected to MySQL database
+2025-07-24 12:06:40,658 - INFO - MySQL connection is closed
+2025-07-24 12:22:30,005 - INFO - Successfully connected to MySQL database
+2025-07-24 12:22:30,083 - INFO - Database tables created successfully
+2025-07-24 12:22:30,105 - INFO - MySQL connection is closed
+2025-07-24 12:22:30,108 - INFO - Database initialized successfully
+2025-07-24 12:22:31,471 - INFO - Binance connection test successful for source account
+2025-07-24 12:22:31,845 - INFO - Copy trading bot started successfully
+2025-07-24 12:22:31,952 - INFO - Successfully connected to MySQL database
+2025-07-24 12:22:31,954 - INFO - MySQL connection is closed
+2025-07-24 12:22:32,610 - INFO - Started listening to source account order updates
+2025-07-24 12:22:39,582 - INFO - Received order update: TSTUSDT BUY NEW ps BOTH
+2025-07-24 12:22:39,606 - INFO - Successfully connected to MySQL database
+2025-07-24 12:22:39,608 - INFO - MySQL connection is closed
+2025-07-24 12:22:40,498 - ERROR - Error placing order - Code: -1106, Message: Parameter 'timeinforce' sent when not required.
+2025-07-24 12:22:40,499 - INFO - Received order update: TSTUSDT BUY FILLED ps BOTH
+2025-07-24 12:23:27,788 - INFO - Received order update: TUSDT BUY NEW ps BOTH
+2025-07-24 12:23:27,801 - INFO - Successfully connected to MySQL database
+2025-07-24 12:23:27,803 - INFO - MySQL connection is closed
+2025-07-24 12:23:28,999 - ERROR - Error placing order - Code: -1106, Message: Parameter 'timeinforce' sent when not required.
+2025-07-24 12:23:29,003 - INFO - Received order update: TUSDT BUY FILLED ps BOTH
+2025-07-24 12:25:22,492 - INFO - Successfully connected to MySQL database
+2025-07-24 12:25:22,494 - INFO - MySQL connection is closed
+2025-07-24 12:25:22,579 - INFO - Successfully connected to MySQL database
+2025-07-24 12:25:22,585 - INFO - MySQL connection is closed
+2025-07-24 12:25:25,714 - INFO - Successfully connected to MySQL database
+2025-07-24 12:25:25,729 - INFO - Database tables created successfully
+2025-07-24 12:25:25,730 - INFO - MySQL connection is closed
+2025-07-24 12:25:25,731 - INFO - Database initialized successfully
+2025-07-24 12:25:26,637 - INFO - Binance connection test successful for source account
+2025-07-24 12:25:26,951 - INFO - Copy trading bot started successfully
+2025-07-24 12:25:27,081 - INFO - Successfully connected to MySQL database
+2025-07-24 12:25:27,085 - INFO - MySQL connection is closed
+2025-07-24 12:25:27,714 - INFO - Started listening to source account order updates
+2025-07-24 12:25:29,526 - INFO - Received order update: ALPHAUSDT BUY CANCELED ps BOTH
+2025-07-24 12:25:29,537 - INFO - Successfully connected to MySQL database
+2025-07-24 12:25:29,539 - INFO - MySQL connection is closed
+2025-07-24 12:25:29,859 - INFO - Order cancelled in source account: ALPHAUSDT 6713457926
+2025-07-24 12:25:29,868 - INFO - Received order update: ALPHAUSDT BUY NEW ps BOTH
+2025-07-24 12:25:29,899 - INFO - Successfully connected to MySQL database
+2025-07-24 12:25:29,901 - INFO - MySQL connection is closed
+2025-07-24 12:25:30,748 - ERROR - Error placing order - Code: -1106, Message: Parameter 'timeinforce' sent when not required.
+2025-07-24 12:25:30,768 - INFO - Received order update: ALPHAUSDT BUY FILLED ps BOTH
+2025-07-24 12:25:31,401 - INFO - Received order update: BAKEUSDT BUY NEW ps BOTH
+2025-07-24 12:25:31,428 - INFO - Successfully connected to MySQL database
+2025-07-24 12:25:31,430 - INFO - MySQL connection is closed
+2025-07-24 12:25:32,291 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-24 12:25:33,222 - INFO - Received order update: BAKEUSDT BUY FILLED ps BOTH
+2025-07-24 12:25:35,291 - INFO - Received order update: TLMUSDT BUY NEW ps BOTH
+2025-07-24 12:25:35,301 - INFO - Successfully connected to MySQL database
+2025-07-24 12:25:35,303 - INFO - MySQL connection is closed
+2025-07-24 12:25:36,192 - ERROR - Error placing order - Code: -4061, Message: Order's position side does not match user's setting.
+2025-07-24 12:25:36,194 - INFO - Received order update: TLMUSDT BUY FILLED ps BOTH
+2025-07-24 12:42:57,869 - INFO - Successfully connected to MySQL database
+2025-07-24 12:42:57,873 - INFO - MySQL connection is closed
+2025-07-24 12:42:57,984 - INFO - Successfully connected to MySQL database
+2025-07-24 12:42:57,991 - INFO - MySQL connection is closed
+2025-07-24 12:43:01,595 - INFO - Successfully connected to MySQL database
+2025-07-24 12:43:01,616 - INFO - Database tables created successfully
+2025-07-24 12:43:01,617 - INFO - MySQL connection is closed
+2025-07-24 12:43:01,618 - INFO - Database initialized successfully
+2025-07-24 12:43:02,703 - INFO - Binance connection test successful for source account
+2025-07-24 12:43:03,012 - INFO - Copy trading bot started successfully
+2025-07-24 12:43:03,099 - INFO - Successfully connected to MySQL database
+2025-07-24 12:43:03,101 - INFO - MySQL connection is closed
+2025-07-24 12:43:03,699 - INFO - Started listening to source account order updates
+2025-07-24 12:43:09,211 - INFO - Successfully connected to MySQL database
+2025-07-24 12:43:09,213 - INFO - MySQL connection is closed
+2025-07-24 12:43:09,348 - INFO - Successfully connected to MySQL database
+2025-07-24 12:43:09,380 - INFO - MySQL connection is closed
+2025-07-24 12:45:15,721 - INFO - Received order update: NEIROUSDT SELL NEW ps BOTH
+2025-07-24 12:45:15,738 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:15,741 - INFO - MySQL connection is closed
+2025-07-24 12:45:16,665 - INFO - Order placed successfully: {'orderId': 8064859384, 'symbol': 'NEIROUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJc9cea28997a436c5f2efec', 'price': '0.00040000', 'avgPrice': '0.00', 'origQty': '17753', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.00000000', 'timeInForce': 'GTC', 'type': 'LIMIT', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.00000000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'LIMIT', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343118241}
+2025-07-24 12:45:16,689 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:16,721 - INFO - MySQL connection is closed
+2025-07-24 12:45:16,722 - INFO - Trade mirrored to account 1: NEIROUSDT SELL
+2025-07-24 12:45:16,726 - INFO - Received order update: NEIROUSDT SELL FILLED ps BOTH
+2025-07-24 12:45:21,001 - INFO - Received order update: NEIROUSDT SELL NEW ps BOTH
+2025-07-24 12:45:21,012 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:21,015 - INFO - MySQL connection is closed
+2025-07-24 12:45:21,854 - INFO - Order placed successfully: {'orderId': 8064860457, 'symbol': 'NEIROUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ97d3736bc53b8c158bfb7e', 'price': '0.00000000', 'avgPrice': '0.00', 'origQty': '17753', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.00000000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.00040350', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343123426}
+2025-07-24 12:45:21,878 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:21,896 - INFO - MySQL connection is closed
+2025-07-24 12:45:21,897 - INFO - Trade mirrored to account 1: NEIROUSDT SELL
+2025-07-24 12:45:26,209 - INFO - Received order update: NEIROUSDT SELL NEW ps BOTH
+2025-07-24 12:45:26,228 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:26,230 - INFO - MySQL connection is closed
+2025-07-24 12:45:27,061 - INFO - Order placed successfully: {'orderId': 8064861335, 'symbol': 'NEIROUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJdce29e22026988fe576469', 'price': '0.00000000', 'avgPrice': '0.00', 'origQty': '17753', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.00000000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.00053801', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343128629}
+2025-07-24 12:45:27,084 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:27,107 - INFO - MySQL connection is closed
+2025-07-24 12:45:27,108 - INFO - Trade mirrored to account 1: NEIROUSDT SELL
+2025-07-24 12:45:29,801 - INFO - Received order update: 1000PEPEUSDT SELL NEW ps BOTH
+2025-07-24 12:45:29,824 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:29,827 - INFO - MySQL connection is closed
+2025-07-24 12:45:30,745 - INFO - Order placed successfully: {'orderId': 45249818951, 'symbol': '1000PEPEUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJc0a11019f5f7d87d9b9fd2', 'price': '0.0124000', 'avgPrice': '0.00', 'origQty': '712', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'LIMIT', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0000000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'LIMIT', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343132297}
+2025-07-24 12:45:30,754 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:30,769 - INFO - MySQL connection is closed
+2025-07-24 12:45:30,770 - INFO - Trade mirrored to account 1: 1000PEPEUSDT SELL
+2025-07-24 12:45:35,019 - INFO - Received order update: 1000PEPEUSDT SELL NEW ps BOTH
+2025-07-24 12:45:35,044 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:35,047 - INFO - MySQL connection is closed
+2025-07-24 12:45:35,947 - INFO - Order placed successfully: {'orderId': 45249822864, 'symbol': '1000PEPEUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ48837c9c8d676b9dbad469', 'price': '0.0000000', 'avgPrice': '0.00', 'origQty': '712', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0111379', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343137500}
+2025-07-24 12:45:35,960 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:35,980 - INFO - MySQL connection is closed
+2025-07-24 12:45:35,981 - INFO - Trade mirrored to account 1: 1000PEPEUSDT SELL
+2025-07-24 12:45:40,229 - INFO - Received order update: 1000PEPEUSDT SELL NEW ps BOTH
+2025-07-24 12:45:40,241 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:40,244 - INFO - MySQL connection is closed
+2025-07-24 12:45:40,917 - INFO - Order placed successfully: {'orderId': 45249829429, 'symbol': '1000PEPEUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ869eb3923393bdb96915ec', 'price': '0.0000000', 'avgPrice': '0.00', 'origQty': '712', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0148505', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343142444}
+2025-07-24 12:45:40,937 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:40,947 - INFO - MySQL connection is closed
+2025-07-24 12:45:40,948 - INFO - Trade mirrored to account 1: 1000PEPEUSDT SELL
+2025-07-24 12:45:43,485 - INFO - Received order update: LEVERUSDT SELL NEW ps BOTH
+2025-07-24 12:45:43,505 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:43,510 - INFO - MySQL connection is closed
+2025-07-24 12:45:44,333 - INFO - Order placed successfully: {'orderId': 4021567391, 'symbol': 'LEVERUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ7a56f75ca9ac17c2f36d5d', 'price': '0.0002000', 'avgPrice': '0.00', 'origQty': '47409', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'LIMIT', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0000000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'LIMIT', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343145885}
+2025-07-24 12:45:44,353 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:44,365 - INFO - MySQL connection is closed
+2025-07-24 12:45:44,365 - INFO - Trade mirrored to account 1: LEVERUSDT SELL
+2025-07-24 12:45:48,735 - INFO - Received order update: LEVERUSDT SELL NEW ps BOTH
+2025-07-24 12:45:48,751 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:48,753 - INFO - MySQL connection is closed
+2025-07-24 12:45:49,362 - INFO - Order placed successfully: {'orderId': 4021567446, 'symbol': 'LEVERUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ7ce6b3c985229cb2cc475c', 'price': '0.0000000', 'avgPrice': '0.00', 'origQty': '47409', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0001697', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343150917}
+2025-07-24 12:45:49,373 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:49,387 - INFO - MySQL connection is closed
+2025-07-24 12:45:49,388 - INFO - Trade mirrored to account 1: LEVERUSDT SELL
+2025-07-24 12:45:53,942 - INFO - Received order update: LEVERUSDT SELL NEW ps BOTH
+2025-07-24 12:45:53,954 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:53,956 - INFO - MySQL connection is closed
+2025-07-24 12:45:54,578 - INFO - Order placed successfully: {'orderId': 4021567508, 'symbol': 'LEVERUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJc40c36a83ad5dc41f11a90', 'price': '0.0000000', 'avgPrice': '0.00', 'origQty': '47409', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0002262', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343156133}
+2025-07-24 12:45:54,592 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:54,602 - INFO - MySQL connection is closed
+2025-07-24 12:45:54,603 - INFO - Trade mirrored to account 1: LEVERUSDT SELL
+2025-07-24 12:45:56,029 - INFO - Received order update: MEMEUSDT SELL NEW ps BOTH
+2025-07-24 12:45:56,045 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:56,048 - INFO - MySQL connection is closed
+2025-07-24 12:45:56,657 - INFO - Order placed successfully: {'orderId': 6239834176, 'symbol': 'MEMEUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJaf0cac6e86fe52b10cce6b', 'price': '0.0018000', 'avgPrice': '0.00', 'origQty': '4735', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'LIMIT', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0000000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'LIMIT', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343158213}
+2025-07-24 12:45:56,666 - INFO - Successfully connected to MySQL database
+2025-07-24 12:45:56,685 - INFO - MySQL connection is closed
+2025-07-24 12:45:56,685 - INFO - Trade mirrored to account 1: MEMEUSDT SELL
+2025-07-24 12:46:01,293 - INFO - Received order update: MEMEUSDT SELL NEW ps BOTH
+2025-07-24 12:46:01,317 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:01,324 - INFO - MySQL connection is closed
+2025-07-24 12:46:01,931 - INFO - Order placed successfully: {'orderId': 6239834253, 'symbol': 'MEMEUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ9fdf37e47057eec75975f1', 'price': '0.0000000', 'avgPrice': '0.00', 'origQty': '4735', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0015750', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343163487}
+2025-07-24 12:46:01,943 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:01,957 - INFO - MySQL connection is closed
+2025-07-24 12:46:01,957 - INFO - Trade mirrored to account 1: MEMEUSDT SELL
+2025-07-24 12:46:06,498 - INFO - Received order update: MEMEUSDT SELL NEW ps BOTH
+2025-07-24 12:46:06,510 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:06,511 - INFO - MySQL connection is closed
+2025-07-24 12:46:07,116 - INFO - Order placed successfully: {'orderId': 6239834529, 'symbol': 'MEMEUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ70b65c267c21ae79798f75', 'price': '0.0000000', 'avgPrice': '0.00', 'origQty': '4735', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0021000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343168667}
+2025-07-24 12:46:07,129 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:07,149 - INFO - MySQL connection is closed
+2025-07-24 12:46:07,150 - INFO - Trade mirrored to account 1: MEMEUSDT SELL
+2025-07-24 12:46:08,245 - INFO - Received order update: 1000SHIBUSDT SELL NEW ps BOTH
+2025-07-24 12:46:08,265 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:08,269 - INFO - MySQL connection is closed
+2025-07-24 12:46:08,901 - INFO - Order placed successfully: {'orderId': 27015755292, 'symbol': '1000SHIBUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ2a1d9915cf3659aeb016a7', 'price': '0.013400', 'avgPrice': '0.00', 'origQty': '688', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.000000', 'timeInForce': 'GTC', 'type': 'LIMIT', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.000000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'LIMIT', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343170452}
+2025-07-24 12:46:08,946 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:08,989 - INFO - MySQL connection is closed
+2025-07-24 12:46:09,012 - INFO - Trade mirrored to account 1: 1000SHIBUSDT SELL
+2025-07-24 12:46:13,498 - INFO - Received order update: 1000SHIBUSDT SELL NEW ps BOTH
+2025-07-24 12:46:13,522 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:13,524 - INFO - MySQL connection is closed
+2025-07-24 12:46:14,177 - INFO - Order placed successfully: {'orderId': 27015756870, 'symbol': '1000SHIBUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJc0b28543a509e40f3bd387', 'price': '0.000000', 'avgPrice': '0.00', 'origQty': '688', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.000000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.012098', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343175669}
+2025-07-24 12:46:14,190 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:14,207 - INFO - MySQL connection is closed
+2025-07-24 12:46:14,208 - INFO - Trade mirrored to account 1: 1000SHIBUSDT SELL
+2025-07-24 12:46:18,695 - INFO - Received order update: 1000SHIBUSDT SELL NEW ps BOTH
+2025-07-24 12:46:18,720 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:18,723 - INFO - MySQL connection is closed
+2025-07-24 12:46:19,341 - INFO - Order placed successfully: {'orderId': 27015758077, 'symbol': '1000SHIBUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ8be8be69db59a826f3206e', 'price': '0.000000', 'avgPrice': '0.00', 'origQty': '688', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.000000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.016130', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343180896}
+2025-07-24 12:46:19,353 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:19,364 - INFO - MySQL connection is closed
+2025-07-24 12:46:19,365 - INFO - Trade mirrored to account 1: 1000SHIBUSDT SELL
+2025-07-24 12:46:20,456 - INFO - Received order update: NOTUSDT SELL NEW ps BOTH
+2025-07-24 12:46:20,470 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:20,471 - INFO - MySQL connection is closed
+2025-07-24 12:46:21,359 - INFO - Order placed successfully: {'orderId': 7336484067, 'symbol': 'NOTUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJac2a97776487fada592975', 'price': '0.0020000', 'avgPrice': '0.00', 'origQty': '4312', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'LIMIT', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0000000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'LIMIT', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343182889}
+2025-07-24 12:46:21,380 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:21,389 - INFO - MySQL connection is closed
+2025-07-24 12:46:21,390 - INFO - Trade mirrored to account 1: NOTUSDT SELL
+2025-07-24 12:46:25,852 - INFO - Received order update: NOTUSDT SELL NEW ps BOTH
+2025-07-24 12:46:25,862 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:25,864 - INFO - MySQL connection is closed
+2025-07-24 12:46:26,614 - INFO - Order placed successfully: {'orderId': 7336484605, 'symbol': 'NOTUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ38dbc3d095c2b24351a43a', 'price': '0.0000000', 'avgPrice': '0.00', 'origQty': '4312', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0017809', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343188167}
+2025-07-24 12:46:26,624 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:26,644 - INFO - MySQL connection is closed
+2025-07-24 12:46:26,644 - INFO - Trade mirrored to account 1: NOTUSDT SELL
+2025-07-24 12:46:31,102 - INFO - Received order update: NOTUSDT SELL NEW ps BOTH
+2025-07-24 12:46:31,113 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:31,115 - INFO - MySQL connection is closed
+2025-07-24 12:46:31,784 - INFO - Order placed successfully: {'orderId': 7336485127, 'symbol': 'NOTUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJe39f31abc7b43d96ed6d47', 'price': '0.0000000', 'avgPrice': '0.00', 'origQty': '4312', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0023745', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343193298}
+2025-07-24 12:46:31,797 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:31,815 - INFO - MySQL connection is closed
+2025-07-24 12:46:31,816 - INFO - Trade mirrored to account 1: NOTUSDT SELL
+2025-07-24 12:46:33,083 - INFO - Received order update: HMSTRUSDT SELL NEW ps BOTH
+2025-07-24 12:46:33,102 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:33,104 - INFO - MySQL connection is closed
+2025-07-24 12:46:33,820 - INFO - Order placed successfully: {'orderId': 1376795266, 'symbol': 'HMSTRUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJac3c0a8d682e42e9ec9d26', 'price': '0.0008000', 'avgPrice': '0.00', 'origQty': '11521', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'LIMIT', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0000000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'LIMIT', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343195302}
+2025-07-24 12:46:33,836 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:33,854 - INFO - MySQL connection is closed
+2025-07-24 12:46:33,855 - INFO - Trade mirrored to account 1: HMSTRUSDT SELL
+2025-07-24 12:46:38,339 - INFO - Received order update: HMSTRUSDT SELL NEW ps BOTH
+2025-07-24 12:46:38,353 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:38,355 - INFO - MySQL connection is closed
+2025-07-24 12:46:39,092 - INFO - Order placed successfully: {'orderId': 1376795687, 'symbol': 'HMSTRUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJb9aa2c3ba29d62d12fa692', 'price': '0.0000000', 'avgPrice': '0.00', 'origQty': '11521', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0007018', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343200642}
+2025-07-24 12:46:39,111 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:39,122 - INFO - MySQL connection is closed
+2025-07-24 12:46:39,122 - INFO - Trade mirrored to account 1: HMSTRUSDT SELL
+2025-07-24 12:46:43,585 - INFO - Received order update: HMSTRUSDT SELL NEW ps BOTH
+2025-07-24 12:46:43,593 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:43,595 - INFO - MySQL connection is closed
+2025-07-24 12:46:44,200 - INFO - Order placed successfully: {'orderId': 1376795811, 'symbol': 'HMSTRUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ8d4d55d727c347c1d716dc', 'price': '0.0000000', 'avgPrice': '0.00', 'origQty': '11521', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0009358', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343205756}
+2025-07-24 12:46:44,212 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:44,229 - INFO - MySQL connection is closed
+2025-07-24 12:46:44,230 - INFO - Trade mirrored to account 1: HMSTRUSDT SELL
+2025-07-24 12:46:45,382 - INFO - Received order update: 1MBABYDOGEUSDT SELL NEW ps BOTH
+2025-07-24 12:46:45,393 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:45,394 - INFO - MySQL connection is closed
+2025-07-24 12:46:46,002 - INFO - Order placed successfully: {'orderId': 3100193367, 'symbol': '1MBABYDOGEUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJb509a44b117bdd62cddfb8', 'price': '0.0013000', 'avgPrice': '0.00', 'origQty': '6618', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000000', 'timeInForce': 'GTC', 'type': 'LIMIT', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0000000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'LIMIT', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343207556}
+2025-07-24 12:46:46,014 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:46,026 - INFO - MySQL connection is closed
+2025-07-24 12:46:46,027 - INFO - Trade mirrored to account 1: 1MBABYDOGEUSDT SELL
+2025-07-24 12:46:46,031 - INFO - Received order update: 1MBABYDOGEUSDT SELL FILLED ps BOTH
+2025-07-24 12:46:50,600 - INFO - Received order update: 1MBABYDOGEUSDT SELL NEW ps BOTH
+2025-07-24 12:46:50,630 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:50,633 - INFO - MySQL connection is closed
+2025-07-24 12:46:51,456 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:46:55,848 - INFO - Received order update: 1MBABYDOGEUSDT SELL NEW ps BOTH
+2025-07-24 12:46:55,859 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:55,862 - INFO - MySQL connection is closed
+2025-07-24 12:46:56,535 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:46:57,698 - INFO - Received order update: DOGEUSDT SELL NEW ps BOTH
+2025-07-24 12:46:57,712 - INFO - Successfully connected to MySQL database
+2025-07-24 12:46:57,715 - INFO - MySQL connection is closed
+2025-07-24 12:46:58,321 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:03,006 - INFO - Received order update: DOGEUSDT SELL NEW ps BOTH
+2025-07-24 12:47:03,016 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:03,018 - INFO - MySQL connection is closed
+2025-07-24 12:47:03,671 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:08,201 - INFO - Received order update: DOGEUSDT SELL NEW ps BOTH
+2025-07-24 12:47:08,214 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:08,218 - INFO - MySQL connection is closed
+2025-07-24 12:47:08,819 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:09,821 - INFO - Received order update: TURBOUSDT SELL NEW ps BOTH
+2025-07-24 12:47:09,832 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:09,833 - INFO - MySQL connection is closed
+2025-07-24 12:47:10,434 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:15,039 - INFO - Received order update: TURBOUSDT SELL NEW ps BOTH
+2025-07-24 12:47:15,063 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:15,065 - INFO - MySQL connection is closed
+2025-07-24 12:47:15,659 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:20,242 - INFO - Received order update: TURBOUSDT SELL NEW ps BOTH
+2025-07-24 12:47:20,257 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:20,259 - INFO - MySQL connection is closed
+2025-07-24 12:47:20,890 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:21,982 - INFO - Received order update: GALAUSDT SELL NEW ps BOTH
+2025-07-24 12:47:21,994 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:21,996 - INFO - MySQL connection is closed
+2025-07-24 12:47:24,065 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:27,541 - INFO - Received order update: GALAUSDT SELL NEW ps BOTH
+2025-07-24 12:47:27,553 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:27,555 - INFO - MySQL connection is closed
+2025-07-24 12:47:28,181 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:32,753 - INFO - Received order update: GALAUSDT SELL NEW ps BOTH
+2025-07-24 12:47:32,773 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:32,775 - INFO - MySQL connection is closed
+2025-07-24 12:47:33,376 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:34,992 - INFO - Received order update: SPELLUSDT SELL NEW ps BOTH
+2025-07-24 12:47:35,016 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:35,020 - INFO - MySQL connection is closed
+2025-07-24 12:47:35,659 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:35,661 - INFO - Received order update: SPELLUSDT SELL FILLED ps BOTH
+2025-07-24 12:47:40,201 - INFO - Received order update: SPELLUSDT SELL NEW ps BOTH
+2025-07-24 12:47:40,213 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:40,217 - INFO - MySQL connection is closed
+2025-07-24 12:47:40,859 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:45,388 - INFO - Received order update: SPELLUSDT SELL NEW ps BOTH
+2025-07-24 12:47:45,408 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:45,412 - INFO - MySQL connection is closed
+2025-07-24 12:47:46,003 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:46,980 - INFO - Received order update: HOTUSDT SELL NEW ps BOTH
+2025-07-24 12:47:46,989 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:46,991 - INFO - MySQL connection is closed
+2025-07-24 12:47:47,587 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:47,589 - INFO - Received order update: HOTUSDT SELL PARTIALLY_FILLED ps BOTH
+2025-07-24 12:47:47,590 - INFO - Received order update: HOTUSDT SELL FILLED ps BOTH
+2025-07-24 12:47:52,235 - INFO - Received order update: HOTUSDT SELL NEW ps BOTH
+2025-07-24 12:47:52,263 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:52,267 - INFO - MySQL connection is closed
+2025-07-24 12:47:52,904 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:57,429 - INFO - Received order update: HOTUSDT SELL NEW ps BOTH
+2025-07-24 12:47:57,439 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:57,440 - INFO - MySQL connection is closed
+2025-07-24 12:47:58,090 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:59,006 - INFO - Received order update: DENTUSDT SELL NEW ps BOTH
+2025-07-24 12:47:59,016 - INFO - Successfully connected to MySQL database
+2025-07-24 12:47:59,017 - INFO - MySQL connection is closed
+2025-07-24 12:47:59,618 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:47:59,622 - INFO - Received order update: DENTUSDT SELL FILLED ps BOTH
+2025-07-24 12:48:04,265 - INFO - Received order update: DENTUSDT SELL NEW ps BOTH
+2025-07-24 12:48:04,290 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:04,293 - INFO - MySQL connection is closed
+2025-07-24 12:48:05,245 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:09,453 - INFO - Received order update: DENTUSDT SELL NEW ps BOTH
+2025-07-24 12:48:09,464 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:09,466 - INFO - MySQL connection is closed
+2025-07-24 12:48:10,101 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:11,064 - INFO - Received order update: 1000CHEEMSUSDT SELL NEW ps BOTH
+2025-07-24 12:48:11,090 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:11,093 - INFO - MySQL connection is closed
+2025-07-24 12:48:11,828 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:16,307 - INFO - Received order update: 1000CHEEMSUSDT SELL NEW ps BOTH
+2025-07-24 12:48:16,316 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:16,318 - INFO - MySQL connection is closed
+2025-07-24 12:48:16,999 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:21,510 - INFO - Received order update: 1000CHEEMSUSDT SELL NEW ps BOTH
+2025-07-24 12:48:21,519 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:21,521 - INFO - MySQL connection is closed
+2025-07-24 12:48:24,192 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:24,198 - INFO - Received order update: COSUSDT SELL NEW ps BOTH
+2025-07-24 12:48:24,222 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:24,224 - INFO - MySQL connection is closed
+2025-07-24 12:48:24,854 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:29,325 - INFO - Received order update: COSUSDT SELL NEW ps BOTH
+2025-07-24 12:48:29,333 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:29,335 - INFO - MySQL connection is closed
+2025-07-24 12:48:30,021 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:34,553 - INFO - Received order update: COSUSDT SELL NEW ps BOTH
+2025-07-24 12:48:34,568 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:34,571 - INFO - MySQL connection is closed
+2025-07-24 12:48:35,247 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:36,126 - INFO - Received order update: FUNUSDT BUY NEW ps BOTH
+2025-07-24 12:48:36,135 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:36,137 - INFO - MySQL connection is closed
+2025-07-24 12:48:36,770 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:36,778 - INFO - Received order update: FUNUSDT BUY FILLED ps BOTH
+2025-07-24 12:48:41,354 - INFO - Received order update: FUNUSDT SELL NEW ps BOTH
+2025-07-24 12:48:41,363 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:41,365 - INFO - MySQL connection is closed
+2025-07-24 12:48:41,991 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:46,560 - INFO - Received order update: FUNUSDT SELL NEW ps BOTH
+2025-07-24 12:48:46,585 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:46,588 - INFO - MySQL connection is closed
+2025-07-24 12:48:47,207 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:48,166 - INFO - Received order update: IOSTUSDT SELL NEW ps BOTH
+2025-07-24 12:48:48,185 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:48,187 - INFO - MySQL connection is closed
+2025-07-24 12:48:48,844 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:48,846 - INFO - Received order update: IOSTUSDT SELL PARTIALLY_FILLED ps BOTH
+2025-07-24 12:48:48,848 - INFO - Received order update: IOSTUSDT SELL FILLED ps BOTH
+2025-07-24 12:48:53,395 - INFO - Received order update: IOSTUSDT SELL NEW ps BOTH
+2025-07-24 12:48:53,404 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:53,405 - INFO - MySQL connection is closed
+2025-07-24 12:48:54,031 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:48:58,603 - INFO - Received order update: IOSTUSDT SELL NEW ps BOTH
+2025-07-24 12:48:58,629 - INFO - Successfully connected to MySQL database
+2025-07-24 12:48:58,631 - INFO - MySQL connection is closed
+2025-07-24 12:48:59,244 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:00,566 - INFO - Received order update: PEOPLEUSDT SELL NEW ps BOTH
+2025-07-24 12:49:00,578 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:00,581 - INFO - MySQL connection is closed
+2025-07-24 12:49:01,228 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:05,872 - INFO - Received order update: PEOPLEUSDT SELL NEW ps BOTH
+2025-07-24 12:49:05,899 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:05,903 - INFO - MySQL connection is closed
+2025-07-24 12:49:06,509 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:11,069 - INFO - Received order update: PEOPLEUSDT SELL NEW ps BOTH
+2025-07-24 12:49:11,094 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:11,097 - INFO - MySQL connection is closed
+2025-07-24 12:49:11,709 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:12,940 - INFO - Received order update: ANIMEUSDT SELL NEW ps BOTH
+2025-07-24 12:49:12,961 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:12,963 - INFO - MySQL connection is closed
+2025-07-24 12:49:13,685 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:18,168 - INFO - Received order update: ANIMEUSDT SELL NEW ps BOTH
+2025-07-24 12:49:18,178 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:18,180 - INFO - MySQL connection is closed
+2025-07-24 12:49:18,832 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:23,376 - INFO - Received order update: ANIMEUSDT SELL NEW ps BOTH
+2025-07-24 12:49:23,386 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:23,388 - INFO - MySQL connection is closed
+2025-07-24 12:49:24,018 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:25,202 - INFO - Received order update: RVNUSDT SELL NEW ps BOTH
+2025-07-24 12:49:25,227 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:25,229 - INFO - MySQL connection is closed
+2025-07-24 12:49:25,830 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:30,434 - INFO - Received order update: RVNUSDT SELL NEW ps BOTH
+2025-07-24 12:49:30,457 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:30,459 - INFO - MySQL connection is closed
+2025-07-24 12:49:31,064 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:35,625 - INFO - Received order update: RVNUSDT SELL NEW ps BOTH
+2025-07-24 12:49:35,634 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:35,635 - INFO - MySQL connection is closed
+2025-07-24 12:49:36,266 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:37,200 - INFO - Received order update: VTHOUSDT SELL NEW ps BOTH
+2025-07-24 12:49:37,209 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:37,211 - INFO - MySQL connection is closed
+2025-07-24 12:49:37,838 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:42,644 - INFO - Received order update: VTHOUSDT SELL NEW ps BOTH
+2025-07-24 12:49:42,654 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:42,656 - INFO - MySQL connection is closed
+2025-07-24 12:49:44,329 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:48,001 - INFO - Received order update: VTHOUSDT SELL NEW ps BOTH
+2025-07-24 12:49:48,015 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:48,017 - INFO - MySQL connection is closed
+2025-07-24 12:49:48,730 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:50,040 - INFO - Received order update: MEMEFIUSDT SELL NEW ps BOTH
+2025-07-24 12:49:50,051 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:50,053 - INFO - MySQL connection is closed
+2025-07-24 12:49:50,675 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:49:50,680 - INFO - Received order update: MEMEFIUSDT SELL FILLED ps BOTH
+2025-07-24 12:49:55,276 - INFO - Received order update: MEMEFIUSDT SELL NEW ps BOTH
+2025-07-24 12:49:55,287 - INFO - Successfully connected to MySQL database
+2025-07-24 12:49:55,289 - INFO - MySQL connection is closed
+2025-07-24 12:49:55,892 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:50:00,466 - INFO - Received order update: MEMEFIUSDT SELL NEW ps BOTH
+2025-07-24 12:50:00,476 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:00,478 - INFO - MySQL connection is closed
+2025-07-24 12:50:01,095 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:50:02,158 - INFO - Received order update: XRPUSDT SELL NEW ps BOTH
+2025-07-24 12:50:02,167 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:02,169 - INFO - MySQL connection is closed
+2025-07-24 12:50:02,776 - INFO - Order placed successfully: {'orderId': 112650515666, 'symbol': 'XRPUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ4268406de346f2b588e362', 'price': '3.0619', 'avgPrice': '0.00', 'origQty': '3.2', 'executedQty': '0.0', 'cumQty': '0.0', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'LIMIT', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.0000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'LIMIT', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343404330}
+2025-07-24 12:50:02,787 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:02,807 - INFO - MySQL connection is closed
+2025-07-24 12:50:02,807 - INFO - Trade mirrored to account 1: XRPUSDT SELL
+2025-07-24 12:50:07,410 - INFO - Received order update: XRPUSDT SELL NEW ps BOTH
+2025-07-24 12:50:07,419 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:07,421 - INFO - MySQL connection is closed
+2025-07-24 12:50:08,034 - INFO - Order placed successfully: {'orderId': 112650529751, 'symbol': 'XRPUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ308acf1a63c0c54701b8cd', 'price': '0.0000', 'avgPrice': '0.00', 'origQty': '3.2', 'executedQty': '0.0', 'cumQty': '0.0', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '2.7557', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343409591}
+2025-07-24 12:50:08,044 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:08,061 - INFO - MySQL connection is closed
+2025-07-24 12:50:08,061 - INFO - Trade mirrored to account 1: XRPUSDT SELL
+2025-07-24 12:50:12,602 - INFO - Received order update: XRPUSDT SELL NEW ps BOTH
+2025-07-24 12:50:12,612 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:12,614 - INFO - MySQL connection is closed
+2025-07-24 12:50:13,231 - INFO - Order placed successfully: {'orderId': 112650546770, 'symbol': 'XRPUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJc7c0c366415caae7ee7208', 'price': '0.0000', 'avgPrice': '0.00', 'origQty': '3.2', 'executedQty': '0.0', 'cumQty': '0.0', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '3.6743', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343414784}
+2025-07-24 12:50:13,247 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:13,259 - INFO - MySQL connection is closed
+2025-07-24 12:50:13,259 - INFO - Trade mirrored to account 1: XRPUSDT SELL
+2025-07-24 12:50:14,204 - INFO - Received order update: VETUSDT SELL NEW ps BOTH
+2025-07-24 12:50:14,217 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:14,221 - INFO - MySQL connection is closed
+2025-07-24 12:50:14,830 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:50:19,433 - INFO - Received order update: VETUSDT SELL NEW ps BOTH
+2025-07-24 12:50:19,462 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:19,465 - INFO - MySQL connection is closed
+2025-07-24 12:50:20,060 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:50:24,900 - INFO - Received order update: VETUSDT SELL NEW ps BOTH
+2025-07-24 12:50:24,926 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:24,928 - INFO - MySQL connection is closed
+2025-07-24 12:50:25,622 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:50:26,605 - INFO - Received order update: 1000CATUSDT SELL NEW ps BOTH
+2025-07-24 12:50:26,626 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:26,628 - INFO - MySQL connection is closed
+2025-07-24 12:50:27,253 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:50:31,814 - INFO - Received order update: 1000CATUSDT SELL NEW ps BOTH
+2025-07-24 12:50:31,841 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:31,844 - INFO - MySQL connection is closed
+2025-07-24 12:50:32,473 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:50:37,009 - INFO - Received order update: 1000CATUSDT SELL NEW ps BOTH
+2025-07-24 12:50:37,019 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:37,021 - INFO - MySQL connection is closed
+2025-07-24 12:50:38,107 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:50:38,644 - INFO - Received order update: RSRUSDT SELL NEW ps BOTH
+2025-07-24 12:50:38,656 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:38,661 - INFO - MySQL connection is closed
+2025-07-24 12:50:39,483 - INFO - Order placed successfully: {'orderId': 633327758674990661, 'symbol': 'RSRUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ872d461d239a8bfce36e28', 'price': '0.008400', 'avgPrice': '0.00', 'origQty': '1068', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.000000', 'timeInForce': 'GTC', 'type': 'LIMIT', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.000000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'LIMIT', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753343441050}
+2025-07-24 12:50:39,496 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:39,514 - INFO - MySQL connection is closed
+2025-07-24 12:50:39,515 - INFO - Trade mirrored to account 1: RSRUSDT SELL
+2025-07-24 12:50:43,870 - INFO - Received order update: RSRUSDT SELL NEW ps BOTH
+2025-07-24 12:50:43,895 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:43,897 - INFO - MySQL connection is closed
+2025-07-24 12:50:44,824 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:50:49,072 - INFO - Received order update: RSRUSDT SELL NEW ps BOTH
+2025-07-24 12:50:49,081 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:49,083 - INFO - MySQL connection is closed
+2025-07-24 12:50:50,001 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:50:50,738 - INFO - Received order update: JASMYUSDT SELL NEW ps BOTH
+2025-07-24 12:50:50,748 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:50,750 - INFO - MySQL connection is closed
+2025-07-24 12:50:51,618 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:50:55,953 - INFO - Received order update: JASMYUSDT SELL NEW ps BOTH
+2025-07-24 12:50:55,969 - INFO - Successfully connected to MySQL database
+2025-07-24 12:50:55,971 - INFO - MySQL connection is closed
+2025-07-24 12:50:56,868 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:01,300 - INFO - Received order update: JASMYUSDT SELL NEW ps BOTH
+2025-07-24 12:51:01,311 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:01,313 - INFO - MySQL connection is closed
+2025-07-24 12:51:02,639 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:03,807 - INFO - Received order update: DEGENUSDT SELL NEW ps BOTH
+2025-07-24 12:51:03,835 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:03,837 - INFO - MySQL connection is closed
+2025-07-24 12:51:04,775 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:04,778 - INFO - Received order update: DEGENUSDT SELL FILLED ps BOTH
+2025-07-24 12:51:09,792 - INFO - Received order update: DEGENUSDT SELL NEW ps BOTH
+2025-07-24 12:51:09,818 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:09,820 - INFO - MySQL connection is closed
+2025-07-24 12:51:12,310 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:15,025 - INFO - Received order update: DEGENUSDT SELL NEW ps BOTH
+2025-07-24 12:51:15,033 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:15,035 - INFO - MySQL connection is closed
+2025-07-24 12:51:15,858 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:16,845 - INFO - Received order update: EPTUSDT SELL NEW ps BOTH
+2025-07-24 12:51:16,856 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:16,858 - INFO - MySQL connection is closed
+2025-07-24 12:51:17,729 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:21,338 - INFO - Received order update: 1000CATUSDT SELL FILLED ps BOTH
+2025-07-24 12:51:22,091 - INFO - Received order update: EPTUSDT SELL NEW ps BOTH
+2025-07-24 12:51:22,100 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:22,102 - INFO - MySQL connection is closed
+2025-07-24 12:51:23,017 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:27,284 - INFO - Received order update: EPTUSDT SELL NEW ps BOTH
+2025-07-24 12:51:27,301 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:27,303 - INFO - MySQL connection is closed
+2025-07-24 12:51:28,158 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:29,136 - INFO - Received order update: FUSDT SELL NEW ps BOTH
+2025-07-24 12:51:29,155 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:29,157 - INFO - MySQL connection is closed
+2025-07-24 12:51:30,052 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:34,348 - INFO - Received order update: FUSDT SELL NEW ps BOTH
+2025-07-24 12:51:34,357 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:34,359 - INFO - MySQL connection is closed
+2025-07-24 12:51:35,219 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:39,543 - INFO - Received order update: FUSDT SELL NEW ps BOTH
+2025-07-24 12:51:39,553 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:39,555 - INFO - MySQL connection is closed
+2025-07-24 12:51:40,436 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:41,244 - INFO - Received order update: BEAMXUSDT SELL NEW ps BOTH
+2025-07-24 12:51:41,260 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:41,262 - INFO - MySQL connection is closed
+2025-07-24 12:51:42,236 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:46,007 - INFO - Received order update: EPTUSDT SELL FILLED ps BOTH
+2025-07-24 12:51:46,466 - INFO - Received order update: BEAMXUSDT SELL NEW ps BOTH
+2025-07-24 12:51:46,480 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:46,482 - INFO - MySQL connection is closed
+2025-07-24 12:51:47,333 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:51,663 - INFO - Received order update: BEAMXUSDT SELL NEW ps BOTH
+2025-07-24 12:51:51,673 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:51,675 - INFO - MySQL connection is closed
+2025-07-24 12:51:52,566 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:53,318 - INFO - Received order update: ZILUSDT SELL NEW ps BOTH
+2025-07-24 12:51:53,332 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:53,334 - INFO - MySQL connection is closed
+2025-07-24 12:51:54,129 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:51:58,523 - INFO - Received order update: ZILUSDT SELL NEW ps BOTH
+2025-07-24 12:51:58,539 - INFO - Successfully connected to MySQL database
+2025-07-24 12:51:58,541 - INFO - MySQL connection is closed
+2025-07-24 12:51:59,460 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:52:03,761 - INFO - Received order update: ZILUSDT SELL NEW ps BOTH
+2025-07-24 12:52:03,771 - INFO - Successfully connected to MySQL database
+2025-07-24 12:52:03,772 - INFO - MySQL connection is closed
+2025-07-24 12:52:04,612 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:52:05,399 - INFO - Received order update: ADAUSDT SELL NEW ps BOTH
+2025-07-24 12:52:05,410 - INFO - Successfully connected to MySQL database
+2025-07-24 12:52:05,412 - INFO - MySQL connection is closed
+2025-07-24 12:52:06,239 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:52:10,626 - INFO - Received order update: ADAUSDT SELL NEW ps BOTH
+2025-07-24 12:52:10,637 - INFO - Successfully connected to MySQL database
+2025-07-24 12:52:10,639 - INFO - MySQL connection is closed
+2025-07-24 12:52:11,522 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:52:15,874 - INFO - Received order update: ADAUSDT SELL NEW ps BOTH
+2025-07-24 12:52:15,885 - INFO - Successfully connected to MySQL database
+2025-07-24 12:52:15,891 - INFO - MySQL connection is closed
+2025-07-24 12:52:16,834 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:52:17,503 - INFO - Received order update: ONEUSDT SELL NEW ps BOTH
+2025-07-24 12:52:17,513 - INFO - Successfully connected to MySQL database
+2025-07-24 12:52:17,515 - INFO - MySQL connection is closed
+2025-07-24 12:52:18,436 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:52:22,718 - INFO - Received order update: ONEUSDT SELL NEW ps BOTH
+2025-07-24 12:52:22,729 - INFO - Successfully connected to MySQL database
+2025-07-24 12:52:22,731 - INFO - MySQL connection is closed
+2025-07-24 12:52:23,645 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:52:27,917 - INFO - Received order update: ONEUSDT SELL NEW ps BOTH
+2025-07-24 12:52:27,941 - INFO - Successfully connected to MySQL database
+2025-07-24 12:52:27,944 - INFO - MySQL connection is closed
+2025-07-24 12:52:28,809 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:52:29,573 - INFO - Received order update: XLMUSDT SELL NEW ps BOTH
+2025-07-24 12:52:29,597 - INFO - Successfully connected to MySQL database
+2025-07-24 12:52:29,600 - INFO - MySQL connection is closed
+2025-07-24 12:52:30,452 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:52:34,791 - INFO - Received order update: XLMUSDT SELL NEW ps BOTH
+2025-07-24 12:52:34,816 - INFO - Successfully connected to MySQL database
+2025-07-24 12:52:34,818 - INFO - MySQL connection is closed
+2025-07-24 12:52:35,666 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:52:39,983 - INFO - Received order update: XLMUSDT SELL NEW ps BOTH
+2025-07-24 12:52:39,994 - INFO - Successfully connected to MySQL database
+2025-07-24 12:52:39,996 - INFO - MySQL connection is closed
+2025-07-24 12:52:40,875 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:52:42,506 - INFO - Received order update: B3USDT SELL NEW ps BOTH
+2025-07-24 12:52:42,517 - INFO - Successfully connected to MySQL database
+2025-07-24 12:52:42,519 - INFO - MySQL connection is closed
+2025-07-24 12:52:43,356 - ERROR - Error placing order - Code: -2019, Message: Margin is insufficient.
+2025-07-24 12:52:43,363 - INFO - Received order update: B3USDT SELL FILLED ps BOTH
+2025-07-24 12:53:55,273 - INFO - Received order update: JASMYUSDT SELL FILLED ps BOTH
+2025-07-24 12:53:58,776 - INFO - Received order update: RVNUSDT SELL FILLED ps BOTH
+2025-07-24 12:56:02,031 - INFO - Received order update: COSUSDT SELL FILLED ps BOTH
+2025-07-24 12:56:19,136 - INFO - Received order update: XRPUSDT SELL FILLED ps BOTH
+2025-07-24 12:56:24,614 - INFO - Received order update: VETUSDT SELL FILLED ps BOTH
+2025-07-24 12:56:29,038 - INFO - Received order update: ANIMEUSDT SELL FILLED ps BOTH
+2025-07-24 12:56:44,345 - INFO - Received order update: XLMUSDT SELL FILLED ps BOTH
+2025-07-24 12:57:26,148 - INFO - Received order update: PEOPLEUSDT SELL FILLED ps BOTH
+2025-07-24 12:57:30,641 - INFO - Received order update: FUSDT SELL PARTIALLY_FILLED ps BOTH
+2025-07-24 12:57:38,748 - INFO - Received order update: FUSDT SELL FILLED ps BOTH
+2025-07-24 12:57:57,635 - INFO - Received order update: RSRUSDT SELL FILLED ps BOTH
+2025-07-24 12:57:59,462 - INFO - Received order update: 1000SHIBUSDT SELL FILLED ps BOTH
+2025-07-24 12:57:59,546 - INFO - Received order update: ADAUSDT SELL FILLED ps BOTH
+2025-07-24 12:58:17,262 - INFO - Received order update: VTHOUSDT SELL FILLED ps BOTH
+2025-07-24 13:05:32,846 - INFO - Received order update: TURBOUSDT SELL FILLED ps BOTH
+2025-07-24 13:06:19,567 - INFO - Received order update: GALAUSDT SELL FILLED ps BOTH
+2025-07-24 13:06:46,989 - INFO - Received order update: DOGEUSDT SELL FILLED ps BOTH
+2025-07-24 13:06:47,012 - INFO - Received order update: BEAMXUSDT SELL FILLED ps BOTH
+2025-07-24 13:07:06,954 - INFO - Received order update: 1000PEPEUSDT SELL FILLED ps BOTH
+2025-07-24 13:11:45,300 - INFO - Received order update: ZILUSDT SELL FILLED ps BOTH
+2025-07-24 13:12:09,280 - INFO - Received order update: ONEUSDT SELL FILLED ps BOTH
+2025-07-24 13:12:21,651 - INFO - Received order update: 1000CHEEMSUSDT SELL FILLED ps BOTH
+2025-07-24 13:18:06,879 - INFO - Successfully connected to MySQL database
+2025-07-24 13:18:06,887 - INFO - MySQL connection is closed
+2025-07-24 13:18:18,221 - INFO - Successfully connected to MySQL database
+2025-07-24 13:18:18,225 - INFO - MySQL connection is closed
+2025-07-24 13:18:18,357 - INFO - Successfully connected to MySQL database
+2025-07-24 13:18:18,358 - INFO - MySQL connection is closed
+2025-07-24 13:18:22,609 - INFO - Successfully connected to MySQL database
+2025-07-24 13:18:22,657 - INFO - Database tables created successfully
+2025-07-24 13:18:22,710 - INFO - MySQL connection is closed
+2025-07-24 13:18:22,712 - INFO - Database initialized successfully
+2025-07-24 13:18:24,009 - INFO - Binance connection test successful for source account
+2025-07-24 13:18:24,353 - INFO - Copy trading bot started successfully
+2025-07-24 13:18:24,486 - INFO - Successfully connected to MySQL database
+2025-07-24 13:18:24,489 - INFO - MySQL connection is closed
+2025-07-24 13:18:25,127 - INFO - Started listening to source account order updates
+2025-07-24 13:18:31,385 - INFO - Successfully connected to MySQL database
+2025-07-24 13:18:31,397 - INFO - MySQL connection is closed
+2025-07-24 13:18:31,590 - INFO - Successfully connected to MySQL database
+2025-07-24 13:18:31,598 - INFO - MySQL connection is closed
+2025-07-24 13:31:01,871 - ERROR - Error handling order update: 'leverage'
+2025-07-24 13:32:39,733 - INFO - Successfully connected to MySQL database
+2025-07-24 13:32:39,736 - INFO - MySQL connection is closed
+2025-07-24 13:32:39,818 - INFO - Successfully connected to MySQL database
+2025-07-24 13:32:39,821 - INFO - MySQL connection is closed
+2025-07-24 13:32:43,802 - INFO - Successfully connected to MySQL database
+2025-07-24 13:32:43,812 - INFO - MySQL connection is closed
+2025-07-24 13:32:43,977 - INFO - Successfully connected to MySQL database
+2025-07-24 13:32:43,984 - INFO - MySQL connection is closed
+2025-07-24 13:37:33,871 - INFO - Received order update: NOTUSDT BUY NEW ps BOTH
+2025-07-24 13:37:33,897 - INFO - Successfully connected to MySQL database
+2025-07-24 13:37:33,901 - INFO - MySQL connection is closed
+2025-07-24 13:37:34,578 - ERROR - Error setting leverage for NOTUSDT: APIError(code=-2028): Leverage is smaller than permitted: insufficient margin balance.
+2025-07-24 13:37:35,006 - ERROR - Error placing order - Code: -1106, Message: Parameter 'timeinforce' sent when not required.
+2025-07-24 13:37:35,474 - INFO - Received order update: NOTUSDT BUY PARTIALLY_FILLED ps BOTH
+2025-07-24 13:37:36,000 - INFO - Received order update: NOTUSDT BUY FILLED ps BOTH
+2025-07-24 13:54:39,508 - INFO - Successfully connected to MySQL database
+2025-07-24 13:54:39,510 - INFO - MySQL connection is closed
+2025-07-24 13:54:45,996 - INFO - Successfully connected to MySQL database
+2025-07-24 13:54:45,999 - INFO - MySQL connection is closed
+2025-07-24 13:54:46,069 - INFO - Successfully connected to MySQL database
+2025-07-24 13:54:46,072 - INFO - MySQL connection is closed
+2025-07-24 13:55:07,430 - INFO - Successfully connected to MySQL database
+2025-07-24 13:55:07,442 - INFO - Database tables created successfully
+2025-07-24 13:55:07,449 - INFO - MySQL connection is closed
+2025-07-24 13:55:07,449 - INFO - Database initialized successfully
+2025-07-24 13:55:08,877 - INFO - Binance connection test successful for source account
+2025-07-24 13:55:09,167 - INFO - Copy trading bot started successfully
+2025-07-24 13:55:09,226 - INFO - Successfully connected to MySQL database
+2025-07-24 13:55:09,235 - INFO - MySQL connection is closed
+2025-07-24 13:55:09,810 - INFO - Started listening to source account order updates
+2025-07-24 13:59:37,992 - INFO - Received order update: RSRUSDT BUY NEW ps BOTH
+2025-07-24 13:59:37,999 - INFO - Successfully connected to MySQL database
+2025-07-24 13:59:38,001 - INFO - MySQL connection is closed
+2025-07-24 13:59:38,854 - INFO - Leverage set for RSRUSDT to 75x
+2025-07-24 13:59:39,029 - INFO - Order placed successfully: {'orderId': 633327758675242470, 'symbol': 'RSRUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ415414c327152ef7cceb83', 'price': '0.000000', 'avgPrice': '0.00', 'origQty': '1068', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.000000', 'timeInForce': 'GTC', 'type': 'MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'BUY', 'positionSide': 'BOTH', 'stopPrice': '0.000000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1753347580627}
+2025-07-24 13:59:39,036 - INFO - Successfully connected to MySQL database
+2025-07-24 13:59:39,056 - INFO - MySQL connection is closed
+2025-07-24 13:59:39,056 - INFO - Trade mirrored to account 1: RSRUSDT BUY
+2025-07-24 13:59:39,429 - INFO - Received order update: RSRUSDT BUY FILLED ps BOTH
+2025-07-24 14:00:38,870 - INFO - Successfully connected to MySQL database
+2025-07-24 14:00:38,872 - INFO - MySQL connection is closed
+2025-07-24 14:00:38,948 - INFO - Successfully connected to MySQL database
+2025-07-24 14:00:38,952 - INFO - MySQL connection is closed
+2025-07-24 14:01:03,087 - INFO - Successfully connected to MySQL database
+2025-07-24 14:01:03,090 - INFO - MySQL connection is closed
+2025-07-24 14:01:09,048 - INFO - Successfully connected to MySQL database
+2025-07-24 14:01:09,050 - INFO - MySQL connection is closed
+2025-07-24 14:01:09,104 - INFO - Successfully connected to MySQL database
+2025-07-24 14:01:09,107 - INFO - MySQL connection is closed
+2025-07-24 14:01:12,781 - INFO - Successfully connected to MySQL database
+2025-07-24 14:01:12,783 - INFO - MySQL connection is closed
+2025-07-24 14:01:12,854 - INFO - Successfully connected to MySQL database
+2025-07-24 14:01:12,857 - INFO - MySQL connection is closed
+2025-07-24 14:02:33,672 - INFO - Successfully connected to MySQL database
+2025-07-24 14:02:33,707 - INFO - MySQL connection is closed

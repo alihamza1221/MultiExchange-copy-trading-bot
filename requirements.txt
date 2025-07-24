@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+python-binance
+python-dotenv
+streamlit
+mysql-connector-python
+pyjwt
+websockets
