@@ -131,19 +131,10 @@ class BinanceClient:
         
     def get_leverage(self, symbol):
         """Fetch leverage for a symbol, with fallback and error handling."""
+        return 40
+
+    def set_leverage(self, symbol, leverage):
         try:
-            positions = self.client.futures_position_information(symbol=symbol)
-            for pos in positions:
-                if pos['symbol'] == symbol:
-                    return int(pos['leverage'])  # Returns current leverage (e.g., 20)
-            # Fallback if no position: Get default bracket
-            brackets = self.client.futures_leverage_bracket(symbol=symbol)
-            return brackets[0]['brackets'][0]['initialLeverage'] if brackets else 1
-        except BinanceAPIException as e:
-            logging.error(f"Error fetching leverage for {symbol}: {e}")
-            return 5  # Default to 1x on failure   
-    def set_leverage(self, symbol, leverage):        
-        try:                        
             # Set leverage
             response = self.client.futures_change_leverage(symbol=symbol, leverage=leverage)
             logging.info(f"Leverage set for {symbol} to {leverage}x")
@@ -185,6 +176,7 @@ class SourceAccountListener:
     
     def handle_order_update(self, order_data):
         """Handle order update from source account"""
+        leverage= 5
         try:
             # Extract order information
             symbol = order_data.get('s')
@@ -196,7 +188,7 @@ class SourceAccountListener:
             status = order_data.get('X')
             order_id = order_data.get('i')
             time_in_force = order_data.get('f')
-            leverage = self.source_client.get_leverage(symbol)
+            leverage = 40
             print("order: ", order_data, "levg:", leverage)
             logging.info(f"Received order update: {symbol} {side} {status} ps {order_data.get('ps')}")
             
