@@ -7,6 +7,7 @@ import streamlit as st
 import hashlib
 import time
 import logging
+import os
 from datetime import datetime
 from typing import Optional, Dict, List
 from dataclasses import dataclass
@@ -26,7 +27,7 @@ st.set_page_config(
 # Import application modules
 try:
     from database import Database
-    from binance_config import BinanceClient
+    from binance_config import BinanceClient, PhemexClient
     from bot_config import bot
 except ImportError as e:
     st.error(f"Failed to import required modules: {e}")
@@ -87,6 +88,13 @@ class SessionManager:
             st.session_state.selected_account = None
         if 'show_account_details' not in st.session_state:
             st.session_state.show_account_details = False
+        if 'accounts_refresh_trigger' not in st.session_state:
+            st.session_state.accounts_refresh_trigger = 0
+
+    @staticmethod
+    def trigger_accounts_refresh():
+        """Trigger a refresh of the accounts display"""
+        st.session_state.accounts_refresh_trigger = st.session_state.get('accounts_refresh_trigger', 0) + 1
 
     @staticmethod
     def hash_password(password: str) -> str:
@@ -574,7 +582,7 @@ class UserDashboard:
                 exchange_options = {
                     "binance": "🔶 Binance",
                     "bybit": "🟡 Bybit", 
-                    "phoenix": "🔴 Phoenix"
+                    "phemex": "🔴 Phemex"
                 }
                 
                 selected_exchange = st.selectbox(
@@ -584,16 +592,16 @@ class UserDashboard:
                     index=0  # Default to Binance
                 )
                 
-                # Show warning for non-Binance exchanges
-                if selected_exchange != "binance":
+                # Show warning for non-supported exchanges
+                if selected_exchange not in ["binance", "phemex"]:
                     st.warning(f"🚧 {exchange_options[selected_exchange]} integration is coming soon!")
-                    st.info("For now, please use Binance exchange which is fully supported.")
-                else:
-                    # Account creation form (only show for Binance)
+                    st.info("For now, please use Binance or Phemex exchanges which are fully supported.")
+                elif selected_exchange == "binance":
+                    # Binance account creation form
                     st.markdown("---")
                     st.markdown("### 🔐 Add Binance Account")
                     
-                    with st.form("add_account_form"):
+                    with st.form("add_binance_account_form"):
                         account_name = st.text_input(
                             "Account Name", 
                             placeholder="e.g., My Binance Trading Account"
@@ -672,43 +680,234 @@ class UserDashboard:
                         • Never share your keys
                         • Regular key rotation
                         """)
-            
-            # Display user accounts
-            if accounts:
-                st.markdown("---")
-                st.markdown("### 📊 My Trading Accounts")
                 
-                for account in accounts:
-                    # Get exchange type (default to binance for existing accounts)
-                    exchange_type = account.get('exchange_type', 'binance')
-                    exchange_name = exchange_options.get(exchange_type, f"🔗 {exchange_type.title()}")
+                elif selected_exchange == "phemex":
+                    # Phemex account creation form
+                    st.markdown("---")
+                    st.markdown("### 🔴 Add Phemex Account")
                     
-                    with st.container():
-                        col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
+                    with st.form("add_phemex_account_form", clear_on_submit=True):
+                        account_name = st.text_input(
+                            "Account Name", 
+                            placeholder="e.g., My Phemex Trading Account",
+                            key="phemex_account_name"
+                        )
                         
-                        with col1:
-                            st.write(f"**{account['account_name'] or 'Unnamed Account'}**")
-                            st.caption(f"Exchange: {exchange_name} • Added: {safe_datetime_to_string(account.get('created_at'))}")
+                        api_key = st.text_input(
+                            "Phemex API Key", 
+                            placeholder="Your Phemex API Key",
+                            key="phemex_api_key"
+                        )
                         
-                        with col2:
-                            st.metric("Total Trades", account['total_trades'])
+                        secret_key = st.text_input(
+                            "Phemex Secret Key", 
+                            type="password", 
+                            placeholder="Your Phemex Secret Key",
+                            key="phemex_secret_key"
+                        )
                         
-                        with col3:
-                            if st.button("📊 Details", key=f"details_{account['id']}"):
-                                st.session_state.selected_account = account['id']
-                                st.session_state.show_account_details = True
-                                st.rerun()
+                        if st.form_submit_button("➕ Add Account", type="primary"):
+                            if api_key and secret_key:
+                                # Validate Phemex credentials
+                                try:
+                                    test_client = PhemexClient(api_key=api_key, api_secret=secret_key)
+                                    # Try the simplified connection test first
+                                    connection_success = test_client.test_connection_simple()
+                                    
+                                    if not connection_success:
+                                        # Fallback to original test method
+                                        connection_success = test_client.test_connection()
+                                    
+                                    if connection_success:
+                                        if db.add_phemex_account(
+                                            st.session_state.user_data.email, 
+                                            api_key, 
+                                            secret_key, 
+                                            account_name
+                                        ):
+                                            st.success("✅ Phemex account added successfully!")
+                                            st.info("🔄 Refreshing page to show new account...")
+                                            # Trigger refresh
+                                            SessionManager.trigger_accounts_refresh()
+                                            time.sleep(2)
+                                            st.rerun()
+                                        else:
+                                            st.error("❌ Failed to add account to database")
+                                    else:
+                                        st.error("❌ Invalid Phemex API credentials")
+                                except Exception as e:
+                                    st.error(f"❌ Error validating credentials: {e}")
+                                    logging.error(f"Phemex credential validation error: {e}")
+                            else:
+                                st.error("❌ Please fill in all fields")
+                    
+                    # Phemex setup help
+                    st.markdown("---")
+                    st.markdown("### � Phemex Setup Help")
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        st.info("""
+                        **📚 API Setup Guide:**
+                        1. Visit [Phemex](https://phemex.com)
+                        2. Go to API Management
+                        3. Create new API key
+                        4. Enable trading permissions
+                        """)
+                    
+                    with col2:
+                        st.info("""
+                        **🔒 Security Tips:**
+                        • Use dedicated trading account
+                        • Enable IP whitelist
+                        • Never share your keys
+                        • Regular key rotation
+                        """)
+            
+            # Display user accounts (from all exchanges)
+            try:
+                # Add debug button for troubleshooting
+                with st.expander("🔧 Debug Information"):
+                    if st.button("🔍 Test Database Connection"):
+                        try:
+                            # Test database connection
+                            if db.ensure_connection():
+                                st.success("✅ Database connection successful")
+                                
+                                # Test Phemex table
+                                cursor = db.connection.cursor()
+                                cursor.execute("""
+                                    SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES 
+                                    WHERE TABLE_SCHEMA = %s AND TABLE_NAME = 'phemex_accounts'
+                                """, (os.getenv('DB_NAME', 'copy_trading'),))
+                                
+                                table_exists = cursor.fetchone()[0] > 0
+                                if table_exists:
+                                    st.success("✅ Phemex accounts table exists")
+                                    
+                                    # Get account count
+                                    cursor.execute("SELECT COUNT(*) FROM phemex_accounts WHERE user_email = %s", 
+                                                 (st.session_state.user_data.email,))
+                                    account_count = cursor.fetchone()[0]
+                                    st.info(f"📊 Found {account_count} Phemex accounts in database")
+                                else:
+                                    st.error("❌ Phemex accounts table does not exist")
+                                
+                                cursor.close()
+                                db.disconnect()
+                            else:
+                                st.error("❌ Database connection failed")
+                        except Exception as e:
+                            st.error(f"❌ Debug test failed: {e}")
+                
+                # Get accounts from all exchanges with proper error handling
+                binance_accounts = []
+                phemex_accounts = []
+                
+                try:
+                    binance_accounts = db.get_user_accounts(st.session_state.user_data.email) or []
+                    logging.info(f"UI: Successfully loaded {len(binance_accounts)} Binance accounts")
+                except Exception as e:
+                    logging.error(f"Error fetching Binance accounts: {e}")
+                    st.warning("⚠️ Error loading Binance accounts")
+                    binance_accounts = []
+                
+                try:
+                    phemex_accounts = db.get_user_phemex_accounts(st.session_state.user_data.email)
+                    logging.info(f"UI: Phemex accounts result type: {type(phemex_accounts)}")
+                    logging.info(f"UI: Phemex accounts result: {phemex_accounts}")
+                    
+                    if phemex_accounts is None:
+                        phemex_accounts = []
+                        st.warning("⚠️ Phemex accounts query returned None")
+                    elif not isinstance(phemex_accounts, list):
+                        logging.error(f"UI: Expected list, got {type(phemex_accounts)}: {phemex_accounts}")
+                        phemex_accounts = []
+                        st.error(f"❌ Invalid data type for Phemex accounts: {type(phemex_accounts)}")
+                    else:
+                        logging.info(f"UI: Successfully loaded {len(phemex_accounts)} Phemex accounts")
                         
-                        with col4:
-                            if st.button("🗑️ Delete", key=f"del_{account['id']}", type="secondary"):
-                                if db.delete_account(account['id'], st.session_state.user_data.email):
-                                    st.success("✅ Account deleted!")
-                                    time.sleep(1)
-                                    st.rerun()
-                        
-                        st.divider()
-            else:
-                st.info("📝 No trading accounts configured. Add your first account above!")
+                except Exception as e:
+                    logging.error(f"Error fetching Phemex accounts: {e}")
+                    import traceback
+                    logging.error(f"Full traceback: {traceback.format_exc()}")
+                    st.error(f"❌ Error loading Phemex accounts: {e}")
+                    phemex_accounts = []
+                
+                all_user_accounts = []
+                
+                # Combine all accounts with proper error handling
+                for account in binance_accounts:
+                    try:
+                        account['exchange_type'] = account.get('exchange_type', 'binance')
+                        all_user_accounts.append(account)
+                    except Exception as e:
+                        logging.error(f"Error processing Binance account {account.get('id', 'unknown')}: {e}")
+                
+                for account in phemex_accounts:
+                    try:
+                        account['exchange_type'] = 'phemex'
+                        all_user_accounts.append(account)
+                    except Exception as e:
+                        logging.error(f"Error processing Phemex account {account.get('id', 'unknown')}: {e}")
+                
+                if all_user_accounts:
+                    st.markdown("---")
+                    st.markdown("### 📊 My Trading Accounts")
+                    
+                    for account in all_user_accounts:
+                        try:
+                            # Get exchange type and display name
+                            exchange_type = account.get('exchange_type', 'binance')
+                            exchange_name = exchange_options.get(exchange_type, f"🔗 {exchange_type.title()}")
+                            
+                            with st.container():
+                                col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
+                                
+                                with col1:
+                                    account_display_name = account.get('account_name') or 'Unnamed Account'
+                                    st.write(f"**{account_display_name}**")
+                                    created_at_safe = safe_datetime_to_string(account.get('created_at'))
+                                    st.caption(f"Exchange: {exchange_name} • Added: {created_at_safe}")
+                                
+                                with col2:
+                                    total_trades = account.get('total_trades', 0)
+                                    st.metric("Total Trades", total_trades)
+                                
+                                with col3:
+                                    if st.button("📊 Details", key=f"details_{exchange_type}_{account['id']}"):
+                                        st.session_state.selected_account = account['id']
+                                        st.session_state.selected_exchange_type = exchange_type
+                                        st.session_state.show_account_details = True
+                                        st.rerun()
+                                
+                                with col4:
+                                    if st.button("🗑️ Delete", key=f"del_{exchange_type}_{account['id']}", type="secondary"):
+                                        # Handle deletion based on exchange type
+                                        if exchange_type == 'binance':
+                                            if db.delete_account(account['id'], st.session_state.user_data.email):
+                                                st.success("✅ Binance account deleted!")
+                                                time.sleep(1)
+                                                st.rerun()
+                                        elif exchange_type == 'phemex':
+                                            if db.delete_phemex_account(account['id'], st.session_state.user_data.email):
+                                                st.success("✅ Phemex account deleted!")
+                                                time.sleep(1)
+                                                st.rerun()
+                                            else:
+                                                st.error("❌ Failed to delete Phemex account")
+                                
+                                st.divider()
+                        except Exception as e:
+                            logging.error(f"Error displaying account {account.get('id', 'unknown')}: {e}")
+                            st.error(f"Error displaying account: {e}")
+                else:
+                    st.info("📝 No trading accounts configured. Add your first account above!")
+                    
+            except Exception as e:
+                logging.error(f"Critical error in account display: {e}")
+                st.error(f"Error loading accounts: {e}")
+                st.info("Please try refreshing the page or contact support if the issue persists.")
                 
         except Exception as e:
             st.error(f"Error loading accounts: {e}")
@@ -751,7 +950,7 @@ class UserDashboard:
             
             with col2:
                 exchange_type = account_info.get('exchange_type', 'binance')
-                exchange_icons = {'binance': '🔶', 'bybit': '🟡', 'phoenix': '🔴'}
+                exchange_icons = {'binance': '🔶', 'bybit': '🟡', 'phemex': '🔴'}
                 st.metric("🔗 Exchange", f"{exchange_icons.get(exchange_type, '🔗')} {exchange_type.title()}")
             
             with col3:
