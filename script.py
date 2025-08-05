@@ -325,7 +325,7 @@ class AdminDashboard:
         # Server info
         col1, col2 = st.columns(2)
         with col1:
-            st.info(f"🌐 **Server IP**: {bot.get_server_ip()}")
+            st.info(f"🌐 **Server IP**: 208.77.246.15")
         
         with col2:
             status = "🟢 Running" if bot.is_running else "🔴 Stopped"
@@ -534,6 +534,13 @@ class UserDashboard:
             return
         
         st.title(f"👤 User Dashboard - {st.session_state.user_data.email}")
+        
+        # Show server info for users
+        col1 = st.columns(1)
+        with col1:
+            st.info(f"🌐 **Server IP**: 208.77.246.15")
+        
+        st.markdown("---")
         
         # User status check
         if st.session_state.user_data.status != UserStatus.APPROVED.value:
