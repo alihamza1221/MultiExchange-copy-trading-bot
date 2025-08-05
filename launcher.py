@@ -12,22 +12,6 @@ from pathlib import Path
 
 
 
-def setup_environment():
-    """Setup environment variables"""
-    env_file = Path(".env")
-    env_example = Path(".env.example")
-    
-    if not env_file.exists() and env_example.exists():
-        print("Creating .env file from template...")
-        with open(env_example, 'r') as src, open(env_file, 'w') as dst:
-            dst.write(src.read())
-        print("Please edit .env file with your actual configuration")
-        return False
-    elif not env_file.exists():
-        print("No .env file found. Please create one with your configuration.")
-        return False
-    
-    return True
 
 def start_streamlit():
     """Start the Streamlit application"""
@@ -68,12 +52,6 @@ def main():
     
     print("Copy Trading Bot Launcher")
     print("=" * 40)
-
-    
-    # Setup environment
-    if not setup_environment():
-        print("Please configure your environment before continuing.")
-        return
     
     if args.check:
         print("All requirements satisfied!")
