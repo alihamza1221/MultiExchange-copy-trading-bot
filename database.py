@@ -9,11 +9,16 @@ load_dotenv()
 
 class Database:
     def __init__(self):
-        self.host = os.getenv('DB_HOST', 'localhost')
-        self.database = os.getenv('DB_NAME', 'copy_trading')
-        self.user = os.getenv('DB_USER', 'root')
-        self.password = os.getenv('DB_PASSWORD', '')
+        # Use Railway's MySQL environment variables with fallbacks
+        self.host = os.getenv('MYSQLHOST', os.getenv('DB_HOST', 'localhost'))
+        self.database = os.getenv('MYSQL_DATABASE', os.getenv('DB_NAME', 'copy_trading'))
+        self.user = os.getenv('MYSQLUSER', os.getenv('DB_USER', 'root'))
+        self.password = os.getenv('MYSQLPASSWORD', os.getenv('DB_PASSWORD', ''))
+        self.port = int(os.getenv('MYSQLPORT', os.getenv('DB_PORT', '3306')))
         self.connection = None
+        
+        # Log connection details (without password) for debugging
+        logging.info(f"Database config - Host: {self.host}, Database: {self.database}, User: {self.user}, Port: {self.port}")
         
     def connect(self):
         try:
@@ -21,13 +26,19 @@ class Database:
                 host=self.host,
                 database=self.database,
                 user=self.user,
-                password=self.password
+                password=self.password,
+                port=self.port,
+                charset='utf8mb4',
+                collation='utf8mb4_unicode_ci',
+                autocommit=False,
+                connection_timeout=30,
+                auth_plugin='mysql_native_password'
             )
             if self.connection.is_connected():
-                logging.info("Successfully connected to MySQL database")
+                logging.info("Successfully connected to Railway MySQL database")
                 return True
         except Error as e:
-            logging.error(f"Error while connecting to MySQL: {e}")
+            logging.error(f"Error while connecting to Railway MySQL: {e}")
             return False
     
     def disconnect(self):
