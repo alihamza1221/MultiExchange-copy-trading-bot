@@ -536,7 +536,7 @@ class UserDashboard:
         st.title(f"👤 User Dashboard - {st.session_state.user_data.email}")
         
         # Show server info for users
-        col1 = st.columns(1)
+        col1, = st.columns(1)
         with col1:
             st.info(f"🌐 **Server IP**: 208.77.246.15")
         
