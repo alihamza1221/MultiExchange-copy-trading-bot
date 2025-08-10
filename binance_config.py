@@ -10,6 +10,8 @@ import time
 from database import Database
 import logging
 import requests, hmac, hashlib, json
+import ccxt
+# import ccxt.async_support as ccxt # link against the asynchronous version of ccxt
 
 load_dotenv()
 class PhemexClient:
@@ -20,39 +22,57 @@ class PhemexClient:
         """Initialize Phemex client with API credentials"""
         self.api_key = api_key
         self.api_secret = api_secret
+
+        # Initialize CCXT Phemex client
+        self.phemex_client = ccxt.phemex({
+            'apiKey': self.api_key,
+            'secret': self.api_secret,
+            'options': {
+                'defaultType': 'swap',
+            },
+        })
+
+        try:
+            # Load markets for symbol validation and conversion
+            self.phemex_client.load_markets()
+            logging.info("✅ Phemex markets loaded successfully")
+            self.markets = self.phemex_client.markets
+        except Exception as e:
+            logging.warning(f" Could not load Phemex markets: {e}")
+            self.markets = {}
+        
+        # Keep the price scale for legacy compatibility
         self.PRICE_SCALE = self.fetch_all_price_scales()
         
     def test_connection(self):
-        """Test if the Phemex API credentials are valid"""
+        """Test if the Phemex API credentials are valid using CCXT"""
         try:
-            # Test connection by getting account info (simpler endpoint)
-            expiry = int(time.time()) + 60
-            path = "/accounts/accountPositions"
-            url = self.BASE_URL + path
+            # Test 1: Fetch markets (public endpoint)
+            markets = self.phemex_client.fetch_markets()
+            if not markets:
+                logging.error("❌ Phemex public API test failed - no markets found")
+                return False
             
-            # Add required currency parameter for Phemex API
-            query = "?currency=USD"
+            logging.info(f"✅ Phemex public API accessible - found {len(markets)} markets")
             
-            signature = self._sign(path, query, expiry, "")
-            headers = {
-                "x-phemex-access-token": self.api_key,
-                "x-phemex-request-expiry": str(expiry),
-                "x-phemex-request-signature": signature,
-                "Content-Type": "application/json"
-            }
-            
-            resp = requests.get(url + query, headers=headers)
-            result = resp.json()
-            
-            if result.get('code') == 0:
-                logging.info("Phemex connection test successful")
+            # Test 2: Authentication test with balance
+            try:
+                balance = self.phemex_client.fetch_balance()
+                logging.info(" Phemex authentication successful")
+                logging.debug(f"Balance info: {balance}")
                 return True
-            else:
-                # Try alternative endpoint if the first fails
-                return self._test_connection_alternative()
+            except Exception as auth_error:
+                # Check if it's a permission issue (auth worked but no permission)
+                error_msg = str(auth_error).lower()
+                if any(keyword in error_msg for keyword in ['permission', 'unauthorized', 'forbidden', 'api']):
+                    logging.info("✅ Phemex authentication successful (limited permissions)")
+                    return True
+                else:
+                    logging.error(f"Phemex authentication failed: {auth_error}")
+                    return self._test_connection_alternative()
                 
         except Exception as e:
-            logging.error(f"Phemex connection test error: {e}")
+            logging.error(f" Phemex connection test error: {e}")
             return self._test_connection_alternative()
     
     def _test_connection_alternative(self):
@@ -143,20 +163,7 @@ class PhemexClient:
         }
         return mapping.get(binance_type, binance_type)  # fallback to same if not mapped
 
-    def convert_binance_to_phemex_order_side(binance_side):
-        """Map Binance order side to Phemex side."""
-        mapping = {
-            'BUY': 'Buy',
-            'SELL': 'Sell'
-        }
-        return mapping.get(binance_side, binance_side)
 
-    def binance_to_phemex_symbol(self, binance_symbol):
-        """Convert Binance symbol to Phemex format (BTCUSDT -> BTCUSD)"""
-        if binance_symbol.endswith('USDT'):
-            return binance_symbol[:-1]
-        return binance_symbol
-    
     @staticmethod
     def convert_binance_to_phemex_time_in_force(binance_tif):
         """Map Binance timeInForce to Phemex timeInForce."""
@@ -190,56 +197,130 @@ class PhemexClient:
             'SELL': 'Sell'
         }
         return mapping.get(binance_side, binance_side)
+    @staticmethod
+    def Convert_to_ccxt_symbol(binance_symbol: str) -> str:
+        quote = 'USDT'
+
+        if not binance_symbol.endswith(quote):
+            raise ValueError(f"Symbol '{binance_symbol}' does not end with '{quote} '")
+
+        base = binance_symbol[:-len(quote)]
+
+        return f"{base}/{quote}:{quote}"
+
+    def place_order_ccxt(self, symbol, side, order_type, quantity, price=None, stop_price=None, time_in_force=None, reduce_only=False, **kwargs):
+        """Place order using CCXT client with proper error handling"""
+        try:
+            # Convert symbol to Phemex format
+            phemex_symbol = self.Convert_to_ccxt_symbol(symbol)
+            logging.info(f"🔄 Placing CCXT order: {symbol} → {phemex_symbol} | {side} {order_type} {quantity}")
+            
+            # Convert order parameters to CCXT format
+            ccxt_side = side.lower()  # 'buy' or 'sell'
+            ccxt_type = self._convert_to_ccxt_order_type(order_type)
+            ccxt_amount = float(quantity)
+            
+            # Prepare order parameters
+            params = {}
+            
+            # Add reduce only if specified
+            if reduce_only:
+                params['reduceOnly'] = True
+                
+            # Add time in force if specified
+            if time_in_force:
+                params['timeInForce'] = self._convert_to_ccxt_time_in_force(time_in_force)
+            
+            # Add any additional parameters
+            params.update(kwargs)
+            
+            # Place order based on type
+            if ccxt_type == 'market':
+                order =self.phemex_client.create_order(phemex_symbol, ccxt_type, ccxt_side, ccxt_amount)
+                #self.phemex_client.set_leverage(phemex_symbol, 10)
+                
+            elif ccxt_type == 'limit':
+                # Limit order
+                if not price:
+                    raise ValueError("Limit order requires price")
+                self.phemex_client.create_limit_order(phemex_symbol, ccxt_side,ccxt_amount, float(price), params)
+                
+            elif ccxt_type == 'stop':
+                # Stop market order
+                # order = self.phemex_client.create_order(
+                #     symbol=phemex_symbol,
+                #     type='stop',
+                #     side=ccxt_side,
+                #     amount=ccxt_amount,
+                #     params=params
+                # )
+
+                order = self.phemex_client.create_stop_order(phemex_symbol, 'market', ccxt_side, ccxt_amount, params)
+            elif ccxt_type == 'stop_limit':
+                order = self.phemex_client.create_stop_order(phemex_symbol, 'limit', ccxt_side, ccxt_amount,float(price),float(stop_price), params)
+
+                
+            else:
+                # Generic order creation
+                order = self.phemex_client.create_order(
+                    symbol=phemex_symbol,
+                    type=ccxt_type,
+                    side=ccxt_side,
+                    amount=ccxt_amount,
+                    price=float(price) if price else None,
+                    params=params
+                )
+            
+            logging.info(f"✅ CCXT order placed successfully: {order['id']} | Status: {order['status']}")
+            logging.debug(f"Order details: {order}")
+            
+            return {
+                'success': True,
+                'order': order,
+                'order_id': order['id'],
+                'status': order['status'],
+                'symbol': phemex_symbol,
+                'ccxt_response': order
+            }
+            
+        except Exception as e:
+            logging.error(f"❌ CCXT order failed for {symbol}: {e}")
+            logging.error(f"Error type: {type(e).__name__}")
+            return {
+                'success': False,
+                'error': str(e),
+                'symbol': symbol,
+                'ccxt_response': None
+            }
+    
+    def _convert_to_ccxt_order_type(self, binance_order_type):
+        """Convert Binance order type to CCXT order type"""
+        mapping = {
+            'MARKET': 'market',
+            'LIMIT': 'limit',
+            'STOP_MARKET': 'stop',
+            'STOP_LIMIT': 'stop_limit',
+            'TAKE_PROFIT_MARKET': 'take_profit',
+            'TAKE_PROFIT': 'take_profit_limit',
+            'TRAILING_STOP_MARKET': 'trailing_stop'
+        }
+        return mapping.get(binance_order_type, binance_order_type.lower())
+    
+    def _convert_to_ccxt_time_in_force(self, binance_tif):
+        """Convert Binance time in force to CCXT format"""
+        mapping = {
+            'GTC': 'GTC',  # Good Till Cancelled
+            'IOC': 'IOC',  # Immediate Or Cancel
+            'FOK': 'FOK',  # Fill Or Kill
+            'GTX': 'PO'    # Post Only
+        }
+        return mapping.get(binance_tif, binance_tif)
     def set_leverage(self, symbol, leverage):
         """Set leverage for a symbol with enhanced debugging"""
         try:
-            # Convert symbol
-            logging.info(f"🔴 Setting leverage:  → {symbol} @ {leverage}x")
-    
-            expiry = int(time.time()) + 60
-            path = "/positions/leverage"
-            url = self.BASE_URL + path
-    
-            params = {
-                "symbol": symbol,
-                "leverage": int(leverage)
-            }
-            body = json.dumps(params, separators=(',', ':'))
+            symbol = self.Convert_to_ccxt_symbol(symbol)
+            self.phemex_client.set_leverage(leverage, symbol)
 
-            
-            # Debug signature generation
-            string_to_sign = path + str(expiry) + body
-            logging.debug(f"🔴 Leverage string to sign: '{string_to_sign}'")
-    
-            signature = self._sign(path, "", expiry, body)
-            
-            headers = {
-                "x-phemex-access-token": self.api_key,
-                "x-phemex-request-expiry": str(expiry),
-                "x-phemex-request-signature": signature,
-                "Content-Type": "application/json"
-            }
-            
-            logging.debug(f"🔴 Leverage request headers: {headers}")
-            logging.debug(f"🔴 Leverage request body: {body}")
-    
-            resp = requests.put(url, data=body, headers=headers)
-            result = resp.json()
-            
-            if result.get('code') == 0:
-                logging.info(f"✅ Phemex leverage set: {symbol} → {leverage}x")
-            else:
-                logging.warning(f"❌ Phemex leverage set failed: {result}")
-                
-                # Additional debug for signature issues
-                if "signature" in str(result.get('msg', '')).lower():
-                    logging.error(f"🔴 Leverage signature verification failed - Debug:")
-                    logging.error(f"   • API Key: {self.api_key[:8]}...")
-                    logging.error(f"   • String to sign: '{string_to_sign}'")
-                    logging.error(f"   • Signature: {signature}")
-                    
-            return result
-    
         except Exception as e:
             logging.error(f"❌ Phemex set_leverage failed: {e}")
             return None
@@ -278,7 +359,7 @@ class PhemexClient:
                 "symbol": symbol,
                 "side": side,  # "Buy" or "Sell"
                 "ordType": order_type,
-                "orderQty": float(quantity),
+                "orderQtyRq": float(quantity),
             }
             if price is not None:
                 order["priceEp"] = priceEp
@@ -326,57 +407,58 @@ class PhemexClient:
 
         except Exception as e:
             logging.error(f"❌ Phemex place_order failed: {e}")
-            import traceback
-            logging.error(f"Full traceback: {traceback.format_exc()}")
             return None
 
     def test_connection_simple(self):
-        """Simplified connection test using public endpoint first, then authenticated"""
+        """Simplified connection test using CCXT"""
         try:
-            # First, test if we can reach Phemex API with public endpoint
-            public_url = 'https://api.phemex.com/public/products'
-            resp = requests.get(public_url, timeout=10)
-            
-            if resp.status_code != 200:
-                logging.error(f"Cannot reach Phemex API: {resp.status_code}")
-                return False
-            
-            # Now test authenticated endpoint with minimal requirements
-            expiry = int(time.time()) + 60
-            path = "/spot/wallets"
-            url = self.BASE_URL + path
-            
-            signature = self._sign(path, "", expiry, "")
-            headers = {
-                "x-phemex-access-token": self.api_key,
-                "x-phemex-request-expiry": str(expiry),
-                "x-phemex-request-signature": signature,
-                "Content-Type": "application/json"
-            }
-            
-            resp = requests.get(url, headers=headers, timeout=10)
-            result = resp.json()
-            
-            # Check for successful authentication (even if no data)
-            if result.get('code') == 0:
-                logging.info("✅ Phemex connection test successful")
-                return True
-            elif result.get('code') in [10001, 10404]:  # Auth success but no data/permission
-                logging.info("✅ Phemex authentication successful (limited permissions)")
+            # Test markets fetch (public endpoint)
+            markets = self.phemex_client.fetch_markets()
+            if markets and len(markets) > 0:
+                logging.info(f"✅ Phemex connection test successful - {len(markets)} markets")
                 return True
             else:
-                logging.warning(f"Phemex connection test failed: {result}")
+                logging.error("❌ Phemex connection test failed - no markets found")
                 return False
-                
-        except requests.exceptions.Timeout:
-            logging.error("Phemex API timeout")
-            return False
-        except requests.exceptions.RequestException as e:
-            logging.error(f"Phemex API request error: {e}")
-            return False
         except Exception as e:
-            logging.error(f"Phemex connection test error: {e}")
+            logging.error(f"❌ Phemex connection test error: {e}")
             return False
+    
+    def get_account_balance_ccxt(self):
+        """Get account balance using CCXT"""
+        try:
+            balance = self.phemex_client.fetch_balance()
+            logging.info("✅ CCXT balance retrieved successfully")
+            return balance
+        except Exception as e:
+            logging.error(f"❌ CCXT get_account_balance failed: {e}")
+            return None
+    
+    def fetch_order_ccxt(self, order_id, symbol=None):
+        """Fetch order details using CCXT"""
+        try:
+            if symbol:
+                phemex_symbol = symbol
+                order = self.phemex_client.fetch_order(order_id, phemex_symbol)
+            else:
+                order = self.phemex_client.fetch_order(order_id)
+            
+            logging.info(f"✅ CCXT order fetched: {order_id}")
+            return order
+        except Exception as e:
+            logging.error(f"❌ CCXT fetch_order failed: {e}")
+            return None
+    
+    def cancel_order_ccxt(self, order_id, symbol):
+        """Cancel order using CCXT"""
+        try:
+            phemex_symbol = symbol
+            result = self.phemex_client.cancel_order(order_id, phemex_symbol)
+            logging.info(f"✅ CCXT order cancelled: {order_id}")
+            return result
+        except Exception as e:
+            logging.error(f"❌ CCXT cancel_order failed: {e}")
+            return None
     
     def get_account_balance(self):
         """Get account balance information"""
@@ -712,7 +794,12 @@ class SourceAccountListener:
                             if exchange_type == 'binance':
                                 target_client.set_leverage(symbol, leverage)
                             elif exchange_type == 'phemex':
-                                target_client.set_leverage(symbol, leverage)
+                                # Use CCXT-based leverage setting
+                                leverage_result = target_client.set_leverage(symbol, leverage)
+                                if leverage_result.get('success'):
+                                    logging.info(f"✅ Leverage set for {client_type} account {account_id}: {leverage}x")
+                                else:
+                                    logging.warning(f"⚠️ Leverage setting failed for {client_type} account {account_id}: {leverage_result.get('error', 'Unknown error')}")
                         except Exception as leverage_error:
                             logging.warning(f"Failed to set leverage for {client_type} account {account_id}: {leverage_error}")
                         
@@ -817,22 +904,60 @@ class SourceAccountListener:
 
     def _execute_phemex_trade(self, phemex_client, symbol, side, order_type, 
                              quantity, price, stop_price, time_in_force):
-        """Execute trade on Phemex"""
+        """Execute trade on Phemex using CCXT client"""
         try:
-            # Use Phemex client's place_order method
-            return phemex_client.place_order(
+            # Use CCXT place_order_ccxt method
+            result = phemex_client.place_order_ccxt(
                 symbol=symbol,
                 side=side,
                 order_type=order_type,
                 quantity=quantity,
-                time_in_force=time_in_force,
                 price=price if price and price != '0' else None,
-                stop_price=stop_price if stop_price and stop_price != '0' else None
+                stop_price=stop_price if stop_price and stop_price != '0' else None,
+                time_in_force=time_in_force
             )
+            
+            if result['success']:
+                logging.info(f"✅ CCXT Phemex trade executed: {result['order_id']} | Status: {result['status']}")
+                return {
+                    'code': 0,
+                    'data': {
+                        'orderID': result['order_id'],
+                        'symbol': result['symbol'],
+                        'status': result['status']
+                    },
+                    'msg': 'Success',
+                    'ccxt_order': result['order']
+                }
+            else:
+                logging.error(f" CCXT Phemex trade failed: {result['error']}")
+                # Fallback to manual method
+                return phemex_client.place_order_manual(
+                    symbol=symbol,
+                    side=side,
+                    order_type=order_type,
+                    quantity=quantity,
+                    time_in_force=time_in_force,
+                    price=price if price and price != '0' else None,
+                    stop_price=stop_price if stop_price and stop_price != '0' else None
+                )
                 
         except Exception as e:
-            logging.error(f"Error executing Phemex trade: {e}")
-            return None
+            logging.error(f"❌ Error executing CCXT Phemex trade: {e}")
+            # Fallback to manual method
+            try:
+                return phemex_client.place_order_manual(
+                    symbol=symbol,
+                    side=side,
+                    order_type=order_type,
+                    quantity=quantity,
+                    time_in_force=time_in_force,
+                    price=price if price and price != '0' else None,
+                    stop_price=stop_price if stop_price and stop_price != '0' else None
+                )
+            except Exception as fallback_error:
+                logging.error(f"❌ Fallback manual Phemex trade also failed: {fallback_error}")
+                return None
 
     def _log_trade_to_database(self, account, exchange_type, symbol, side, order_type, 
                               quantity, price, stop_price, response, source_order_id):

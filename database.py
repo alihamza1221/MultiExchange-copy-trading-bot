@@ -622,61 +622,19 @@ class Database:
             self.disconnect()
     
     def get_user_phemex_accounts(self, user_email):
-        """Get Phemex accounts for a specific user with enhanced debugging"""
-        logging.info(f"Fetching Phemex accounts for user: {user_email}")
-        
         if not self.connect():
-            logging.error("Failed to establish database connection for Phemex accounts")
             return []
             
-        cursor = None
+        cursor = self.connection.cursor(dictionary=True)
+        query = "SELECT * FROM phemex_accounts WHERE user_email = %s"
+
         try:
-            cursor = self.connection.cursor(dictionary=True)
-            
-            # Check if Phemex table exists
-            cursor.execute("""
-                SELECT COUNT(*) as table_count
-                FROM INFORMATION_SCHEMA.TABLES 
-                WHERE TABLE_SCHEMA = %s AND TABLE_NAME = 'phemex_accounts'
-            """, (os.getenv('DB_NAME', 'copy_trading'),))
-            
-            table_result = cursor.fetchone()
-            logging.info(f"Table check result: {table_result}")
-            
-            if not table_result or table_result['table_count'] == 0:
-                logging.warning("Phemex accounts table does not exist")
-                return []
-            
-            # Execute the main query with detailed logging
-            query = """
-            SELECT id, user_email, exchange_type, api_key, secret_key, account_name, total_trades, created_at
-            FROM phemex_accounts 
-            WHERE user_email = %s 
-            ORDER BY created_at DESC
-            """
-            
-            logging.info(f"Executing query: {query} with user_email: {user_email}")
             cursor.execute(query, (user_email,))
-            
-            # Fetch results with detailed logging
-            results = cursor.fetchall()
-            logging.info(f"Raw query results type: {type(results)}")
-            logging.info(f"Raw query results: {results}")
-            
-            if results and len(results) > 0:
-                logging.info(f"Successfully found {len(results)} Phemex accounts for {user_email}")
-                for i, account in enumerate(results):
-                    logging.info(f"Account {i+1}: ID={account.get('id')}, Name={account.get('account_name')}")
-                return list(results)  # Ensure it's a list
-            else:
-                logging.info(f"No Phemex accounts found for {user_email}")
-                return []
+            result = cursor.fetchall()
+            return result
             
         except Exception as e:
             logging.error(f"Unexpected error getting user Phemex accounts: {e}")
-            logging.error(f"Error type: {type(e)}")
-            import traceback
-            logging.error(f"Full traceback: {traceback.format_exc()}")
             return []
         finally:
             if cursor:
@@ -739,7 +697,7 @@ class Database:
         accounts = []
         
         try:
-            logging.info("🔍 Starting get_all_trading_accounts")
+            logging.info("Starting get_all_trading_accounts")
             
             # Get Binance accounts with error handling
             try:

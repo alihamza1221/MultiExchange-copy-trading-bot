@@ -24,15 +24,7 @@ class CopyTradingBot:
         self.source_listener = None
         self.is_running = False
         
-    def initialize_database(self):
-        """Initialize database tables"""
-        if self.db.create_tables():
-            logging.info("Database initialized successfully")
-            return True
-        else:
-            logging.error("Failed to initialize database")
-            return False
-    
+
     def test_source_connection(self):
         """Test source account connection"""
         source_client = BinanceClient(is_source=True)
@@ -40,9 +32,7 @@ class CopyTradingBot:
     
     def start_bot(self):
         """Start the copy trading bot"""
-        if not self.initialize_database():
-            return False
-        
+       
         if not self.test_source_connection():
             logging.error("Source account connection failed")
             return False
@@ -65,19 +55,7 @@ class CopyTradingBot:
         if self.source_listener and self.source_listener.ws:
             self.source_listener.ws.stop()
         logging.info("Copy trading bot stopped")
-    
-    def get_server_ip(self):
-        """Get server IP address"""
-        try:
-            # Connect to a remote server to get local IP
-            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            s.connect(("8.8.8.8", 80))
-            ip = s.getsockname()[0]
-            s.close()
-            return ip
-        except Exception:
-            return "192.168.8.2"  # Default IP as requested
-    
+        
     def validate_api_credentials(self, api_key, secret_key):
         """Validate Binance API credentials"""
         try:

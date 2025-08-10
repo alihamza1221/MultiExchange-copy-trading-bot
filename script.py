@@ -497,7 +497,7 @@ class AdminDashboard:
                                             st.rerun()
                                 
                                 with col2:
-                                    if st.form_submit_button("❌ Cancel"):
+                                    if st.form_submit_button("Cancel"):
                                         st.session_state[f"editing_{account['id']}"] = False
                                         st.rerun()
                         
@@ -579,7 +579,7 @@ class UserDashboard:
         
         try:
             db = Database()
-            accounts = db.get_user_accounts(st.session_state.user_data.email)
+            # accounts = db.get_user_accounts(st.session_state.user_data.email)
             
             # Add new account form with exchange selection
             with st.expander("➕ Add New Trading Account"):
@@ -587,9 +587,9 @@ class UserDashboard:
                 
                 # Exchange selection dropdown
                 exchange_options = {
-                    "binance": "🔶 Binance",
-                    "bybit": "🟡 Bybit", 
-                    "phemex": "🔴 Phemex"
+                    "binance": "Binance",
+                    "bybit": "Bybit", 
+                    "phemex": "Phemex"
                 }
                 
                 selected_exchange = st.selectbox(
@@ -601,12 +601,12 @@ class UserDashboard:
                 
                 # Show warning for non-supported exchanges
                 if selected_exchange not in ["binance", "phemex"]:
-                    st.warning(f"🚧 {exchange_options[selected_exchange]} integration is coming soon!")
+                    st.warning(f" {exchange_options[selected_exchange]} integration is coming soon!")
                     st.info("For now, please use Binance or Phemex exchanges which are fully supported.")
                 elif selected_exchange == "binance":
                     # Binance account creation form
                     st.markdown("---")
-                    st.markdown("### 🔐 Add Binance Account")
+                    st.markdown("### S Add Binance Account")
                     
                     with st.form("add_binance_account_form"):
                         account_name = st.text_input(
@@ -644,7 +644,7 @@ class UserDashboard:
                                                 time.sleep(1)
                                                 st.rerun()
                                             else:
-                                                st.error("❌ Failed to add account to database")
+                                                st.error("Failed to add account to database")
                                         except Exception:
                                             # Fallback to old method without exchange type
                                             if db.add_binance_account(
@@ -653,17 +653,17 @@ class UserDashboard:
                                                 secret_key, 
                                                 account_name
                                             ):
-                                                st.success("✅ Binance account added successfully!")
+                                                st.success(" Binance account added successfully!")
                                                 time.sleep(1)
                                                 st.rerun()
                                             else:
-                                                st.error("❌ Failed to add account to database")
+                                                st.error("Failed to add account to database")
                                     else:
-                                        st.error("❌ Invalid Binance API credentials")
+                                        st.error(" Invalid Binance API credentials")
                                 except Exception as e:
-                                    st.error(f"❌ Error validating credentials: {e}")
+                                    st.error(f"Error validating credentials: {e}")
                             else:
-                                st.error("❌ Please fill in all fields")
+                                st.error("Please fill in all fields")
                     
                     # Binance setup help
                     st.markdown("---")
@@ -701,8 +701,8 @@ class UserDashboard:
                         )
                         
                         api_key = st.text_input(
-                            "Phemex API Key", 
-                            placeholder="Your Phemex API Key",
+                            "Phemex Id", 
+                            placeholder="Your Phemex Id",
                             key="phemex_api_key"
                         )
                         
@@ -773,56 +773,21 @@ class UserDashboard:
             
             # Display user accounts (from all exchanges)
             try:
-                # Add debug button for troubleshooting
-                with st.expander("🔧 Debug Information"):
-                    if st.button("🔍 Test Database Connection"):
-                        try:
-                            # Test database connection
-                            if db.ensure_connection():
-                                st.success("✅ Database connection successful")
-                                
-                                # Test Phemex table
-                                cursor = db.connection.cursor()
-                                cursor.execute("""
-                                    SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES 
-                                    WHERE TABLE_SCHEMA = %s AND TABLE_NAME = 'phemex_accounts'
-                                """, (os.getenv('DB_NAME', 'copy_trading'),))
-                                
-                                table_exists = cursor.fetchone()[0] > 0
-                                if table_exists:
-                                    st.success("✅ Phemex accounts table exists")
-                                    
-                                    # Get account count
-                                    cursor.execute("SELECT COUNT(*) FROM phemex_accounts WHERE user_email = %s", 
-                                                 (st.session_state.user_data.email,))
-                                    account_count = cursor.fetchone()[0]
-                                    st.info(f"📊 Found {account_count} Phemex accounts in database")
-                                else:
-                                    st.error("❌ Phemex accounts table does not exist")
-                                
-                                cursor.close()
-                                db.disconnect()
-                            else:
-                                st.error("❌ Database connection failed")
-                        except Exception as e:
-                            st.error(f"❌ Debug test failed: {e}")
-                
-                # Get accounts from all exchanges with proper error handling
                 binance_accounts = []
                 phemex_accounts = []
                 
                 try:
                     binance_accounts = db.get_user_accounts(st.session_state.user_data.email) or []
-                    logging.info(f"UI: Successfully loaded {len(binance_accounts)} Binance accounts")
+                    logging.info(f"Successfully loaded {len(binance_accounts)} Binance accounts")
                 except Exception as e:
                     logging.error(f"Error fetching Binance accounts: {e}")
-                    st.warning("⚠️ Error loading Binance accounts")
+                    st.warning("No Binance Accounts Found")
                     binance_accounts = []
                 
                 try:
                     phemex_accounts = db.get_user_phemex_accounts(st.session_state.user_data.email)
-                    logging.info(f"UI: Phemex accounts result type: {type(phemex_accounts)}")
-                    logging.info(f"UI: Phemex accounts result: {phemex_accounts}")
+                    logging.info(f"Phemex accounts result type: {type(phemex_accounts)}")
+                    logging.info(f"Phemex accounts result: {phemex_accounts}")
                     
                     if phemex_accounts is None:
                         phemex_accounts = []
