@@ -341,7 +341,7 @@ class PhemexClient:
         try:
             # Convert symbol FIRST before any other operations
             order_type = self.convert_binance_to_phemex_order_type(order_type)
-            side = self.convert_binance_to_phemex_order_side(side)
+            side = self.convert_binFance_to_phemex_order_side(side)
             
             expiry = int(time.time()) + 60
             path = "/orders"
@@ -657,7 +657,7 @@ class BinanceClient:
         
     def get_leverage(self, symbol):
         """Fetch leverage for a symbol, with fallback and error handling."""
-        return 40
+        return 10
 
     def set_leverage(self, symbol, leverage):
         try:
@@ -714,7 +714,7 @@ class SourceAccountListener:
             status = order_data.get('X')
             order_id = order_data.get('i')
             time_in_force = order_data.get('f')
-            leverage = 40
+            leverage = 10
             print("order: ", order_data, "levg:", leverage)
             logging.info(f"Received order update: {symbol} {side} {status} ps {order_data.get('ps')}")
             
@@ -728,7 +728,7 @@ class SourceAccountListener:
         except Exception as e:
             logging.error(f"Error handling order update: {e}")
     
-    def process_order_update(self, symbol, side, order_type, quantity, price, stop_price, status, source_order_id, leverage = 5, time_in_force='GTC'):
+    def process_order_update(self, symbol, side, order_type, quantity, price, stop_price, status, source_order_id, leverage = 10, time_in_force='GTC'):
         """Process order update and mirror to target accounts across all exchanges"""
         try:
             logging.info(f"🔄 Starting process_order_update for {symbol} {side} {order_type}")

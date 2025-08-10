@@ -51,7 +51,7 @@ def main():
     os.chdir(Path(__file__).parent)
     
     print("Copy Trading Bot Launcher")
-    print("=" * 40)
+    print("=" * 10)
     
     if args.check:
         print("All requirements satisfied!")
