@@ -7,7 +7,6 @@ import logging
 from binance_config import BinanceClient, SourceAccountListener
 from database import Database
 import threading
-import socket
 
 logging.basicConfig(
     level=logging.INFO,

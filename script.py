@@ -687,7 +687,18 @@ class UserDashboard:
                         • Never share your keys
                         • Regular key rotation
                         """)
-                
+                    
+                    # Detailed PDF guide button
+                    st.markdown("---")
+                    col1, col2, col3 = st.columns([1, 2, 1])
+                    with col2:
+                        if st.button("📖 View Detailed Step-by-Step Guide", use_container_width=True, type="secondary", key="binance_pdf_guide_button"):
+                            st.session_state.show_binance_guide = True
+                            st.rerun()
+                    
+                    # Show detailed guide from PDF
+                    if st.session_state.get('show_binance_guide', False):
+                        UserDashboard._show_binance_pdf_guide()
                 elif selected_exchange == "phemex":
                     # Phemex account creation form
                     st.markdown("---")
@@ -1179,6 +1190,348 @@ class UserDashboard:
         st.subheader("📊 My Trading History")
         st.info("📈 Your trading history and performance will be displayed here")
         # TODO: Implement user trading history
+
+    @staticmethod
+    def _show_binance_pdf_guide():
+        """Display download option for Binance API setup guide PDF"""
+        with st.container():
+            st.markdown("---")
+            st.markdown("## 📖 Complete Binance API Setup Guide")
+            
+            # Close button with unique key
+            col1, col2, col3 = st.columns([1, 2, 1])
+            with col3:
+                if st.button("❌ Close Guide", type="secondary", use_container_width=True, key="close_pdf_guide"):
+                    st.session_state.show_binance_guide = False
+                    st.rerun()
+            
+            # Check if PDF file exists
+            pdf_path = os.path.join(os.path.dirname(__file__), "binance.pdf")
+            
+            if os.path.exists(pdf_path):
+                try:
+                    # Read PDF file as bytes for download
+                    with open(pdf_path, 'rb') as pdf_file:
+                        pdf_bytes = pdf_file.read()
+                    
+                    st.success("📄 PDF Guide Available - Download to view complete instructions with images")
+                    
+                    # Guide description
+                    st.markdown("### 📋 What's in the Guide?")
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        st.info("""
+                        **📚 Complete Setup Instructions:**
+                        • Step-by-step screenshots
+                        • API key creation process
+                        • Security configuration
+                        • Permission settings
+                        """)
+                    
+                    with col2:
+                        st.info("""
+                        **🎯 Visual Learning:**
+                        • Detailed images for each step
+                        • Highlighted important sections
+                        • Real Binance interface screenshots
+                        • Troubleshooting tips
+                        """)
+                    
+                    # Download section
+                    st.markdown("---")
+                    st.markdown("### 📥 Download Guide")
+                    
+                    col1, col2, col3 = st.columns([1, 2, 1])
+                    with col2:
+                        # File info
+                        file_size_mb = len(pdf_bytes) / (1024 * 1024)
+                        st.markdown(f"**📋 File Size:** {file_size_mb:.2f} MB")
+                        st.markdown("**📄 Format:** PDF with images and screenshots")
+                        
+                        # Primary download button with unique key
+                        st.download_button(
+                            label="📥 Download Complete Guide",
+                            data=pdf_bytes,
+                            file_name="binance_api_setup_guide.pdf",
+                            mime="application/pdf",
+                            use_container_width=True,
+                            type="primary",
+                            help="Downloads the complete PDF guide with all images and step-by-step instructions",
+                            key="download_pdf_primary"
+                        )
+                        
+                        st.caption("💡 **Tip:** Open with your default PDF reader for best viewing experience")
+                        
+                except Exception as e:
+                    st.error(f"❌ Error loading PDF file: {e}")
+                    UserDashboard._show_fallback_binance_guide()
+            else:
+                st.warning("⚠️ PDF guide not found at expected location")
+                st.info("📍 **Expected location:** `binance.pdf` in the project directory")
+                
+                # Show expected path for debugging
+                st.code(f"Looking for: {pdf_path}")
+                
+                # Check if file exists with different name
+                possible_names = ["binance.pdf", "Binance.pdf", "BINANCE.pdf", "binance_guide.pdf"]
+                pdf_dir = os.path.dirname(__file__)
+                
+                st.markdown("🔍 **Checking for alternative filenames:**")
+                found_alternative = False
+                
+                for idx, name in enumerate(possible_names):
+                    alt_path = os.path.join(pdf_dir, name)
+                    exists = os.path.exists(alt_path)
+                    status = "✅ Found" if exists else "❌ Not found"
+                    st.write(f"• {name}: {status}")
+                    
+                    if exists and not found_alternative:
+                        found_alternative = True
+                        st.success(f"📄 Found alternative file: {name}")
+                        
+                        try:
+                            with open(alt_path, 'rb') as pdf_file:
+                                alt_pdf_bytes = pdf_file.read()
+                            
+                            col1, col2, col3 = st.columns([1, 2, 1])
+                            with col2:
+                                st.download_button(
+                                    label=f"📥 Download {name}",
+                                    data=alt_pdf_bytes,
+                                    file_name="binance_api_setup_guide.pdf",
+                                    mime="application/pdf",
+                                    use_container_width=True,
+                                    type="primary",
+                                    key=f"download_pdf_alt_{idx}"
+                                )
+                        except Exception as e:
+                            st.error(f"Error reading {name}: {e}")
+                
+                if not found_alternative:
+                    # Show fallback guide if no PDF found
+                    UserDashboard._show_fallback_binance_guide()
+        with st.container():
+            st.markdown("---")
+            st.markdown("## 📖 Complete Binance API Setup Guide")
+            
+            # Close button
+            col1, col2, col3 = st.columns([1, 2, 1])
+            with col3:
+                if st.button("❌ Close Guide", type="secondary", use_container_width=True):
+                    st.session_state.show_binance_guide = False
+                    st.rerun()
+            
+            # Check if PDF file exists
+            pdf_path = os.path.join(os.path.dirname(__file__), "binance.pdf")
+            
+            if os.path.exists(pdf_path):
+                try:
+                    # Read PDF file as bytes for display
+                    with open(pdf_path, 'rb') as pdf_file:
+                        pdf_bytes = pdf_file.read()
+                    
+                    st.success(f"📄 PDF Guide Ready - Click to view or download")
+                    
+                    # Display PDF using Streamlit's built-in viewer (supports images)
+                    st.markdown("### 📖 PDF Viewer")
+                    
+                    # Create tabs for viewing options
+                    tab1, tab2 = st.tabs(["🖥️ View Online", "📥 Download"])
+                    
+                    with tab1:
+                        try:
+                            # Use Streamlit's PDF display (works with images)
+                            import base64
+                            
+                            # Encode PDF to base64 for embedding
+                            pdf_base64 = base64.b64encode(pdf_bytes).decode('utf-8')
+                            
+                            # Create HTML embed for PDF viewer
+                            pdf_display = f"""
+                            <iframe 
+                                src="data:application/pdf;base64,{pdf_base64}" 
+                                width="100%" 
+                                height="800" 
+                                type="application/pdf"
+                                style="border: 1px solid #ccc; border-radius: 5px;">
+                                <p>Your browser does not support PDF viewing. 
+                                   <a href="data:application/pdf;base64,{pdf_base64}" download="binance_api_guide.pdf">
+                                   Click here to download the PDF</a>
+                                </p>
+                            </iframe>
+                            """
+                            
+                            # Display the PDF
+                            st.markdown(pdf_display, unsafe_allow_html=True)
+                            
+                            # Alternative: Use Streamlit's native PDF display
+                            st.markdown("---")
+                            st.markdown("#### 📄 Alternative Viewer")
+                            st.markdown("*If the PDF doesn't display above, try this viewer:*")
+                            
+                            # Display PDF using st.download_button with auto-open
+                            col1, col2, col3 = st.columns([1, 2, 1])
+                            with col2:
+                                st.download_button(
+                                    label="📖 Open PDF in New Tab",
+                                    data=pdf_bytes,
+                                    file_name="binance_api_setup_guide.pdf",
+                                    mime="application/pdf",
+                                    use_container_width=True,
+                                    help="Opens PDF in a new browser tab where you can view all images and content"
+                                )
+                            
+                        except Exception as display_error:
+                            st.warning(f"⚠️ PDF viewer error: {display_error}")
+                            st.info("📥 Please use the download option below to view the complete guide with images.")
+                            
+                            # Fallback to download button
+                            col1, col2, col3 = st.columns([1, 2, 1])
+                            with col2:
+                                st.download_button(
+                                    label="📥 Download PDF Guide",
+                                    data=pdf_bytes,
+                                    file_name="binance_api_setup_guide.pdf",
+                                    mime="application/pdf",
+                                    use_container_width=True
+                                )
+                    
+                    with tab2:
+                        st.markdown("### 📥 Download Options")
+                        st.info("💡 **Recommended**: Download the PDF to view all images and detailed instructions on your device.")
+                        
+                        col1, col2 = st.columns(2)
+                        
+                        with col1:
+                            # Primary download button
+                            st.download_button(
+                                label="📥 Download Full Guide",
+                                data=pdf_bytes,
+                                file_name="binance_api_setup_guide.pdf",
+                                mime="application/pdf",
+                                use_container_width=True,
+                                type="primary",
+                                help="Downloads the complete PDF guide with all images and step-by-step screenshots"
+                            )
+                        
+                        with col2:
+                            # Quick view button
+                            st.download_button(
+                                label="� Quick Download",
+                                data=pdf_bytes,
+                                file_name="binance_setup.pdf",
+                                mime="application/pdf",
+                                use_container_width=True,
+                                help="Same PDF with a shorter filename for quick access"
+                            )
+                        
+                        # File info
+                        st.markdown("---")
+                        st.markdown("**📋 File Information:**")
+                        file_size_mb = len(pdf_bytes) / (1024 * 1024)
+                        st.write(f"• **Size**: {file_size_mb:.2f} MB")
+                        st.write(f"• **Format**: PDF with images and screenshots")
+                        st.write(f"• **Content**: Complete Binance API setup guide")
+                        st.write(f"• **Best viewed**: In your default PDF reader")
+                        
+                except Exception as e:
+                    st.error(f"❌ Error loading PDF file: {e}")
+                    UserDashboard._show_fallback_binance_guide()
+            else:
+                st.warning("⚠️ PDF guide not found at expected location")
+                st.info("📍 **Expected location**: `binance.pdf` in the project directory")
+                
+                # Show expected path for debugging
+                st.code(f"Looking for: {pdf_path}")
+                
+                # Check if file exists with different name
+                possible_names = ["binance.pdf", "Binance.pdf", "BINANCE.pdf", "binance_guide.pdf"]
+                pdf_dir = os.path.dirname(__file__)
+                
+                st.markdown("🔍 **Checking for alternative filenames:**")
+                for name in possible_names:
+                    alt_path = os.path.join(pdf_dir, name)
+                    exists = os.path.exists(alt_path)
+                    status = "✅ Found" if exists else "❌ Not found"
+                    st.write(f"• {name}: {status}")
+                    
+                    if exists:
+                        st.success(f"📄 Found alternative file: {name}")
+                        if st.button(f"📖 Use {name}", key=f"use_{name}"):
+                            # Update the PDF path and reload
+                            st.session_state.pdf_path_override = alt_path
+                            st.rerun()
+                
+                # Show fallback guide
+                UserDashboard._show_fallback_binance_guide()
+
+    @staticmethod
+    def _show_fallback_binance_guide():
+        """Show fallback detailed guide when PDF is not available"""
+        st.markdown("### 📚 Detailed Binance API Setup Instructions")
+        
+        with st.expander("🔧 Step 1: Account Preparation", expanded=True):
+            st.markdown("""
+            **Before You Start:**
+            1. ✅ Ensure you have a verified Binance account
+            2. ✅ Complete all KYC (Know Your Customer) requirements
+            3. ✅ Enable two-factor authentication (2FA)
+            4. ✅ Consider using a dedicated trading account
+            """)
+        
+        with st.expander("🔑 Step 2: Creating API Keys"):
+            st.markdown("""
+            **Creating Your API Keys:**
+            1. 🌐 Log into your Binance account at [binance.com](https://www.binance.com)
+            2. 👤 Go to your profile (top right corner)
+            3. ⚙️ Select "API Management"
+            4. ➕ Click "Create API"
+            5. 📝 Enter a label for your API (e.g., "Copy Trading Bot")
+            6. ✅ Complete any security verification (SMS, Email, 2FA)
+            7. 💾 **IMPORTANT**: Save both API Key and Secret Key immediately
+            """)
+        
+        with st.expander("🔐 Step 3: Configuring Permissions"):
+            st.markdown("""
+            **Required Permissions:**
+            - ✅ **Enable Reading** - Required for account information
+            - ✅ **Enable Spot & Margin Trading** - For spot trading
+            - ✅ **Enable Futures** - For futures/derivatives trading
+            - ❌ **Withdraw** - NOT recommended for security
+            
+            **IP Restrictions (Recommended):**
+            1. 🔒 Add your server IP: `208.77.246.15`
+            2. 🏠 Add your home/office IP for manual access
+            3. 💡 Leave blank only if you have dynamic IP
+            """)
+        
+        with st.expander("⚡ Step 4: Testing Your API"):
+            st.markdown("""
+            **Verify Your Setup:**
+            1. 📋 Copy your API Key and Secret
+            2. 📝 Paste them in the form above
+            3. 🧪 Click "Add Account" to test
+            4. ✅ You should see "Binance account added successfully!"
+            
+            **If Connection Fails:**
+            - 🔍 Double-check API key and secret
+            - 🌐 Verify IP restrictions
+            - ⏰ Wait a few minutes for API activation
+            - 🔐 Ensure all required permissions are enabled
+            """)
+        
+        with st.expander("🛡️ Step 5: Security Best Practices"):
+            st.markdown("""
+            **Keep Your Account Safe:**
+            - 🔐 Never share your API keys
+            - 🔄 Rotate keys regularly (monthly recommended)
+            - 📊 Monitor API usage in Binance dashboard
+            - 🚫 Disable withdraw permissions
+            - 🔒 Use IP restrictions when possible
+            - 📱 Keep 2FA enabled
+            - 💰 Consider using smaller amounts initially
+            """)
 
 def main():
     """Main application entry point"""
