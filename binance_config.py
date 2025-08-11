@@ -13,6 +13,7 @@ import requests, hmac, hashlib, json
 import ccxt
 # import ccxt.async_support as ccxt # link against the asynchronous version of ccxt
 
+logging.basicConfig(level=logging.INFO)
 load_dotenv()
 class PhemexClient:
     """Enterprise-grade Phemex trading client with connection testing and error handling"""
@@ -33,24 +34,17 @@ class PhemexClient:
         })
 
         try:
-            # Load markets for symbol validation and conversion
             self.phemex_client.load_markets()
-            logging.info("✅ Phemex markets loaded successfully")
-            self.markets = self.phemex_client.markets
+            logging.info("Phemex markets loaded successfully")
         except Exception as e:
-            logging.warning(f" Could not load Phemex markets: {e}")
-            self.markets = {}
-        
-        # Keep the price scale for legacy compatibility
-        self.PRICE_SCALE = self.fetch_all_price_scales()
-        
+            logging.warning(f" Could not load Phemex markets: {e}")        
     def test_connection(self):
         """Test if the Phemex API credentials are valid using CCXT"""
         try:
             # Test 1: Fetch markets (public endpoint)
             markets = self.phemex_client.fetch_markets()
             if not markets:
-                logging.error("❌ Phemex public API test failed - no markets found")
+                logging.error("Phemex public API test failed - no markets found")
                 return False
             
             logging.info(f"✅ Phemex public API accessible - found {len(markets)} markets")
@@ -341,7 +335,7 @@ class PhemexClient:
         try:
             # Convert symbol FIRST before any other operations
             order_type = self.convert_binance_to_phemex_order_type(order_type)
-            side = self.convert_binFance_to_phemex_order_side(side)
+            side = self.convert_binance_to_phemex_order_side(side)
             
             expiry = int(time.time()) + 60
             path = "/orders"
@@ -385,7 +379,7 @@ class PhemexClient:
                 "Content-Type": "application/json"
             }
             
-            logging.info(f"🔴 Phemex order request: {symbol} {side} {order_type} | Body: {body}")
+            logging.info(f" Phemex order request: {symbol} {side} {order_type} | Body: {body}")
             
             resp = requests.post(url, data=body, headers=headers)
             result = resp.json()
@@ -393,20 +387,19 @@ class PhemexClient:
             if result.get('code') == 0:
                 logging.info(f"✅ Phemex order placed successfully: {result}")
             else:
-                logging.error(f"❌ Phemex order failed: {result}")
-                # Log additional debug info for signature issues
+                logging.error(f" Phemex order failed: {result}")
                 if "signature" in str(result.get('msg', '')).lower():
-                    logging.error(f"🔴 Signature verification failed - Debug info:")
-                    logging.error(f"   • API Key: {self.api_key[:8]}...")
-                    logging.error(f"   • Expiry: {expiry}")
-                    logging.error(f"   • Path: {path}")
-                    logging.error(f"   • Body: {body}")
-                    logging.error(f"   • Signature: {signature[:16]}...")
+                    logging.error(f"Signature verification failed - Debug info:")
+                    logging.info(f"   • API Key: {self.api_key[:8]}...")
+                    logging.info(f"   • Expiry: {expiry}")
+                    logging.info(f"   • Path: {path}")
+                    logging.info(f"   • Body: {body}")
+                    logging.info(f"   • Signature: {signature[:16]}...")
             
             return result
 
         except Exception as e:
-            logging.error(f"❌ Phemex place_order failed: {e}")
+            logging.error(f" Phemex place_order failed: {e}")
             return None
 
     def test_connection_simple(self):
@@ -415,23 +408,23 @@ class PhemexClient:
             # Test markets fetch (public endpoint)
             markets = self.phemex_client.fetch_markets()
             if markets and len(markets) > 0:
-                logging.info(f"✅ Phemex connection test successful - {len(markets)} markets")
+                logging.info(f" Phemex connection test successful - {len(markets)} markets")
                 return True
             else:
-                logging.error("❌ Phemex connection test failed - no markets found")
+                logging.error(" Phemex connection test failed - no markets found")
                 return False
         except Exception as e:
-            logging.error(f"❌ Phemex connection test error: {e}")
+            logging.error(f" Phemex connection test error: {e}")
             return False
     
     def get_account_balance_ccxt(self):
         """Get account balance using CCXT"""
         try:
             balance = self.phemex_client.fetch_balance()
-            logging.info("✅ CCXT balance retrieved successfully")
+            logging.info("CCXT balance retrieved successfully")
             return balance
         except Exception as e:
-            logging.error(f"❌ CCXT get_account_balance failed: {e}")
+            logging.error(f" CCXT get_account_balance failed: {e}")
             return None
     
     def fetch_order_ccxt(self, order_id, symbol=None):
@@ -442,11 +435,11 @@ class PhemexClient:
                 order = self.phemex_client.fetch_order(order_id, phemex_symbol)
             else:
                 order = self.phemex_client.fetch_order(order_id)
-            
-            logging.info(f"✅ CCXT order fetched: {order_id}")
+        
+            logging.info(f" CCXT order fetched: {order_id}")
             return order
         except Exception as e:
-            logging.error(f"❌ CCXT fetch_order failed: {e}")
+            logging.error(f" CCXT fetch_order failed: {e}")
             return None
     
     def cancel_order_ccxt(self, order_id, symbol):
@@ -454,10 +447,10 @@ class PhemexClient:
         try:
             phemex_symbol = symbol
             result = self.phemex_client.cancel_order(order_id, phemex_symbol)
-            logging.info(f"✅ CCXT order cancelled: {order_id}")
+            logging.info(f"CCXT order cancelled: {order_id}")
             return result
         except Exception as e:
-            logging.error(f"❌ CCXT cancel_order failed: {e}")
+            logging.error(f" CCXT cancel_order failed: {e}")
             return None
     
     def get_account_balance(self):
@@ -489,16 +482,6 @@ class PhemexClient:
             return None
 
     def validate_phemex_credentials(self, api_key, api_secret):
-        """
-        Comprehensive validation of Phemex API credentials
-        
-        Args:
-            api_key (str): Phemex API key
-            api_secret (str): Phemex API secret
-            
-        Returns:
-            dict: Validation result with success status and details
-        """
         validation_result = {
             'success': False,
             'message': '',
@@ -521,7 +504,6 @@ class PhemexClient:
                 validation_result['permissions'].append('spot_read')
                 validation_result['details']['balance_accessible'] = True
             
-            # Test 3: Check if we can access futures data
             try:
                 # Test futures permissions if available
                 validation_result['permissions'].append('basic_access')
@@ -529,7 +511,7 @@ class PhemexClient:
                 pass
             
             validation_result['success'] = True
-            validation_result['message'] = f"✅ Phemex credentials validated successfully"
+            validation_result['message'] = f"Phemex credentials validated successfully"
             validation_result['details']['api_key_prefix'] = api_key[:8] + "..."
             
             return validation_result
@@ -560,16 +542,6 @@ class BinanceClient:
             account_info = self.client.futures_account()
             logging.info(f"Binance connection test successful for {'source' if self.is_source else 'target'} account")
             return True
-        except BinanceAPIException as error:
-            logging.error(
-                f"Binance API Error - Code: {error.code}, Message: {error.message}"
-            )
-            return False
-        except BinanceRequestException as error:
-            logging.error(
-                f"Binance Request Error - Message: {error.message}"
-            )
-            return False
         except Exception as error:
             logging.error(f"Unexpected error during connection test: {str(error)}")
             return False
@@ -739,7 +711,7 @@ class SourceAccountListener:
             
             # Validate accounts result
             if all_accounts is None:
-                logging.error("❌ CRITICAL: get_all_trading_accounts returned None")
+                logging.error(" CRITICAL: get_all_trading_accounts returned None")
                 return
             
             if not isinstance(all_accounts, list):
