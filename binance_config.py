@@ -207,12 +207,16 @@ class PhemexClient:
         try:
             # Convert symbol to Phemex format
             phemex_symbol = self.Convert_to_ccxt_symbol(symbol)
-            logging.info(f"🔄 Placing CCXT order: {symbol} → {phemex_symbol} | {side} {order_type} {quantity}")
-            
-            # Convert order parameters to CCXT format
-            ccxt_side = side.lower()  # 'buy' or 'sell'
             ccxt_type = self._convert_to_ccxt_order_type(order_type)
+            ccxt_time = self._convert_to_ccxt_time_in_force(time_in_force)
+            ccxt_side = side.lower()  # 'buy' or 'sell'
             ccxt_amount = float(quantity)
+
+
+            logging.info(f" Placing CCXT order: {symbol} → {phemex_symbol} | {ccxt_side} {ccxt_type} {ccxt_amount} at price {price} and sp = {stop_price}")
+
+            # Convert order parameters to CCXT format
+            
             
             # Prepare order parameters
             params = {}
@@ -231,41 +235,70 @@ class PhemexClient:
             # Place order based on type
             if ccxt_type == 'market':
                 order =self.phemex_client.create_order(phemex_symbol, ccxt_type, ccxt_side, ccxt_amount)
+                logging.info("successfully placed market order")
                 #self.phemex_client.set_leverage(phemex_symbol, 10)
                 
             elif ccxt_type == 'limit':
-                # Limit order
+                # Use create_order instead of create_limit_order
                 if not price:
                     raise ValueError("Limit order requires price")
-                self.phemex_client.create_limit_order(phemex_symbol, ccxt_side,ccxt_amount, float(price), params)
-                
-            elif ccxt_type == 'stop':
-                # Stop market order
-                # order = self.phemex_client.create_order(
-                #     symbol=phemex_symbol,
-                #     type='stop',
-                #     side=ccxt_side,
-                #     amount=ccxt_amount,
-                #     params=params
-                # )
-
-                order = self.phemex_client.create_stop_order(phemex_symbol, 'market', ccxt_side, ccxt_amount, params)
-            elif ccxt_type == 'stop_limit':
-                order = self.phemex_client.create_stop_order(phemex_symbol, 'limit', ccxt_side, ccxt_amount,float(price),float(stop_price), params)
-
-                
-            else:
-                # Generic order creation
+                logging.info(f"placing limit order --------------\n symbol {phemex_symbol} type : limit side : {ccxt_side} amount : {ccxt_amount} price : {float(price)}")
                 order = self.phemex_client.create_order(
                     symbol=phemex_symbol,
-                    type=ccxt_type,
+                    type='limit', 
                     side=ccxt_side,
                     amount=ccxt_amount,
-                    price=float(price) if price else None,
+                    price=float(price),
+                )
+            elif order_type == "STOP_MARKET":
+                    logging.info(f" Placing STOP_MARKET order: {phemex_symbol} | {ccxt_amount} @ {stop_price}")
+                    order = self.create_stop_market_order(phemex_symbol, ccxt_amount, float(stop_price)) if ccxt_side == "sell" else self.create_stop_short_order(phemex_symbol, ccxt_amount, float(stop_price))
+                        
+            elif ccxt_type == 'stop':
+                if ccxt_side.lower() == 'sell':  # Stop loss 
+                    trigger_direction = 'descending' 
+                else:  
+                    trigger_direction = 'ascending'  
+
+                params.update({
+                    'triggerPrice': str(stop_price),
+                    'triggerDirection': trigger_direction,
+                    'triggerType': 'ByMarkPrice',  # or 'ByLastPrice'
+                    'posSide': 'Merged',  # One-way mode
+                })
+
+                order = self.phemex_client.create_order(
+                    symbol=phemex_symbol,
+                    type='market', 
+                    side=ccxt_side,
+                    amount=ccxt_amount,
+                    price=None,  
                     params=params
                 )
+            elif ccxt_type == 'stop_limit':
+                order = self.phemex_client.create_stop_order(phemex_symbol, 'limit', ccxt_side, ccxt_amount,float(price),float  (stop_price), params)
+
+
+            else:
+                # Generic order creation
+                if order_type == "TAKE_PROFIT_MARKET" :
+                    logging.info(f" Placing TAKE_PROFIT_MARKET order: {phemex_symbol} | {ccxt_amount} @ {stop_price}")
+                    order = self.create_take_profit_market_order(phemex_symbol, ccxt_amount, float(stop_price)) if ccxt_side == "sell" else self.create_take_profit_short_order(phemex_symbol, ccxt_amount, float(stop_price))
+               
+
+                else:
+                    logging.info('placing generic order on phemex....')
+
+                    order = self.phemex_client.create_order(
+                        symbol=phemex_symbol,
+                        type=ccxt_type,
+                        side=ccxt_side,
+                        amount=ccxt_amount,
+                        price=float(price) if price else None,
+                        params=params
+                    )
             
-            logging.info(f"✅ CCXT order placed successfully: {order['id']} | Status: {order['status']}")
+            logging.info(f" CCXT order placed successfully: {order['id']} | Status: {order['status']}")
             logging.debug(f"Order details: {order}")
             
             return {
@@ -278,7 +311,7 @@ class PhemexClient:
             }
             
         except Exception as e:
-            logging.error(f"❌ CCXT order failed for {symbol}: {e}")
+            logging.error(f" CCXT order failed for {symbol}: {e}")
             logging.error(f"Error type: {type(e).__name__}")
             return {
                 'success': False,
@@ -286,7 +319,95 @@ class PhemexClient:
                 'symbol': symbol,
                 'ccxt_response': None
             }
+
+    def create_stop_market_order(self, symbol, amount, stop_price):
+       
+        params = {
+            'triggerPrice': str(stop_price),
+            'triggerDirection': 'descending',  # Price going DOWN to trigger
+            'triggerType': 'ByMarkPrice',      # or 'ByLastPrice'
+            'posSide': 'Merged',               # One-way mode
+            'reduceOnly': True
+        }
+        
+        logging.info(f'Placing stop loss market order for LONG: SELL {amount} {symbol} at trigger {stop_price}')
+        
+        order = self.phemex_client.create_order(
+            symbol=symbol,
+            type='market',
+            side='sell',  # Sell to close long position
+            amount=amount,
+            price=None,
+            params=params
+        )
+        
+        return order
+
+    def create_stop_short_order(self, symbol, amount, stop_price):
+        
+        params = {
+            'triggerPrice': str(stop_price),
+            'triggerDirection': 'ascending',   # Price going UP to trigger
+            'triggerType': 'ByMarkPrice',      # or 'ByLastPrice'
+            'posSide': 'Merged',               # One-way mode
+            'reduceOnly': True
+        }
+        
+        logging.info(f'Placing stop loss market order for SHORT: BUY {amount} {symbol} at trigger {stop_price}')
+        
+        order = self.phemex_client.create_order(
+            symbol=symbol,
+            type='market',
+            side='buy',   # Buy to close short position
+            amount=amount,
+            price=None,
+            params=params
+        )
+        
+        return order
+        
+    # Take profit for LONG position (sell at higher price)
+    def create_take_profit_market_order(self, symbol, amount, trigger_price):
+        params = {
+            'triggerPrice': trigger_price,
+            'triggerType': 'ByMarkPrice',  # or 'ByLastPrice'
+            'triggerDirection': 'ascending',  # Price moving up to trigger
+            'posSide': 'Merged',  # One-way mode
+            'reduceOnly': True,  # Close position
+        }
+        
+        # For LONG position take profit: SELL when price goes UP
+        order = self.phemex_client.create_order(
+            symbol=symbol,
+            type='market',
+            side='sell',
+            amount=amount,
+            price=None,
+            params=params
+        )
+        return order
     
+    # Take profit for SHORT position (buy at lower price)  
+    def create_take_profit_short_order(self, symbol, amount, trigger_price):
+        params = {
+            'triggerPrice': trigger_price,
+            'triggerType': 'ByMarkPrice',
+            'triggerDirection': 'descending',  # Price moving down to trigger
+            'posSide': 'Merged',  # One-way mode
+            'reduceOnly': True,
+        }
+        
+        # For SHORT position take profit: BUY when price goes DOWN
+        order = self.phemex_client.create_order(
+            symbol=symbol,
+            type='market',
+            side='buy',
+            amount=amount,
+            price=None,
+            params=params
+        )
+        return order
+
     def _convert_to_ccxt_order_type(self, binance_order_type):
         """Convert Binance order type to CCXT order type"""
         mapping = {
@@ -302,6 +423,8 @@ class PhemexClient:
     
     def _convert_to_ccxt_time_in_force(self, binance_tif):
         """Convert Binance time in force to CCXT format"""
+        if binance_tif is None:
+            return None
         mapping = {
             'GTC': 'GTC',  # Good Till Cancelled
             'IOC': 'IOC',  # Immediate Or Cancel
@@ -314,94 +437,10 @@ class PhemexClient:
         try:
             symbol = self.Convert_to_ccxt_symbol(symbol)
             self.phemex_client.set_leverage(leverage, symbol)
-
+            logging.info(f"Leverage is set to {leverage} for {symbol} in phemex client")
         except Exception as e:
-            logging.error(f"❌ Phemex set_leverage failed: {e}")
+            logging.error(f" Phemex set_leverage failed: {e}")
             return None
-
-    def place_order(
-            self,
-            symbol,
-            side,
-            order_type,
-            quantity,
-            time_in_force,
-            price=None,
-            stop_price=None,
-            reduce_only=False,
-            close_on_trigger=None,
-            client_order_id=None,
-            **kwargs):
-        try:
-            # Convert symbol FIRST before any other operations
-            order_type = self.convert_binance_to_phemex_order_type(order_type)
-            side = self.convert_binance_to_phemex_order_side(side)
-            
-            expiry = int(time.time()) + 60
-            path = "/orders"
-            url = self.BASE_URL + path
-            
-            if time_in_force:
-                time_in_force = self.convert_binance_to_phemex_time_in_force(time_in_force)
-            
-            # Use the converted symbol for price scaling
-            priceEp = int(float(price) * self.PRICE_SCALE.get(symbol, 10000)) if price is not None else 0
-            stopPxEp = int(float(stop_price) * self.PRICE_SCALE.get(symbol, 10000)) if stop_price is not None else 0
-
-            # Compose the order fields according to type
-            order = {
-                "symbol": symbol,
-                "side": side,  # "Buy" or "Sell"
-                "ordType": order_type,
-                "orderQtyRq": float(quantity),
-            }
-            if price is not None:
-                order["priceEp"] = priceEp
-            if stop_price is not None:
-                order["stopPxEp"] = stopPxEp
-            if time_in_force:
-                order["timeInForce"] = time_in_force
-            order["reduceOnly"] = reduce_only
-            if close_on_trigger is not None:
-                order["closeOnTrigger"] = close_on_trigger
-            if client_order_id:
-                order["clOrdID"] = client_order_id
-            # Allow extension fields (for advanced strategies)
-            order.update(kwargs)
-
-            body = json.dumps(order)
-            signature = self._sign(path, "", expiry, body)
-            
-            headers = {
-                "x-phemex-access-token": self.api_key,
-                "x-phemex-request-expiry": str(expiry),
-                "x-phemex-request-signature": signature,
-                "Content-Type": "application/json"
-            }
-            
-            logging.info(f" Phemex order request: {symbol} {side} {order_type} | Body: {body}")
-            
-            resp = requests.post(url, data=body, headers=headers)
-            result = resp.json()
-            
-            if result.get('code') == 0:
-                logging.info(f"✅ Phemex order placed successfully: {result}")
-            else:
-                logging.error(f" Phemex order failed: {result}")
-                if "signature" in str(result.get('msg', '')).lower():
-                    logging.error(f"Signature verification failed - Debug info:")
-                    logging.info(f"   • API Key: {self.api_key[:8]}...")
-                    logging.info(f"   • Expiry: {expiry}")
-                    logging.info(f"   • Path: {path}")
-                    logging.info(f"   • Body: {body}")
-                    logging.info(f"   • Signature: {signature[:16]}...")
-            
-            return result
-
-        except Exception as e:
-            logging.error(f" Phemex place_order failed: {e}")
-            return None
-
     def test_connection_simple(self):
         """Simplified connection test using CCXT"""
         try:
@@ -452,34 +491,6 @@ class PhemexClient:
         except Exception as e:
             logging.error(f" CCXT cancel_order failed: {e}")
             return None
-    
-    def get_account_balance(self):
-        """Get account balance information"""
-        try:
-            expiry = int(time.time()) + 60
-            path = "/spot/wallets"
-            url = self.BASE_URL + path
-            
-            signature = self._sign(path, "", expiry, "")
-            headers = {
-                "x-phemex-access-token": self.api_key,
-                "x-phemex-request-expiry": str(expiry),
-                "x-phemex-request-signature": signature,
-                "Content-Type": "application/json"
-            }
-            
-            resp = requests.get(url, headers=headers)
-            result = resp.json()
-            
-            if result.get('code') == 0:
-                return result.get('data', [])
-            else:
-                logging.error(f"Error getting Phemex balance: {result}")
-                return None
-                
-        except Exception as e:
-            logging.error(f"Phemex get_account_balance failed: {e}")
-            return None
 
     def validate_phemex_credentials(self, api_key, api_secret):
         validation_result = {
@@ -499,7 +510,7 @@ class PhemexClient:
                 return validation_result
             
             # Test 2: Get account information
-            balance_info = temp_client.get_account_balance()
+            balance_info = temp_client.get_account_balance_ccxt()
             if balance_info is not None:
                 validation_result['permissions'].append('spot_read')
                 validation_result['details']['balance_accessible'] = True
@@ -703,8 +714,8 @@ class SourceAccountListener:
     def process_order_update(self, symbol, side, order_type, quantity, price, stop_price, status, source_order_id, leverage = 10, time_in_force='GTC'):
         """Process order update and mirror to target accounts across all exchanges"""
         try:
-            logging.info(f"🔄 Starting process_order_update for {symbol} {side} {order_type}")
-            
+            logging.info(f"🔄 Starting process_order_update for {symbol} {side} {order_type} {quantity} {price} {stop_price} {status} {source_order_id} {leverage} {time_in_force}")
+
             # Get all target accounts from all exchanges
             all_accounts = self.db.get_all_trading_accounts()
             logging.info(f"📊 Retrieved accounts: type={type(all_accounts)}, value={all_accounts}")
@@ -715,30 +726,29 @@ class SourceAccountListener:
                 return
             
             if not isinstance(all_accounts, list):
-                logging.error(f"❌ CRITICAL: get_all_trading_accounts returned invalid type: {type(all_accounts)} - value: {all_accounts}")
+                logging.error(f"No trading accounts")
                 return
             
             if len(all_accounts) == 0:
-                logging.warning("⚠️ No target accounts found for trade mirroring")
+                logging.warning("No target accounts found for trade mirroring")
                 return
             
             successful_mirrors = 0
             failed_mirrors = 0
             
-            logging.info(f"🔄 Processing {status} order: {symbol} {side} {order_type} | Qty: {quantity} | Leverage: {leverage}x")
             logging.info(f"📊 Found {len(all_accounts)} target accounts to mirror to")
             
             for account in all_accounts:
                 try:
                     if not isinstance(account, dict):
-                        logging.error(f"❌ Invalid account format: {type(account)} - {account}")
+                        logging.error(f" Invalid account format: {type(account)} - {account}")
                         failed_mirrors += 1
                         continue
                     
                     exchange_type = account.get('exchange_type', 'binance')
                     account_id = account.get('id')
                     
-                    logging.info(f"🔄 Processing account ID {account_id} on {exchange_type}")
+                    logging.info(f" Processing account ID {account_id} on {exchange_type}")
                     
                     # Create appropriate client based on exchange type
                     if exchange_type == 'binance':
@@ -766,12 +776,11 @@ class SourceAccountListener:
                             if exchange_type == 'binance':
                                 target_client.set_leverage(symbol, leverage)
                             elif exchange_type == 'phemex':
-                                # Use CCXT-based leverage setting
-                                leverage_result = target_client.set_leverage(symbol, leverage)
+                                leverage_result = target_client.set_leverage(symbol, 10)
                                 if leverage_result.get('success'):
-                                    logging.info(f"✅ Leverage set for {client_type} account {account_id}: {leverage}x")
+                                    logging.info(f" Leverage set for {client_type} account {account_id}: {leverage}x")
                                 else:
-                                    logging.warning(f"⚠️ Leverage setting failed for {client_type} account {account_id}: {leverage_result.get('error', 'Unknown error')}")
+                                    logging.warning(f" Leverage setting failed for {client_type} account {account_id}: {leverage_result.get('error', 'Unknown error')}")
                         except Exception as leverage_error:
                             logging.warning(f"Failed to set leverage for {client_type} account {account_id}: {leverage_error}")
                         
@@ -809,7 +818,7 @@ class SourceAccountListener:
             logging.info(f"📊 Mirror summary: {successful_mirrors}/{total_accounts} successful, {failed_mirrors} failed")
                     
         except Exception as e:
-            logging.error(f"❌ Critical error processing order update: {e}")
+            logging.error(f" Critical error processing order update: {e}")
             import traceback
             logging.error(f"Full traceback: {traceback.format_exc()}")
 
@@ -817,6 +826,7 @@ class SourceAccountListener:
                              quantity, price, stop_price, time_in_force):
         """Execute the mirror trade with exchange-specific handling"""
         try:
+            
             if exchange_type == 'binance':
                 return self._execute_binance_trade(target_client, symbol, side, order_type, 
                                                  quantity, price, stop_price, time_in_force)
@@ -880,6 +890,8 @@ class SourceAccountListener:
         try:
             # Use CCXT place_order_ccxt method
             result = phemex_client.place_order_ccxt(
+
+
                 symbol=symbol,
                 side=side,
                 order_type=order_type,
@@ -890,7 +902,7 @@ class SourceAccountListener:
             )
             
             if result['success']:
-                logging.info(f"✅ CCXT Phemex trade executed: {result['order_id']} | Status: {result['status']}")
+                logging.info(f" CCXT Phemex trade executed: {result['order_id']} | Status: {result['status']}")
                 return {
                     'code': 0,
                     'data': {
@@ -901,35 +913,9 @@ class SourceAccountListener:
                     'msg': 'Success',
                     'ccxt_order': result['order']
                 }
-            else:
-                logging.error(f" CCXT Phemex trade failed: {result['error']}")
-                # Fallback to manual method
-                return phemex_client.place_order_manual(
-                    symbol=symbol,
-                    side=side,
-                    order_type=order_type,
-                    quantity=quantity,
-                    time_in_force=time_in_force,
-                    price=price if price and price != '0' else None,
-                    stop_price=stop_price if stop_price and stop_price != '0' else None
-                )
-                
         except Exception as e:
-            logging.error(f"❌ Error executing CCXT Phemex trade: {e}")
-            # Fallback to manual method
-            try:
-                return phemex_client.place_order_manual(
-                    symbol=symbol,
-                    side=side,
-                    order_type=order_type,
-                    quantity=quantity,
-                    time_in_force=time_in_force,
-                    price=price if price and price != '0' else None,
-                    stop_price=stop_price if stop_price and stop_price != '0' else None
-                )
-            except Exception as fallback_error:
-                logging.error(f"❌ Fallback manual Phemex trade also failed: {fallback_error}")
-                return None
+            logging.error(f" Error executing CCXT Phemex trade: {e}")
+            return None
 
     def _log_trade_to_database(self, account, exchange_type, symbol, side, order_type, 
                               quantity, price, stop_price, response, source_order_id):
