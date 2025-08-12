@@ -743,3 +743,73 @@ class Database:
             import traceback
             logging.error(f"Full traceback: {traceback.format_exc()}")
             return []
+    
+    def add_phemex_trade(self, account_id, symbol, side, order_type, quantity, price=None, stop_price=None, order_id=None, status='pending', source_order_id=None, trade_time=None):
+        """Add a new Phemex trade to the database"""
+        try:
+            self.connect()
+            cursor = self.connection.cursor()
+            
+            # If trade_time is not provided, use current time
+            if trade_time is None:
+                from datetime import datetime
+                trade_time = datetime.now()
+            
+            query = """
+            INSERT INTO phemex_trades 
+            (account_id, symbol, side, order_type, quantity, price, stop_price, order_id, status, source_order_id, trade_time)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            
+            cursor.execute(query, (account_id, symbol, side, order_type, quantity, price, stop_price, order_id, status, source_order_id, trade_time))
+            self.connection.commit()
+            
+            trade_id = cursor.lastrowid
+            logging.info(f"✅ Added Phemex trade: ID={trade_id}, Account={account_id}, Symbol={symbol}, Side={side}")
+            return trade_id
+            
+        except Exception as e:
+            logging.error(f"❌ Error adding Phemex trade: {e}")
+            if self.connection:
+                self.connection.rollback()
+            return None
+        finally:
+            cursor.close()
+            self.disconnect()
+    
+    def get_phemex_trades(self, account_id=None, symbol=None, limit=100):
+        """Get Phemex trades from the database with optional filtering"""
+        try:
+            self.connect()
+            cursor = self.connection.cursor(dictionary=True)
+            
+            # Build query with optional filters
+            query = "SELECT * FROM phemex_trades WHERE 1=1"
+            params = []
+            
+            if account_id:
+                query += " AND account_id = %s"
+                params.append(account_id)
+                
+            if symbol:
+                query += " AND symbol = %s"
+                params.append(symbol)
+            
+            query += " ORDER BY trade_time DESC"
+            
+            if limit:
+                query += " LIMIT %s"
+                params.append(limit)
+            
+            cursor.execute(query, params)
+            trades = cursor.fetchall()
+            
+            logging.info(f"✅ Retrieved {len(trades)} Phemex trades")
+            return trades
+            
+        except Exception as e:
+            logging.error(f"❌ Error getting Phemex trades: {e}")
+            return []
+        finally:
+            cursor.close()
+            self.disconnect()

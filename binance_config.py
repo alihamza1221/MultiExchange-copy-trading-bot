@@ -438,9 +438,10 @@ class PhemexClient:
             symbol = self.Convert_to_ccxt_symbol(symbol)
             self.phemex_client.set_leverage(leverage, symbol)
             logging.info(f"Leverage is set to {leverage} for {symbol} in phemex client")
+            return True
         except Exception as e:
             logging.error(f" Phemex set_leverage failed: {e}")
-            return None
+            return False
     def test_connection_simple(self):
         """Simplified connection test using CCXT"""
         try:
@@ -777,7 +778,7 @@ class SourceAccountListener:
                                 target_client.set_leverage(symbol, leverage)
                             elif exchange_type == 'phemex':
                                 leverage_result = target_client.set_leverage(symbol, 10)
-                                if leverage_result.get('success'):
+                                if leverage_result:
                                     logging.info(f" Leverage set for {client_type} account {account_id}: {leverage}x")
                                 else:
                                     logging.warning(f" Leverage setting failed for {client_type} account {account_id}: {leverage_result.get('error', 'Unknown error')}")
@@ -792,24 +793,25 @@ class SourceAccountListener:
                         
                         if response:
                             # Log successful trade to appropriate table
+                            print('response: ', response)
                             self._log_trade_to_database(
                                 account, exchange_type, symbol, side, order_type, 
                                 quantity, price, stop_price, response, source_order_id
                             )
                             successful_mirrors += 1
-                            logging.info(f"✅ Trade mirrored to {client_type} account {account_id}: {symbol} {side} {quantity}")
+                            logging.info(f" Trade mirrored to {client_type} account {account_id}: {symbol} {side} {quantity}")
                         else:
                             failed_mirrors += 1
-                            logging.error(f"❌ Failed to mirror trade to {client_type} account {account_id}")
+                            logging.error(f" Failed to mirror trade to {client_type} account {account_id}")
                     
                     elif status == 'CANCELED':
-                        logging.info(f"🚫 Order cancelled in source account: {symbol} {source_order_id}")
+                        logging.info(f"Order cancelled in source account: {symbol} {source_order_id}")
                         # Could implement order cancellation mirroring here if needed
                         
                 except Exception as account_error:
                     failed_mirrors += 1
                     exchange_type = account.get('exchange_type', 'unknown')
-                    logging.error(f"❌ Error processing order for {exchange_type} account {account.get('id', 'unknown')}: {account_error}")
+                    logging.error(f" Error processing order for {exchange_type} account {account.get('id', 'unknown')}: {account_error}")
                     import traceback
                     logging.error(f"Account processing traceback: {traceback.format_exc()}")
             
@@ -921,6 +923,7 @@ class SourceAccountListener:
                               quantity, price, stop_price, response, source_order_id):
         """Log successful trade to database with exchange-specific handling"""
         try:
+            logging.debug(f"Trade LOGGING........ to database for {exchange_type} account {source_order_id}")
             # Extract order ID based on exchange response format
             if exchange_type == 'binance':
                 order_id = response.get('orderId')
@@ -929,19 +932,37 @@ class SourceAccountListener:
             else:
                 order_id = str(response.get('id', 'unknown'))
             
+            
+            logging.debug(f"Trade LOGGING........ to database for {exchange_type} account {source_order_id} with order ID {order_id}")
+            
+            
             # Add trade record
-            self.db.add_trade(
-                account_id=account['id'],
-                symbol=symbol,
-                side=side,
-                order_type=order_type,
-                quantity=float(quantity),
-                price=float(price) if price and price != '0' else None,
-                stop_price=float(stop_price) if stop_price and stop_price != '0' else None,
-                order_id=order_id,
-                status='MIRRORED',
-                source_order_id=source_order_id
-            )
+            if exchange_type == 'binance':
+                self.db.add_trade(
+                    account_id=account['id'],
+                    symbol=symbol,
+                    side=side,
+                    order_type=order_type,
+                    quantity=float(quantity),
+                    price=float(price) if price and price != '0' else None,
+                    stop_price=float(stop_price) if stop_price and stop_price != '0' else   None,
+                    order_id=order_id,
+                    status='MIRRORED',
+                    source_order_id=source_order_id
+                )
+            elif exchange_type == 'phemex':
+                self.db.add_phemex_trade(
+                    account_id=account['id'],
+                    symbol=symbol,
+                    side=side,
+                    order_type=order_type,
+                    quantity=float(quantity),
+                    price=float(price) if price and price != '0' else None,
+                    stop_price=float(stop_price) if stop_price and stop_price != '0' else   None,
+                    order_id=order_id,
+                    status='MIRRORED',
+                    source_order_id=source_order_id
+                )
             
             logging.debug(f"Trade logged to database for {exchange_type} account {account['id']}")
             
