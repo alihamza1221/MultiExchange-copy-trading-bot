@@ -531,10 +531,7 @@ class UserDashboard:
         # Check if we should show account details page
         if st.session_state.get('show_account_details', False) and st.session_state.get('selected_account'):
             UserDashboard._show_account_details()
-            return
-        
-        st.title(f"👤 User Dashboard - {st.session_state.user_data.email}")
-        
+            return        
         # Show server info for users
         col1, = st.columns(1)
         with col1:
