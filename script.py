@@ -588,7 +588,6 @@ class UserDashboard:
                 # Exchange selection dropdown
                 exchange_options = {
                     "binance": "Binance",
-                    "bybit": "Bybit", 
                     "phemex": "Phemex"
                 }
                 
@@ -604,10 +603,56 @@ class UserDashboard:
                     st.warning(f" {exchange_options[selected_exchange]} integration is coming soon!")
                     st.info("For now, please use Binance or Phemex exchanges which are fully supported.")
                 elif selected_exchange == "binance":
-                    # Binance account creation form
+                    # Binance setup help
                     st.markdown("---")
-                    st.markdown("### S Add Binance Account")
+                    st.markdown("### 💡 Binance Setup Help")
                     
+                    col1, = st.columns(1)
+                    with col1:
+                        st.info("""
+                        **📚 API Setup Guide:**
+                        1. Visit [Binance](https://www.binance.com)
+                        2. Go to API Management
+                        3. Create new API key
+                        4. Enable trading permissions
+                        """)
+                    
+                    # Detailed PDF guide button
+                    st.markdown("---")
+                    col1, = st.columns(1)
+                    pdf_path = os.path.join(os.path.dirname(__file__), "binance.pdf")
+
+                    if os.path.exists(pdf_path):
+                        try:
+                            # Read PDF file as bytes for download
+                            with open(pdf_path, 'rb') as pdf_file:
+                                pdf_bytes = pdf_file.read()
+
+                            st.success("📄 PDF Guide Available - Download to view complete instructions with images")
+                            with col1:
+                                # File info
+                                file_size_mb = len(pdf_bytes) / (1024 * 1024)
+                                st.markdown(f"**📋 File Size:** {file_size_mb:.2f} MB")
+                                st.markdown("**📄 Format:** PDF with images and screenshots")
+
+                                # Primary download button with unique key
+                                st.download_button(
+                                    label="📥 Download Complete Guide",
+                                    data=pdf_bytes,
+                                    file_name="binance.pdf",
+                                    mime="application/pdf",
+                                    use_container_width=True,
+                                    type="primary",
+                                    help="Downloads the complete PDF guide with step-by-step instructions",
+                                    key="download_pdf_primary"
+                                )
+
+                                st.caption("💡 **Tip:** Open with your default PDF reader for best viewing experience")
+                        except Exception as e:
+                            st.info(f"Error loading PDF guide: {e}")
+                    st.markdown("---")
+                    st.markdown("### Add Binance Account")
+
                     with st.form("add_binance_account_form"):
                         account_name = st.text_input(
                             "Account Name", 
@@ -665,40 +710,7 @@ class UserDashboard:
                             else:
                                 st.error("Please fill in all fields")
                     
-                    # Binance setup help
-                    st.markdown("---")
-                    st.markdown("### 💡 Binance Setup Help")
                     
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        st.info("""
-                        **📚 API Setup Guide:**
-                        1. Visit [Binance](https://www.binance.com)
-                        2. Go to API Management
-                        3. Create new API key
-                        4. Enable trading permissions
-                        """)
-                    
-                    with col2:
-                        st.info("""
-                        **🔒 Security Tips:**
-                        • Use dedicated trading account
-                        • Enable IP whitelist
-                        • Never share your keys
-                        • Regular key rotation
-                        """)
-                    
-                    # Detailed PDF guide button
-                    st.markdown("---")
-                    col1, col2, col3 = st.columns([1, 2, 1])
-                    with col2:
-                        if st.button("📖 View Detailed Step-by-Step Guide", use_container_width=True, type="secondary", key="binance_pdf_guide_button"):
-                            st.session_state.show_binance_guide = True
-                            st.rerun()
-                    
-                    # Show detailed guide from PDF
-                    if st.session_state.get('show_binance_guide', False):
-                        UserDashboard._show_binance_pdf_guide()
                 elif selected_exchange == "phemex":
                     # Phemex account creation form
                     st.markdown("---")
@@ -856,13 +868,13 @@ class UserDashboard:
                                 with col2:
                                     total_trades = account.get('total_trades', 0)
                                     st.metric("Total Trades", total_trades)
-                                
-                                with col3:
-                                    if st.button("📊 Details", key=f"details_{exchange_type}_{account['id']}"):
-                                        st.session_state.selected_account = account['id']
-                                        st.session_state.selected_exchange_type = exchange_type
-                                        st.session_state.show_account_details = True
-                                        st.rerun()
+                                if exchange_type == 'binance':
+                                    with col3:
+                                        if st.button("📊 Details",  key=f"details_{exchange_type}_{account   ['id']}"):
+                                            st.session_state.selected_account =     account['id']
+                                            st.session_state.   selected_exchange_type =   exchange_type
+                                            st.session_state.   show_account_details = True
+                                            st.rerun()
                                 
                                 with col4:
                                     if st.button("🗑️ Delete", key=f"del_{exchange_type}_{account['id']}", type="secondary"):
@@ -1186,197 +1198,418 @@ class UserDashboard:
 
     @staticmethod
     def _show_user_trades() -> None:
-        """Show user's trading history"""
+        """Show user's trading history with separate tabs for different exchanges"""
         st.subheader("📊 My Trading History")
-        st.info("📈 Your trading history and performance will be displayed here")
-        # TODO: Implement user trading history
+        
+        try:
+            db = Database()
+            user_email = st.session_state.user_data.email
+            
+            # Get user's accounts to filter trades
+            binance_accounts = db.get_user_accounts(user_email) or []
+            phemex_accounts = db.get_user_phemex_accounts(user_email) or []
+            
+            # Create tabs for different exchanges
+            tab1, tab2, tab3 = st.tabs(["🔶 Binance Trades", "🔴 Phemex Trades", "📊 Overall Summary"])
+            
+            with tab1:
+                UserDashboard._show_binance_trades(db, binance_accounts)
+            
+            with tab2:
+                UserDashboard._show_phemex_trades(db, phemex_accounts, user_email)
+            
+            with tab3:
+                UserDashboard._show_trading_summary(db, binance_accounts, phemex_accounts, user_email)
+                
+        except Exception as e:
+            st.error(f"Error loading trading history: {e}")
+            logging.error(f"Trading history error: {e}")
 
     @staticmethod
-    def _show_binance_pdf_guide():
-        """Display download option for Binance API setup guide PDF"""
-        with st.container():
-            st.markdown("---")
-            st.markdown("## 📖 Complete Binance API Setup Guide")
+    def _show_binance_trades(db, binance_accounts):
+        """Show Binance trading history"""
+        st.subheader("🔶 Binance Trading History")
+        
+        if not binance_accounts:
+            st.info("📝 No Binance accounts found. Add a Binance account in the 'My Accounts' tab to see trades here.")
+            return
+        
+        # Account selector for multiple accounts
+        if len(binance_accounts) > 1:
+            account_options = {account['id']: f"{account['account_name'] or 'Unnamed Account'} ({account['api_key'][:8]}...)" 
+                             for account in binance_accounts}
+            account_options['all'] = "All Accounts"
             
-            # Close button with unique key
-            col1, col2, col3 = st.columns([1, 2, 1])
-            with col3:
-                if st.button("❌ Close Guide", type="secondary", use_container_width=True, key="close_pdf_guide"):
-                    st.session_state.show_binance_guide = False
-                    st.rerun()
-            
-            # Check if PDF file exists
-            pdf_path = os.path.join(os.path.dirname(__file__), "binance.pdf")
-            
-            if os.path.exists(pdf_path):
-                try:
-                    # Read PDF file as bytes for download
-                    with open(pdf_path, 'rb') as pdf_file:
-                        pdf_bytes = pdf_file.read()
-                    
-                    st.success("📄 PDF Guide Available - Download to view complete instructions with images")
-                    
-                    # Guide description
-                    st.markdown("### 📋 What's in the Guide?")
-                    col1, col2 = st.columns(2)
-                    
-                    with col1:
-                        st.info("""
-                        **📚 Complete Setup Instructions:**
-                        • Step-by-step screenshots
-                        • API key creation process
-                        • Security configuration
-                        • Permission settings
-                        """)
-                    
-                    with col2:
-                        st.info("""
-                        **🎯 Visual Learning:**
-                        • Detailed images for each step
-                        • Highlighted important sections
-                        • Real Binance interface screenshots
-                        • Troubleshooting tips
-                        """)
-                    
-                    # Download section
-                    st.markdown("---")
-                    st.markdown("### 📥 Download Guide")
-                    
-                    col1, col2, col3 = st.columns([1, 2, 1])
-                    with col2:
-                        # File info
-                        file_size_mb = len(pdf_bytes) / (1024 * 1024)
-                        st.markdown(f"**📋 File Size:** {file_size_mb:.2f} MB")
-                        st.markdown("**📄 Format:** PDF with images and screenshots")
-                        
-                        # Primary download button with unique key
-                        st.download_button(
-                            label="📥 Download Complete Guide",
-                            data=pdf_bytes,
-                            file_name="binance_api_setup_guide.pdf",
-                            mime="application/pdf",
-                            use_container_width=True,
-                            type="primary",
-                            help="Downloads the complete PDF guide with all images and step-by-step instructions",
-                            key="download_pdf_primary"
-                        )
-                        
-                        st.caption("💡 **Tip:** Open with your default PDF reader for best viewing experience")
-                        
-                except Exception as e:
-                    st.error(f"❌ Error loading PDF file: {e}")
-                    UserDashboard._show_fallback_binance_guide()
-            else:
-                st.warning("⚠️ PDF guide not found at expected location")
-                st.info("📍 **Expected location:** `binance.pdf` in the project directory")
-                
-                # Show expected path for debugging
-                st.code(f"Looking for: {pdf_path}")
-                
-                # Check if file exists with different name
-                possible_names = ["binance.pdf", "Binance.pdf", "BINANCE.pdf", "binance_guide.pdf"]
-                pdf_dir = os.path.dirname(__file__)
-                
-                st.markdown("🔍 **Checking for alternative filenames:**")
-                found_alternative = False
-                
-                for idx, name in enumerate(possible_names):
-                    alt_path = os.path.join(pdf_dir, name)
-                    exists = os.path.exists(alt_path)
-                    status = "✅ Found" if exists else "❌ Not found"
-                    st.write(f"• {name}: {status}")
-                    
-                    if exists and not found_alternative:
-                        found_alternative = True
-                        st.success(f"📄 Found alternative file: {name}")
-                        
-                        try:
-                            with open(alt_path, 'rb') as pdf_file:
-                                alt_pdf_bytes = pdf_file.read()
-                            
-                            col1, col2, col3 = st.columns([1, 2, 1])
-                            with col2:
-                                st.download_button(
-                                    label=f"📥 Download {name}",
-                                    data=alt_pdf_bytes,
-                                    file_name="binance_api_setup_guide.pdf",
-                                    mime="application/pdf",
-                                    use_container_width=True,
-                                    type="primary",
-                                    key=f"download_pdf_alt_{idx}"
-                                )
-                        except Exception as e:
-                            st.error(f"Error reading {name}: {e}")
-                
-                if not found_alternative:
-                    # Show fallback guide if no PDF found
-                    UserDashboard._show_fallback_binance_guide()
+            selected_account = st.selectbox(
+                "Select Account:",
+                options=list(account_options.keys()),
+                format_func=lambda x: account_options[x],
+                index=len(account_options) - 1  # Default to "All Accounts"
+            )
+        else:
+            selected_account = binance_accounts[0]['id']
+        
+        # Get trades based on selection
+        all_binance_trades = []
+        
+        if selected_account == 'all':
+            # Get trades from all accounts
+            for account in binance_accounts:
+                account_trades = db.get_account_trades(account['id']) or []
+                for trade in account_trades:
+                    trade['account_name'] = account['account_name'] or 'Unnamed Account'
+                    trade['account_id'] = account['id']
+                all_binance_trades.extend(account_trades)
+        else:
+            # Get trades from selected account
+            account_trades = db.get_account_trades(selected_account) or []
+            account_name = next((acc['account_name'] for acc in binance_accounts if acc['id'] == selected_account), 'Unnamed Account')
+            for trade in account_trades:
+                trade['account_name'] = account_name
+                trade['account_id'] = selected_account
+            all_binance_trades = account_trades
+        
+        UserDashboard._display_trades_table(all_binance_trades, "Binance", show_account_column=(selected_account == 'all'))
+
     @staticmethod
-    def _show_fallback_binance_guide():
-        """Show fallback detailed guide when PDF is not available"""
-        st.markdown("### 📚 Detailed Binance API Setup Instructions")
+    def _show_phemex_trades(db, phemex_accounts, user_email):
+        """Show Phemex trading history"""
+        st.subheader("🔴 Phemex Trading History")
         
-        with st.expander("🔧 Step 1: Account Preparation", expanded=True):
-            st.markdown("""
-            **Before You Start:**
-            1. ✅ Ensure you have a verified Binance account
-            2. ✅ Complete all KYC (Know Your Customer) requirements
-            3. ✅ Enable two-factor authentication (2FA)
-            4. ✅ Consider using a dedicated trading account
-            """)
+        if not phemex_accounts:
+            st.info("📝 No Phemex accounts found. Add a Phemex account in the 'My Accounts' tab to see trades here.")
+            return
         
-        with st.expander("🔑 Step 2: Creating API Keys"):
-            st.markdown("""
-            **Creating Your API Keys:**
-            1. 🌐 Log into your Binance account at [binance.com](https://www.binance.com)
-            2. 👤 Go to your profile (top right corner)
-            3. ⚙️ Select "API Management"
-            4. ➕ Click "Create API"
-            5. 📝 Enter a label for your API (e.g., "Copy Trading Bot")
-            6. ✅ Complete any security verification (SMS, Email, 2FA)
-            7. 💾 **IMPORTANT**: Save both API Key and Secret Key immediately
-            """)
-        
-        with st.expander("🔐 Step 3: Configuring Permissions"):
-            st.markdown("""
-            **Required Permissions:**
-            - ✅ **Enable Reading** - Required for account information
-            - ✅ **Enable Spot & Margin Trading** - For spot trading
-            - ✅ **Enable Futures** - For futures/derivatives trading
-            - ❌ **Withdraw** - NOT recommended for security
+        # Account selector for multiple accounts
+        if len(phemex_accounts) > 1:
+            account_options = {account['id']: f"{account['account_name'] or 'Unnamed Account'} ({account['api_key'][:8]}...)" 
+                             for account in phemex_accounts}
+            account_options['all'] = "All Accounts"
             
-            **IP Restrictions (Recommended):**
-            1. 🔒 Add your server IP: `208.77.246.15`
-            2. 🏠 Add your home/office IP for manual access
-            3. 💡 Leave blank only if you have dynamic IP
-            """)
+            selected_account = st.selectbox(
+                "Select Phemex Account:",
+                options=list(account_options.keys()),
+                format_func=lambda x: account_options[x],
+                index=len(account_options) - 1  # Default to "All Accounts"
+            )
+        else:
+            selected_account = phemex_accounts[0]['id']
         
-        with st.expander("⚡ Step 4: Testing Your API"):
-            st.markdown("""
-            **Verify Your Setup:**
-            1. 📋 Copy your API Key and Secret
-            2. 📝 Paste them in the form above
-            3. 🧪 Click "Add Account" to test
-            4. ✅ You should see "Binance account added successfully!"
+        # Get Phemex trades
+        try:
+            if selected_account == 'all':
+                # Get all Phemex trades for user
+                all_phemex_trades = db.get_phemex_trades() or []
+                # Filter by user's account IDs
+                user_account_ids = [acc['id'] for acc in phemex_accounts]
+                all_phemex_trades = [trade for trade in all_phemex_trades if trade.get('account_id') in user_account_ids]
+                
+                # Add account names
+                for trade in all_phemex_trades:
+                    account = next((acc for acc in phemex_accounts if acc['id'] == trade.get('account_id')), None)
+                    trade['account_name'] = account['account_name'] if account else 'Unknown Account'
+            else:
+                # Get trades for specific account
+                all_phemex_trades = db.get_phemex_trades(account_id=selected_account) or []
+                account_name = next((acc['account_name'] for acc in phemex_accounts if acc['id'] == selected_account), 'Unnamed Account')
+                for trade in all_phemex_trades:
+                    trade['account_name'] = account_name
             
-            **If Connection Fails:**
-            - 🔍 Double-check API key and secret
-            - 🌐 Verify IP restrictions
-            - ⏰ Wait a few minutes for API activation
-            - 🔐 Ensure all required permissions are enabled
-            """)
+            UserDashboard._display_trades_table(all_phemex_trades, "Phemex", show_account_column=(selected_account == 'all'))
+            
+        except Exception as e:
+            st.error(f"Error loading Phemex trades: {e}")
+            logging.error(f"Phemex trades error: {e}")
+
+    @staticmethod
+    def _show_trading_summary(db, binance_accounts, phemex_accounts, user_email):
+        """Show overall trading summary across all exchanges"""
+        st.subheader("📊 Overall Trading Summary")
         
-        with st.expander("🛡️ Step 5: Security Best Practices"):
-            st.markdown("""
-            **Keep Your Account Safe:**
-            - 🔐 Never share your API keys
-            - 🔄 Rotate keys regularly (monthly recommended)
-            - 📊 Monitor API usage in Binance dashboard
-            - 🚫 Disable withdraw permissions
-            - 🔒 Use IP restrictions when possible
-            - 📱 Keep 2FA enabled
-            - 💰 Consider using smaller amounts initially
-            """)
+        try:
+            # Get all trades from both exchanges
+            all_binance_trades = []
+            all_phemex_trades = []
+            
+            # Collect Binance trades
+            for account in binance_accounts:
+                account_trades = db.get_account_trades(account['id']) or []
+                for trade in account_trades:
+                    trade['exchange'] = 'Binance'
+                    trade['account_name'] = account['account_name'] or 'Unnamed Account'
+                all_binance_trades.extend(account_trades)
+            
+            # Collect Phemex trades
+            try:
+                user_account_ids = [acc['id'] for acc in phemex_accounts]
+                phemex_trades = db.get_phemex_trades() or []
+                all_phemex_trades = [trade for trade in phemex_trades if trade.get('account_id') in user_account_ids]
+                
+                for trade in all_phemex_trades:
+                    trade['exchange'] = 'Phemex'
+                    account = next((acc for acc in phemex_accounts if acc['id'] == trade.get('account_id')), None)
+                    trade['account_name'] = account['account_name'] if account else 'Unknown Account'
+                    
+            except Exception as e:
+                logging.error(f"Error loading Phemex trades for summary: {e}")
+                all_phemex_trades = []
+            
+            # Summary metrics
+            total_trades = len(all_binance_trades) + len(all_phemex_trades)
+            
+            if total_trades > 0:
+                col1, col2, col3, col4 = st.columns(4)
+                
+                with col1:
+                    st.metric("📊 Total Trades", total_trades)
+                
+                with col2:
+                    st.metric("🔶 Binance Trades", len(all_binance_trades))
+                
+                with col3:
+                    st.metric("🔴 Phemex Trades", len(all_phemex_trades))
+                
+                with col4:
+                    success_count = len([t for t in (all_binance_trades + all_phemex_trades) 
+                                       if t.get('status') in ['FILLED', 'MIRRORED']])
+                    success_rate = (success_count / total_trades * 100) if total_trades > 0 else 0
+                    st.metric("✅ Success Rate", f"{success_rate:.1f}%")
+                
+                # Exchange distribution chart
+                st.markdown("---")
+                st.subheader("📈 Trading Distribution")
+                
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    # Exchange distribution
+                    exchange_data = {
+                        'Exchange': ['Binance', 'Phemex'],
+                        'Trades': [len(all_binance_trades), len(all_phemex_trades)]
+                    }
+                    if exchange_data['Trades'][0] > 0 or exchange_data['Trades'][1] > 0:
+                        st.bar_chart(data=exchange_data, x='Exchange', y='Trades')
+                
+                with col2:
+                    # Side distribution
+                    all_trades = all_binance_trades + all_phemex_trades
+                    buy_count = len([t for t in all_trades if t.get('side') == 'BUY'])
+                    sell_count = len([t for t in all_trades if t.get('side') == 'SELL'])
+                    
+                    side_data = {
+                        'Side': ['BUY', 'SELL'],
+                        'Count': [buy_count, sell_count]
+                    }
+                    if side_data['Count'][0] > 0 or side_data['Count'][1] > 0:
+                        st.bar_chart(data=side_data, x='Side', y='Count')
+                
+                # Recent activity across all exchanges
+                st.markdown("---")
+                st.subheader("🕐 Recent Activity (All Exchanges)")
+                
+                # Combine and sort all trades
+                combined_trades = []
+                for trade in all_binance_trades:
+                    trade['exchange'] = 'Binance'
+                    combined_trades.append(trade)
+                for trade in all_phemex_trades:
+                    trade['exchange'] = 'Phemex'
+                    combined_trades.append(trade)
+                
+                # Sort by trade time (most recent first)
+                combined_trades.sort(key=lambda x: x.get('trade_time', ''), reverse=True)
+                
+                # Show recent trades (limit to 20)
+                recent_trades = combined_trades[:20]
+                UserDashboard._display_trades_table(recent_trades, "Combined", show_account_column=True, show_exchange_column=True)
+                
+            else:
+                st.info("📝 No trading activity found across any accounts.")
+                st.markdown("""
+                **Getting Started:**
+                - 🔗 Add trading accounts in the 'My Accounts' tab
+                - 🤖 Ensure the copy trading bot is running
+                - 📡 Bot will automatically copy trades when signals are received
+                - 📊 Your trading history will appear here
+                """)
+                
+        except Exception as e:
+            st.error(f"Error generating trading summary: {e}")
+            logging.error(f"Trading summary error: {e}")
+
+    @staticmethod
+    def _display_trades_table(trades, exchange_name, show_account_column=False, show_exchange_column=False):
+        """Display trades in a formatted table with filtering options"""
+        
+        if not trades:
+            st.info(f"📝 No {exchange_name} trades found.")
+            return
+        
+        # Filter options
+        st.markdown("### 🔍 Filter Options")
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            symbols = list(set([trade.get('symbol', 'N/A') for trade in trades]))
+            selected_symbol = st.selectbox("Symbol", ["All"] + sorted(symbols), key=f"symbol_{exchange_name}")
+        
+        with col2:
+            sides = ['All', 'BUY', 'SELL']
+            selected_side = st.selectbox("Side", sides, key=f"side_{exchange_name}")
+        
+        with col3:
+            statuses = list(set([trade.get('status', 'N/A') for trade in trades]))
+            selected_status = st.selectbox("Status", ["All"] + sorted(statuses), key=f"status_{exchange_name}")
+        
+        with col4:
+            limit_options = [10, 25, 50, 100, "All"]
+            selected_limit = st.selectbox("Show", limit_options, index=1, key=f"limit_{exchange_name}")
+        
+        # Apply filters
+        filtered_trades = trades
+        if selected_symbol != "All":
+            filtered_trades = [t for t in filtered_trades if t.get('symbol') == selected_symbol]
+        if selected_side != "All":
+            filtered_trades = [t for t in filtered_trades if t.get('side') == selected_side]
+        if selected_status != "All":
+            filtered_trades = [t for t in filtered_trades if t.get('status') == selected_status]
+        
+        # Apply limit
+        if selected_limit != "All":
+            filtered_trades = filtered_trades[:selected_limit]
+        
+        # Sort by most recent
+        filtered_trades.sort(key=lambda x: x.get('trade_time', ''), reverse=True)
+        
+        # Display summary
+        st.markdown(f"### 📋 {exchange_name} Trades ({len(filtered_trades)} shown)")
+        
+        if filtered_trades:
+            # Quick stats
+            col1, col2, col3, col4 = st.columns(4)
+            
+            with col1:
+                buy_orders = len([t for t in filtered_trades if t.get('side') == 'BUY'])
+                st.metric("📈 Buy Orders", buy_orders)
+            
+            with col2:
+                sell_orders = len([t for t in filtered_trades if t.get('side') == 'SELL'])
+                st.metric("📉 Sell Orders", sell_orders)
+            
+            with col3:
+                successful = len([t for t in filtered_trades if t.get('status') in ['FILLED', 'MIRRORED']])
+                st.metric("✅ Successful", successful)
+            
+            with col4:
+                total_volume = sum([float(t.get('quantity', 0)) for t in filtered_trades])
+                st.metric("📊 Total Volume", f"{total_volume:.4f}")
+            
+            st.markdown("---")
+            
+            # Display trades
+            for i, trade in enumerate(filtered_trades):
+                with st.container():
+                    # Determine number of columns based on what we need to show
+                    num_cols = 7
+                    if show_account_column:
+                        num_cols += 1
+                    if show_exchange_column:
+                        num_cols += 1
+                    
+                    cols = st.columns(num_cols)
+                    col_idx = 0
+                    
+                    # Symbol
+                    with cols[col_idx]:
+                        symbol = trade.get('symbol', 'N/A')
+                        st.write(f"**{symbol}**")
+                        order_id = trade.get('order_id', 'N/A')
+                        if len(str(order_id)) > 15:
+                            st.caption(f"ID: {str(order_id)[:12]}...")
+                        else:
+                            st.caption(f"ID: {order_id}")
+                    col_idx += 1
+                    
+                    # Side
+                    with cols[col_idx]:
+                        side = trade.get('side', 'N/A')
+                        side_color = "🟢" if side == "BUY" else "🔴" if side == "SELL" else "⚪"
+                        st.write(f"{side_color} {side}")
+                    col_idx += 1
+                    
+                    # Type
+                    with cols[col_idx]:
+                        order_type = trade.get('order_type', 'N/A')
+                        st.write(f"📋 {order_type}")
+                    col_idx += 1
+                    
+                    # Quantity
+                    with cols[col_idx]:
+                        quantity = trade.get('quantity', 0)
+                        st.write(f"📊 {quantity}")
+                    col_idx += 1
+                    
+                    # Price
+                    with cols[col_idx]:
+                        price = trade.get('price')
+                        if price and float(price) > 0:
+                            st.write(f"💰 ${float(price):,.4f}")
+                        else:
+                            st.write("💰 Market")
+                    col_idx += 1
+                    
+                    # Status
+                    with cols[col_idx]:
+                        status = trade.get('status', 'N/A')
+                        status_colors = {
+                            'FILLED': '✅',
+                            'MIRRORED': '🔄',
+                            'PENDING': '⏳',
+                            'CANCELED': '❌',
+                            'REJECTED': '🚫'
+                        }
+                        status_icon = status_colors.get(status, '⚪')
+                        st.write(f"{status_icon} {status}")
+                    col_idx += 1
+                    
+                    # Time
+                    with cols[col_idx]:
+                        trade_time = trade.get('trade_time', 'N/A')
+                        formatted_time = safe_datetime_to_string(trade_time)
+                        if formatted_time != 'N/A' and len(formatted_time) >= 10:
+                            try:
+                                date_part = formatted_time[5:10].replace('-', '/')
+                                time_part = formatted_time[11:16] if len(formatted_time) > 11 else ""
+                                short_display = f"{date_part} {time_part}".strip()
+                                st.write(f"⏰ {short_display}")
+                            except:
+                                st.write(f"⏰ {formatted_time}")
+                        else:
+                            st.write("⏰ N/A")
+                    col_idx += 1
+                    
+                    # Account (if showing)
+                    if show_account_column:
+                        with cols[col_idx]:
+                            account_name = trade.get('account_name', 'Unknown')
+                            if len(account_name) > 15:
+                                st.caption(f"👤 {account_name[:12]}...")
+                            else:
+                                st.caption(f"👤 {account_name}")
+                        col_idx += 1
+                    
+                    # Exchange (if showing)
+                    if show_exchange_column:
+                        with cols[col_idx]:
+                            exchange = trade.get('exchange', 'Unknown')
+                            exchange_icons = {'Binance': '🔶', 'Phemex': '🔴'}
+                            icon = exchange_icons.get(exchange, '🔗')
+                            st.caption(f"{icon} {exchange}")
+                    
+                    if i < len(filtered_trades) - 1:  # Don't add divider after last item
+                        st.divider()
+        else:
+            st.info("📝 No trades match the selected filters.")
 
 def main():
     """Main application entry point"""
