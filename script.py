@@ -264,12 +264,11 @@ class AdminDashboard:
         AdminDashboard._show_admin_metrics()
         
         # Navigation tabs
-        tab1, tab2, tab3, tab4, tab5 = st.tabs([
-            "🤖 Bot Control", 
-            "👥 User Management", 
-            "💳 Account Management", 
-            "📊 Trading Stats",
-            "⚙️ Settings"
+        tab1, tab2, tab3, tab4 = st.tabs([
+            "Bot Control", 
+            "User Management", 
+            "Account Management", 
+            "Trading Stats"
         ])
         
         with tab1:
@@ -284,8 +283,6 @@ class AdminDashboard:
         with tab4:
             AdminDashboard._show_trading_stats()
         
-        with tab5:
-            AdminDashboard._show_settings()
 
     @staticmethod
     def _show_admin_metrics() -> None:
@@ -438,90 +435,224 @@ class AdminDashboard:
 
     @staticmethod
     def _show_account_management() -> None:
-        """Enhanced account management for admin"""
-        st.subheader("💳 Trading Account Management")
+        """Enhanced account management for admin with Binance and Phemex tabs"""
+        st.subheader("Trading Account Management")
         
         try:
             db = Database()
-            accounts = db.get_all_binance_accounts()
-            
-            if accounts:
-                st.info(f"📊 **Total Accounts**: {len(accounts)}")
-                
-                for account in accounts:
-                    with st.expander(f"💳 {account['account_name'] or 'Unnamed Account'} - {account['user_email']}"):
-                        col1, col2 = st.columns(2)
-                        
-                        with col1:
-                            st.write("**Account Details:**")
-                            st.write(f"• **Owner**: {account['user_email']}")
-                            st.write(f"• **Created**: {account['created_at']}")
-                            st.write(f"• **Total Trades**: {account['total_trades']}")
-                        
-                        with col2:
-                            st.write("**API Configuration:**")
-                            st.code(f"API Key: {account['api_key'][:8]}...{account['api_key'][-8:]}")
-                            st.code(f"Secret: {account['secret_key'][:8]}...{account['secret_key'][-8:]}")
-                        
-                        # Account actions
-                        col1, col2, col3 = st.columns(3)
-                        
-                        with col1:
-                            if st.button("✏️ Edit", key=f"edit_{account['id']}"):
-                                st.session_state[f"editing_{account['id']}"] = True
-                                st.rerun()
-                        
-                        with col2:
-                            if st.button("🗑️ Delete", key=f"delete_{account['id']}", type="secondary"):
-                                if st.button("⚠️ Confirm Delete", key=f"confirm_delete_{account['id']}", type="primary"):
-                                    if db.delete_account_admin(account['id']):
-                                        st.success("✅ Account deleted!")
-                                        time.sleep(1)
-                                        st.rerun()
-                        
-                        # Edit form
-                        if st.session_state.get(f"editing_{account['id']}", False):
-                            with st.form(f"edit_form_{account['id']}"):
-                                st.write("**Edit Account:**")
-                                new_name = st.text_input("Account Name", value=account['account_name'] or "")
-                                new_api_key = st.text_input("API Key", value=account['api_key'])
-                                new_secret = st.text_input("Secret Key", value=account['secret_key'], type="password")
-                                
+            # Two tabs: Binance and Phemex
+            binance_tab, phemex_tab = st.tabs(["Binance Accounts", "Phemex Accounts"])
+
+            with binance_tab:
+                try:
+                    accounts = db.get_all_binance_accounts()
+                    
+                    if accounts:
+                        st.info(f"📊 **Binance Accounts**: {len(accounts)}")
+                        for account in accounts:
+                            with st.expander(f"💳 {account['account_name'] or 'Unnamed Account'} - {account['user_email']}"):
                                 col1, col2 = st.columns(2)
                                 with col1:
-                                    if st.form_submit_button("💾 Save", type="primary"):
-                                        if db.update_binance_account(account['id'], new_api_key, new_secret, new_name):
-                                            st.success("✅ Account updated!")
-                                            st.session_state[f"editing_{account['id']}"] = False
+                                    st.write("**Account Details:**")
+                                    st.write(f"• **Owner**: {account['user_email']}")
+                                    st.write(f"• **Created**: {account.get('created_at', 'N/A')}")
+                                    st.write(f"• **Total Trades**: {account.get('total_trades', 0)}")
+                                with col2:
+                                    st.write("**API Configuration:**")
+                                    api_key = account.get('api_key', '')
+                                    secret_key = account.get('secret_key', '')
+                                    if api_key:
+                                        st.code(f"API Key: {api_key[:8]}...{api_key[-8:]}")
+                                    if secret_key:
+                                        st.code(f"Secret: {secret_key[:8]}...{secret_key[-8:]}")
+                                # Account actions
+                                col1a, col2a, col3a = st.columns(3)
+                                with col1a:
+                                    if st.button("Edit", key=f"edit_{account['id']}"):
+                                        st.session_state[f"editing_{account['id']}"] = True
+                                        st.rerun()
+                                with col2a:
+                                    if st.button("Delete", key=f"delete_{account['id']}", type="secondary"):
+                                        if st.button("Confirm Delete", key=f"confirm_delete_{account['id']}", type="primary"):
+                                            if db.delete_account_admin(account['id']):
+                                                st.success("Account deleted!")
+                                                time.sleep(1)
+                                                st.rerun()
+                                # Edit form
+                                if st.session_state.get(f"editing_{account['id']}", False):
+                                    with st.form(f"edit_form_{account['id']}"):
+                                        st.write("**Edit Account:**")
+                                        new_name = st.text_input("Account Name", value=account['account_name'] or "")
+                                        new_api_key = st.text_input("API Key", value=account.get('api_key', ''))
+                                        new_secret = st.text_input("Secret Key", value=account.get('secret_key', ''), type="password")
+                                        colL, colR = st.columns(2)
+                                        with colL:
+                                            if st.form_submit_button("Save", type="primary"):
+                                                if db.update_binance_account(account['id'], new_api_key, new_secret, new_name):
+                                                    st.success("Account updated!")
+                                                    st.session_state[f"editing_{account['id']}"] = False
+                                                    time.sleep(1)
+                                                    st.rerun()
+                                        with colR:
+                                            if st.form_submit_button("Cancel"):
+                                                st.session_state[f"editing_{account['id']}"] = False
+                                                st.rerun()
+                                st.divider()
+                    else:
+                        st.info("📝 No trading accounts configured yet")
+                except Exception as e:
+                    st.error(f"Error loading Binance account management: {e}")
+
+            with phemex_tab:
+                try:
+                    # Try to fetch all Phemex accounts (admin view)
+                    try:
+                        p_accounts = db.get_all_phemex_accounts()
+                    except Exception as fetch_err:
+                        logging.warning(f"get_all_phemex_accounts unavailable or failed: {fetch_err}")
+                        p_accounts = []
+                    
+                    if p_accounts:
+                        st.info(f"📊 **Phemex Accounts**: {len(p_accounts)}")
+                        for account in p_accounts:
+                            with st.expander(f"💳 {account.get('account_name') or 'Unnamed Account'} - {account.get('user_email', '')}"):
+                                col1, col2 = st.columns(2)
+                                with col1:
+                                    st.write("**Account Details:**")
+                                    st.write(f"• **Owner**: {account.get('user_email', 'N/A')}")
+                                    st.write(f"• **Created**: {account.get('created_at', 'N/A')}")
+                                    # Total trades (from precomputed field or fallback to query)
+                                    total_trades = account.get('total_trades')
+                                    if total_trades is None:
+                                        try:
+                                            trades = db.get_phemex_trades(account_id=account['id'])
+                                            total_trades = len(trades)
+                                        except Exception:
+                                            total_trades = 'N/A'
+                                    st.write(f"• **Total Trades**: {total_trades}")
+                                with col2:
+                                    st.write("**API Configuration:**")
+                                    api_key = account.get('api_key', '')
+                                    secret_key = account.get('secret_key', '')
+                                    if api_key:
+                                        st.code(f"API Key: {api_key[:8]}...{api_key[-8:]}")
+                                    if secret_key:
+                                        st.code(f"Secret: {secret_key[:8]}...{secret_key[-8:]}")
+                                # Actions (Edit if available, Delete with admin or fallback)
+                                col1a, col2a = st.columns(2)
+                                with col1a:
+                                    if hasattr(db, 'update_phemex_account'):
+                                        if st.button("Edit", key=f"phemex_edit_{account['id']}"):
+                                            st.session_state[f"phemex_editing_{account['id']}"] = True
+                                            st.rerun()
+                                with col2a:
+                                    if st.button("Delete", key=f"phemex_delete_{account['id']}", type="secondary"):
+                                        deleted = False
+                                        try:
+                                            if hasattr(db, 'delete_phemex_account_admin'):
+                                                deleted = db.delete_phemex_account_admin(account['id'])
+                                            else:
+                                                deleted = db.delete_phemex_account(account['id'], account.get('user_email'))
+                                        except Exception as de:
+                                            logging.error(f"Delete Phemex account failed: {de}")
+                                        if deleted:
+                                            st.success("Phemex account deleted!")
                                             time.sleep(1)
                                             st.rerun()
-                                
-                                with col2:
-                                    if st.form_submit_button("Cancel"):
-                                        st.session_state[f"editing_{account['id']}"] = False
-                                        st.rerun()
-                        
-                        st.divider()
-            else:
-                st.info("📝 No trading accounts configured yet")
-                
+                                # Edit form (only if method exists)
+                                if st.session_state.get(f"phemex_editing_{account['id']}", False) and hasattr(db, 'update_phemex_account'):
+                                    with st.form(f"phemex_edit_form_{account['id']}"):
+                                        new_name = st.text_input("Account Name", value=account.get('account_name', '') or '')
+                                        new_api_key = st.text_input("API Key", value=account.get('api_key', '') or '')
+                                        new_secret = st.text_input("Secret Key", value=account.get('secret_key', '') or '', type="password")
+                                        c1, c2 = st.columns(2)
+                                        with c1:
+                                            if st.form_submit_button("Save", type="primary"):
+                                                try:
+                                                    if db.update_phemex_account(account['id'], new_api_key, new_secret, new_name):
+                                                        st.success("Account updated!")
+                                                        st.session_state[f"phemex_editing_{account['id']}"] = False
+                                                        time.sleep(1)
+                                                        st.rerun()
+                                                    else:
+                                                        st.error("Failed to update account")
+                                                except Exception as ue:
+                                                    st.error(f"Update error: {ue}")
+                                        with c2:
+                                            if st.form_submit_button("Cancel"):
+                                                st.session_state[f"phemex_editing_{account['id']}"] = False
+                                                st.rerun()
+                                st.divider()
+                    else:
+                        st.info("📝 No Phemex accounts configured yet")
+                except Exception as e:
+                    st.error(f"Error loading Phemex account management: {e}")
         except Exception as e:
             st.error(f"Error loading account management: {e}")
-
     @staticmethod
     def _show_trading_stats() -> None:
-        """Show trading statistics"""
+        """Show trading statistics split by exchange (Binance / Phemex)"""
         st.subheader("📊 Trading Statistics")
-        st.info("📈 Trading statistics and analytics will be displayed here")
-        # TODO: Implement trading statistics
+        
+        try:
+            db = Database()
+            binance_tab, phemex_tab = st.tabs(["🔶 Binance", "🔴 Phemex"])
 
-    @staticmethod
-    def _show_settings() -> None:
-        """Show admin settings"""
-        st.subheader("⚙️ System Settings")
-        st.info("🔧 System configuration options will be displayed here")
-        # TODO: Implement system settings
+            # BINANCE TAB
+            with binance_tab:
+                try:
+                    accounts = db.get_all_binance_accounts() or []
+                except Exception as e:
+                    logging.error(f"Failed to load Binance accounts: {e}")
+                    accounts = []
+                
+                all_trades = []
+                name_by_id = {}
+                for acc in accounts:
+                    acc_id = acc.get('id')
+                    name_by_id[acc_id] = acc.get('account_name') or 'Unnamed Account'
+                    try:
+                        trades = db.get_account_trades(acc_id) or []
+                    except Exception as te:
+                        logging.error(f"Failed to load trades for Binance account {acc_id}: {te}")
+                        trades = []
+                    for t in trades:
+                        t['account_id'] = acc_id
+                        t['account_name'] = name_by_id[acc_id]
+                    all_trades.extend(trades)
+                
+                if not all_trades:
+                    st.info("📝 No Binance trades found.")
+                else:
+                    UserDashboard._display_trades_table(all_trades, "Binance", show_account_column=True)
 
+            # PHEMEX TAB
+            with phemex_tab:
+                try:
+                    phemex_trades = db.get_phemex_trades() or []
+                except Exception as pe:
+                    logging.error(f"Failed to load Phemex trades: {pe}")
+                    phemex_trades = []
+                
+                # Map account_id to account_name if available
+                name_by_id = {}
+                try:
+                    phemex_accounts = db.get_all_phemex_accounts() or []
+                    name_by_id = {a.get('id'): (a.get('account_name') or 'Unnamed Account') for a in phemex_accounts}
+                except Exception as ae:
+                    logging.warning(f"get_all_phemex_accounts unavailable or failed: {ae}")
+                    name_by_id = {}
+                
+                for t in phemex_trades:
+                    t['account_name'] = name_by_id.get(t.get('account_id'), 'Unknown Account')
+                
+                if not phemex_trades:
+                    st.info("📝 No Phemex trades found.")
+                else:
+                    UserDashboard._display_trades_table(phemex_trades, "Phemex", show_account_column=True)
+        except Exception as e:
+            st.error(f"Error loading trading statistics: {e}")
+            logging.error(f"Trading statistics error: {e}")
 class UserDashboard:
     """User dashboard with limited access"""
     
