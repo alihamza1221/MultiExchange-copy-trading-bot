@@ -258,7 +258,6 @@ class AdminDashboard:
     @staticmethod
     def show_admin_dashboard() -> None:
         """Main admin dashboard"""
-        st.title(f"👑 Admin Dashboard - {st.session_state.user_data.email}")
         
         # Admin metrics
         AdminDashboard._show_admin_metrics()
@@ -298,18 +297,18 @@ class AdminDashboard:
             col1, col2, col3, col4 = st.columns(4)
             
             with col1:
-                st.metric("🤖 Bot Status", "Running" if bot.is_running else "Stopped",
+                st.metric("Bot Status", "Running" if bot.is_running else "Stopped",
                          delta="Active" if bot.is_running else "Inactive")
             
             with col2:
-                st.metric("👥 Total Users", len(all_users))
+                st.metric("Total Users", len(all_users))
             
             with col3:
-                st.metric("⏳ Pending Approvals", len(pending_users),
+                st.metric("Pending Approvals", len(pending_users),
                          delta=f"+{len(pending_users)}" if pending_users else None)
             
             with col4:
-                st.metric("💳 Trading Accounts", len(all_accounts))
+                st.metric("Trading Accounts", len(all_accounts))
                 
         except Exception as e:
             st.error(f"Error loading metrics: {e}")
@@ -325,8 +324,8 @@ class AdminDashboard:
             st.info(f"🌐 **Server IP**: 208.77.246.15")
         
         with col2:
-            status = "🟢 Running" if bot.is_running else "🔴 Stopped"
-            st.info(f"📊 **Bot Status**: {status}")
+            status = "Running" if bot.is_running else "Stopped"
+            st.info(f"**Bot Status**: {status}")
         
         st.markdown("---")
         
@@ -334,28 +333,28 @@ class AdminDashboard:
         col1, col2, col3 = st.columns([1, 1, 2])
         
         with col1:
-            if st.button("🚀 Start Bot", disabled=bot.is_running, use_container_width=True, type="primary"):
+            if st.button("Start Bot", disabled=bot.is_running, use_container_width=True, type="primary"):
                 with st.spinner("Starting bot..."):
                     if bot.start_bot():
-                        st.success("✅ Copy trading bot started successfully!")
+                        st.success("Copy trading bot started successfully!")
                         time.sleep(1)
                         st.rerun()
                     else:
-                        st.error("❌ Failed to start bot. Check configuration.")
+                        st.error(" Failed to start bot. Check configuration.")
         
         with col2:
-            if st.button("⏹️ Stop Bot", disabled=not bot.is_running, use_container_width=True):
+            if st.button("Stop Bot", disabled=not bot.is_running, use_container_width=True):
                 with st.spinner("Stopping bot..."):
                     bot.stop_bot()
-                    st.success("✅ Copy trading bot stopped!")
+                    st.success("Copy trading bot stopped!")
                     time.sleep(1)
                     st.rerun()
         
         with col3:
             if bot.is_running:
-                st.success("🟢 **Bot is actively monitoring and copying trades**")
+                st.success("**Bot Active**")
             else:
-                st.warning("🔴 **Bot is stopped - No trade monitoring active**")
+                st.warning("**Bot is stopped**")
 
     @staticmethod
     def _show_user_management() -> None:
@@ -368,35 +367,35 @@ class AdminDashboard:
             # Pending approvals section
             pending_users = db.get_pending_users()
             if pending_users:
-                st.warning(f"⏳ **{len(pending_users)} users awaiting approval**")
+                st.warning(f"**{len(pending_users)} users awaiting approval**")
                 
                 for user in pending_users:
                     with st.container():
                         col1, col2, col3, col4 = st.columns([3, 2, 1, 1])
                         
                         with col1:
-                            st.write(f"📧 **{user['email']}**")
+                            st.write(f"**{user['email']}**")
                         
                         with col2:
                             st.caption(f"Registered: {user['created_at']}")
                         
                         with col3:
-                            if st.button("✅ Approve", key=f"approve_{user['id']}", type="primary"):
+                            if st.button(" Approve", key=f"approve_{user['id']}", type="primary"):
                                 if db.approve_user(user['id'], st.session_state.user_data.id):
-                                    st.success(f"✅ Approved {user['email']}")
+                                    st.success(f"Approved {user['email']}")
                                     time.sleep(1)
                                     st.rerun()
                         
                         with col4:
-                            if st.button("❌ Reject", key=f"reject_{user['id']}"):
+                            if st.button("Reject", key=f"reject_{user['id']}"):
                                 if db.reject_user(user['id'], st.session_state.user_data.id):
-                                    st.error(f"❌ Rejected {user['email']}")
+                                    st.error(f"Rejected {user['email']}")
                                     time.sleep(1)
                                     st.rerun()
                         
                         st.divider()
             else:
-                st.info("✅ No pending user approvals")
+                st.info("No pending user approvals")
             
             st.markdown("---")
             
@@ -666,7 +665,7 @@ class UserDashboard:
         # Show server info for users
         col1, = st.columns(1)
         with col1:
-            st.info(f"🌐 **Server IP**: 208.77.246.15")
+            st.info(f"**Server IP**: 208.77.246.15")
         
         st.markdown("---")
         
@@ -676,7 +675,7 @@ class UserDashboard:
             return
         
         # Approved user interface
-        tab1, tab2 = st.tabs(["💳 My Accounts", "📊 My Trades"])
+        tab1, tab2 = st.tabs(["My Accounts", "My Trades"])
         
         with tab1:
             UserDashboard._show_user_accounts()
@@ -689,12 +688,11 @@ class UserDashboard:
         """Show approval pending message"""
         st.warning("⏳ **Account Pending Approval**")
         st.info("""
-        📧 Your account registration is currently under review by our administrators.
+        Your account registration is currently under review by our administrators.
         
         **What's next?**
         - ✅ Your registration has been received
         - ⏳ Admin review is in progress  
-        - 📧 You'll be notified once approved
         - 🚀 Full access will be granted after approval
         
         **Need help?** Contact support if you have any questions.
@@ -703,7 +701,7 @@ class UserDashboard:
     @staticmethod
     def _show_user_accounts() -> None:
         """Show user's trading accounts with exchange selection"""
-        st.subheader("💳 My Trading Accounts")
+        st.subheader(" My Trading Accounts")
         
         try:
             db = Database()
@@ -841,8 +839,22 @@ class UserDashboard:
                     
                 elif selected_exchange == "phemex":
                     # Phemex account creation form
+                    
+                    # Phemex setup help
                     st.markdown("---")
-                    st.markdown("### 🔴 Add Phemex Account")
+                    st.markdown("### Phemex Setup Help")
+                    
+                    col1, = st.columns(1)
+                    with col1:
+                        st.info("""
+                        **📚 API Setup Guide:**
+                        1. Visit [Phemex](https://phemex.com)
+                        2. Go to API Management
+                        3. Create new API key
+                        4. Enable trading permissions
+                        """)
+                    st.markdown("---")
+                    st.markdown("### Add Phemex Account")
                     
                     with st.form("add_phemex_account_form", clear_on_submit=True):
                         account_name = st.text_input(
@@ -883,45 +895,22 @@ class UserDashboard:
                                             secret_key, 
                                             account_name
                                         ):
-                                            st.success("✅ Phemex account added successfully!")
-                                            st.info("🔄 Refreshing page to show new account...")
+                                            st.success(" Phemex account added successfully!")
+                                            st.info("Refreshing page to show new account...")
                                             # Trigger refresh
                                             SessionManager.trigger_accounts_refresh()
                                             time.sleep(2)
                                             st.rerun()
                                         else:
-                                            st.error("❌ Failed to add account to database")
+                                            st.error("Failed to add account to database")
                                     else:
-                                        st.error("❌ Invalid Phemex API credentials")
+                                        st.error("Invalid Phemex API credentials")
                                 except Exception as e:
-                                    st.error(f"❌ Error validating credentials: {e}")
+                                    st.error(f"Error validating credentials: {e}")
                                     logging.error(f"Phemex credential validation error: {e}")
                             else:
-                                st.error("❌ Please fill in all fields")
-                    
-                    # Phemex setup help
-                    st.markdown("---")
-                    st.markdown("### � Phemex Setup Help")
-                    
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        st.info("""
-                        **📚 API Setup Guide:**
-                        1. Visit [Phemex](https://phemex.com)
-                        2. Go to API Management
-                        3. Create new API key
-                        4. Enable trading permissions
-                        """)
-                    
-                    with col2:
-                        st.info("""
-                        **🔒 Security Tips:**
-                        • Use dedicated trading account
-                        • Enable IP whitelist
-                        • Never share your keys
-                        • Regular key rotation
-                        """)
-            
+                                st.error("Please fill in all fields")
+                                
             # Display user accounts (from all exchanges)
             try:
                 binance_accounts = []
@@ -942,11 +931,11 @@ class UserDashboard:
                     
                     if phemex_accounts is None:
                         phemex_accounts = []
-                        st.warning("⚠️ Phemex accounts query returned None")
+                        st.warning("Phemex accounts query returned None")
                     elif not isinstance(phemex_accounts, list):
                         logging.error(f"UI: Expected list, got {type(phemex_accounts)}: {phemex_accounts}")
                         phemex_accounts = []
-                        st.error(f"❌ Invalid data type for Phemex accounts: {type(phemex_accounts)}")
+                        st.error(f"Invalid data type for Phemex accounts: {type(phemex_accounts)}")
                     else:
                         logging.info(f"UI: Successfully loaded {len(phemex_accounts)} Phemex accounts")
                         
@@ -954,7 +943,7 @@ class UserDashboard:
                     logging.error(f"Error fetching Phemex accounts: {e}")
                     import traceback
                     logging.error(f"Full traceback: {traceback.format_exc()}")
-                    st.error(f"❌ Error loading Phemex accounts: {e}")
+                    st.error(f"Error loading Phemex accounts: {e}")
                     phemex_accounts = []
                 
                 all_user_accounts = []
@@ -998,27 +987,27 @@ class UserDashboard:
                                     st.metric("Total Trades", total_trades)
                                 if exchange_type == 'binance':
                                     with col3:
-                                        if st.button("📊 Details",  key=f"details_{exchange_type}_{account   ['id']}"):
+                                        if st.button("Details",  key=f"details_{exchange_type}_{account   ['id']}"):
                                             st.session_state.selected_account =     account['id']
                                             st.session_state.   selected_exchange_type =   exchange_type
                                             st.session_state.   show_account_details = True
                                             st.rerun()
                                 
                                 with col4:
-                                    if st.button("🗑️ Delete", key=f"del_{exchange_type}_{account['id']}", type="secondary"):
+                                    if st.button("Delete", key=f"del_{exchange_type}_{account['id']}", type="secondary"):
                                         # Handle deletion based on exchange type
                                         if exchange_type == 'binance':
                                             if db.delete_account(account['id'], st.session_state.user_data.email):
-                                                st.success("✅ Binance account deleted!")
+                                                st.success("Binance account deleted!")
                                                 time.sleep(1)
                                                 st.rerun()
                                         elif exchange_type == 'phemex':
                                             if db.delete_phemex_account(account['id'], st.session_state.user_data.email):
-                                                st.success("✅ Phemex account deleted!")
+                                                st.success("Phemex account deleted!")
                                                 time.sleep(1)
                                                 st.rerun()
                                             else:
-                                                st.error("❌ Failed to delete Phemex account")
+                                                st.error("Failed to delete Phemex account")
                                 
                                 st.divider()
                         except Exception as e:
@@ -1057,19 +1046,19 @@ class UserDashboard:
             account_info = db.get_account_by_id(account_id, st.session_state.user_data.email)
             
             if not account_info:
-                st.error("❌ Account not found or access denied")
+                st.error("Account not found or access denied")
                 st.session_state.show_account_details = False
                 st.rerun()
                 return
             
             # Page title
-            st.title(f"📊 Account Details: {account_info.get('account_name', 'Unnamed Account')}")
+            st.title(f"Account Details: {account_info.get('account_name', 'Unnamed Account')}")
             
             # Account overview
             col1, col2, col3, col4 = st.columns(4)
             
             with col1:
-                st.metric("📈 Total Trades", account_info.get('total_trades', 0))
+                st.metric("Total Trades", account_info.get('total_trades', 0))
             
             with col2:
                 exchange_type = account_info.get('exchange_type', 'binance')
@@ -1086,43 +1075,43 @@ class UserDashboard:
                         api_key=account_info['api_key'],
                         secret_key=account_info['secret_key']
                     )
-                    connection_status = "🟢 Connected" if test_client.test_connection() else "🔴 Disconnected"
-                    st.metric("🔌 Status", connection_status)
+                    connection_status = "Connected" if test_client.test_connection() else "Disconnected"
+                    st.metric("Status", connection_status)
                 except Exception:
-                    st.metric("🔌 Status", "⚠️ Unknown")
+                    st.metric("Status", "Unknown")
             
             st.markdown("---")
             
             # Trading history section
-            st.subheader("📈 Trading History")
+            st.subheader("Trading History")
             
             # Get trades for this account
             trades = db.get_account_trades(account_id)
             
             if trades:
                 # Summary metrics
-                st.markdown("### 📊 Trading Summary")
+                st.markdown("### Trading Summary")
                 col1, col2, col3, col4 = st.columns(4)
                 
                 with col1:
-                    st.metric("🔢 Total Orders", len(trades))
+                    st.metric("Total Orders", len(trades))
                 
                 with col2:
                     buy_orders = len([t for t in trades if t.get('side') == 'BUY'])
-                    st.metric("📈 Buy Orders", buy_orders)
+                    st.metric("Buy Orders", buy_orders)
                 
                 with col3:
                     sell_orders = len([t for t in trades if t.get('side') == 'SELL'])
-                    st.metric("📉 Sell Orders", sell_orders)
+                    st.metric("Sell Orders", sell_orders)
                 
                 with col4:
                     successful_trades = len([t for t in trades if t.get('status') in ['FILLED', 'MIRRORED']])
-                    st.metric("✅ Successful", successful_trades)
+                    st.metric("Successful", successful_trades)
                 
                 st.markdown("---")
                 
                 # Recent trades table
-                st.markdown("### 🕐 Recent Trades")
+                st.markdown("### Recent Trades")
                 
                 # Filter options
                 col1, col2, col3 = st.columns(3)
@@ -1216,11 +1205,11 @@ class UserDashboard:
                                         date_part = formatted_time[5:10].replace('-', '/')  # MM/DD
                                         time_part = formatted_time[11:16] if len(formatted_time) > 11 else ""  # HH:MM
                                         short_display = f"{date_part} {time_part}".strip()
-                                        st.caption(f"⏰ {short_display}")
+                                        st.caption(f" {short_display}")
                                     except:
-                                        st.caption(f"⏰ {formatted_time}")
+                                        st.caption(f" {formatted_time}")
                                 else:
-                                    st.caption("⏰ N/A")
+                                    st.caption("N/A")
                             
                             st.divider()
                     
@@ -1255,26 +1244,26 @@ class UserDashboard:
                             secret_key=account_info['secret_key']
                         )
                         if test_client.test_connection():
-                            st.success("✅ Connection successful!")
+                            st.success(" Connection successful!")
                         else:
-                            st.error("❌ Connection failed!")
+                            st.error("Connection failed!")
                     except Exception as e:
-                        st.error(f"❌ Connection error: {e}")
+                        st.error(f" Connection error: {e}")
             
             with col2:
-                if st.button("✏️ Edit Account", use_container_width=True):
+                if st.button(" Edit Account", use_container_width=True):
                     st.session_state[f"editing_user_{account_id}"] = True
                     st.rerun()
             
             with col3:
-                if st.button("🗑️ Delete Account", use_container_width=True, type="secondary"):
+                if st.button("Delete Account", use_container_width=True, type="secondary"):
                     st.session_state[f"confirming_delete_{account_id}"] = True
                     st.rerun()
             
             # Edit form
             if st.session_state.get(f"editing_user_{account_id}", False):
                 with st.form(f"edit_user_account_{account_id}"):
-                    st.markdown("### ✏️ Edit Account")
+                    st.markdown("###  Edit Account")
                     
                     new_name = st.text_input("Account Name", value=account_info.get('account_name', ''))
                     new_api_key = st.text_input("API Key", value=account_info.get('api_key', ''))
@@ -1284,39 +1273,39 @@ class UserDashboard:
                     with col1:
                         if st.form_submit_button("💾 Save Changes", type="primary"):
                             if db.update_binance_account(account_id, new_api_key, new_secret, new_name):
-                                st.success("✅ Account updated successfully!")
+                                st.success(" Account updated successfully!")
                                 st.session_state[f"editing_user_{account_id}"] = False
                                 time.sleep(1)
                                 st.rerun()
                             else:
-                                st.error("❌ Failed to update account")
+                                st.error(" Failed to update account")
                     
                     with col2:
-                        if st.form_submit_button("❌ Cancel"):
+                        if st.form_submit_button(" Cancel"):
                             st.session_state[f"editing_user_{account_id}"] = False
                             st.rerun()
             
             # Delete confirmation
             if st.session_state.get(f"confirming_delete_{account_id}", False):
-                st.warning("⚠️ **Confirm Account Deletion**")
+                st.warning(" **Confirm Account Deletion**")
                 st.markdown(f"Are you sure you want to delete **{account_info.get('account_name', 'this account')}**?")
                 st.markdown("This action cannot be undone and will remove all trading history.")
                 
                 col1, col2, col3 = st.columns(3)
                 with col1:
-                    if st.button("🗑️ Yes, Delete", type="primary"):
+                    if st.button(" Yes, Delete", type="primary"):
                         if db.delete_account(account_id, st.session_state.user_data.email):
-                            st.success("✅ Account deleted successfully!")
+                            st.success(" Account deleted successfully!")
                             st.session_state[f"confirming_delete_{account_id}"] = False
                             st.session_state.show_account_details = False
                             st.session_state.selected_account = None
                             time.sleep(1)
                             st.rerun()
                         else:
-                            st.error("❌ Failed to delete account")
+                            st.error(" Failed to delete account")
                 
                 with col2:
-                    if st.button("❌ Cancel"):
+                    if st.button(" Cancel"):
                         st.session_state[f"confirming_delete_{account_id}"] = False
                         st.rerun()
                         
@@ -1402,7 +1391,7 @@ class UserDashboard:
     @staticmethod
     def _show_phemex_trades(db, phemex_accounts, user_email):
         """Show Phemex trading history"""
-        st.subheader("🔴 Phemex Trading History")
+        st.subheader(" Phemex Trading History")
         
         if not phemex_accounts:
             st.info("📝 No Phemex accounts found. Add a Phemex account in the 'My Accounts' tab to see trades here.")
@@ -1452,7 +1441,7 @@ class UserDashboard:
     @staticmethod
     def _show_trading_summary(db, binance_accounts, phemex_accounts, user_email):
         """Show overall trading summary across all exchanges"""
-        st.subheader("📊 Overall Trading Summary")
+        st.subheader("Overall Trading Summary")
         
         try:
             # Get all trades from both exchanges
@@ -1489,13 +1478,13 @@ class UserDashboard:
                 col1, col2, col3, col4 = st.columns(4)
                 
                 with col1:
-                    st.metric("📊 Total Trades", total_trades)
+                    st.metric("Total Trades", total_trades)
                 
                 with col2:
-                    st.metric("🔶 Binance Trades", len(all_binance_trades))
+                    st.metric("Binance Trades", len(all_binance_trades))
                 
                 with col3:
-                    st.metric("🔴 Phemex Trades", len(all_phemex_trades))
+                    st.metric("Phemex Trades", len(all_phemex_trades))
                 
                 with col4:
                     success_count = len([t for t in (all_binance_trades + all_phemex_trades) 
@@ -1533,7 +1522,7 @@ class UserDashboard:
                 
                 # Recent activity across all exchanges
                 st.markdown("---")
-                st.subheader("🕐 Recent Activity (All Exchanges)")
+                st.subheader("Recent Activity (All Exchanges)")
                 
                 # Combine and sort all trades
                 combined_trades = []
@@ -1555,10 +1544,10 @@ class UserDashboard:
                 st.info("📝 No trading activity found across any accounts.")
                 st.markdown("""
                 **Getting Started:**
-                - 🔗 Add trading accounts in the 'My Accounts' tab
-                - 🤖 Ensure the copy trading bot is running
-                - 📡 Bot will automatically copy trades when signals are received
-                - 📊 Your trading history will appear here
+                - Add trading accounts in the 'My Accounts' tab
+                - Ensure the copy trading bot is running
+                - Bot will automatically copy trades when signals are received
+                - Your trading history will appear here
                 """)
                 
         except Exception as e:
