@@ -11,7 +11,7 @@ class Database:
     def __init__(self):
         # Use Railway's MySQL environment variables with fallbacks
         self.host = os.getenv('MYSQLHOST', os.getenv('DB_HOST', 'localhost'))
-        self.database = os.getenv('MYSQL_DATABASE', os.getenv('DB_NAME', 'copy_trading'))
+        self.database = os.getenv('MYSQL_DATABASE', os.getenv('DB_NAME', 'railway'))
         self.user = os.getenv('MYSQLUSER', os.getenv('DB_USER', 'root'))
         self.password = os.getenv('MYSQLPASSWORD', os.getenv('DB_PASSWORD', ''))
         self.port = int(os.getenv('MYSQLPORT', os.getenv('DB_PORT', '3306')))
@@ -278,7 +278,7 @@ class Database:
                 SELECT COUNT(*) 
                 FROM INFORMATION_SCHEMA.COLUMNS 
                 WHERE TABLE_SCHEMA = %s AND TABLE_NAME = 'binance_accounts' AND COLUMN_NAME = 'exchange_type'
-            """, (os.getenv('DB_NAME', 'copy_trading'),))
+            """, (os.getenv('DB_NAME', 'railway'),))
             
             column_exists = cursor.fetchone()[0] > 0
             
@@ -514,8 +514,8 @@ class Database:
                 SELECT COUNT(*) 
                 FROM INFORMATION_SCHEMA.TABLES 
                 WHERE TABLE_SCHEMA = %s AND TABLE_NAME = 'phemex_accounts'
-            """, (os.getenv('DB_NAME', 'copy_trading'),))
-            
+            """, (os.getenv('DB_NAME', 'railway'),))
+
             phemex_table_exists = cursor.fetchone()[0] > 0
             
             if not phemex_table_exists:
@@ -557,29 +557,15 @@ class Database:
     
     def get_all_phemex_accounts(self):
         """Get all Phemex trading accounts with enhanced error handling"""
-        logging.info("🔴 Starting get_all_phemex_accounts()")
+        logging.info("Getting Phemex accounts from db....")
         
         if not self.connect():
-            logging.error("❌ Failed to establish database connection for all Phemex accounts")
+            logging.error(" Failed to establish database connection")
             return []
             
         cursor = None
         try:
             cursor = self.connection.cursor(dictionary=True)
-            
-            # Check if Phemex table exists
-            cursor.execute("""
-                SELECT COUNT(*) as table_count
-                FROM INFORMATION_SCHEMA.TABLES 
-                WHERE TABLE_SCHEMA = %s AND TABLE_NAME = 'phemex_accounts'
-            """, (os.getenv('DB_NAME', 'copy_trading'),))
-            
-            table_result = cursor.fetchone()
-            logging.info(f"🔴 Table check result: {table_result}")
-            
-            if not table_result or table_result.get('table_count', 0) == 0:
-                logging.warning("⚠️ Phemex accounts table does not exist")
-                return []
             
             # Get all Phemex accounts
             query = """
@@ -591,11 +577,11 @@ class Database:
             ORDER BY pa.created_at DESC
             """
             
-            logging.info(f"🔴 Executing query: {query}")
+            logging.info(f"Executing query: {query}")
             cursor.execute(query)
             
             results = cursor.fetchall()
-            logging.info(f"🔴 Raw query results: type={type(results)}, count={len(results) if results else 0}")
+            logging.info(f"Raw query results: type={type(results)}, count={len(results) if results else 0}")
             
             if results and len(results) > 0:
                 logging.info(f"✅ Successfully found {len(results)} Phemex accounts")
