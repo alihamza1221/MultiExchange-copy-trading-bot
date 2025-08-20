@@ -582,15 +582,17 @@ class BinanceClient:
                     'type': order_type,
                     'quantity': quantity,
                 }
+                if reduce_only:
+                    order_params['reduceOnly'] = reduce_only
             elif order_type in ['LIMIT', 'STOP_MARKET', 'TAKE_PROFIT_MARKET']:
                 order_params = {
                     'symbol': symbol,
                     'side': side,
                     'type': order_type,
-                    'quantity': quantity,
                     'timeInForce': time_in_force
                 }
-
+            if quantity:
+                order_params['quantity'] = quantity
             if price:
                 order_params['price'] = str(price)
             if stop_price:
