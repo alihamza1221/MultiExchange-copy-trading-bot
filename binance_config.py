@@ -674,6 +674,9 @@ class SourceAccountListener:
         self.db = Database()
         self.listen_key = None
         self.twm = None
+        # De-duplication store to avoid double mirroring per target account
+        # Key format: f"{exchange}:{account_id}:{symbol}:{side}:{order_type}:{source_order_id}"
+        self._mirror_dedup = set()
         
     def handle_socket_message(self, msg):
         """Handle WebSocket messages from futures user data stream"""
@@ -686,7 +689,6 @@ class SourceAccountListener:
     
     def handle_order_update(self, order_data):
         """Handle order update from source account"""
-        leverage= 5
         try:
             # Extract order information
             symbol = order_data.get('s')
@@ -700,36 +702,58 @@ class SourceAccountListener:
             time_in_force = order_data.get('f')
             leverage = 10
             print("order: ", order_data, "levg:", leverage)
-            logging.info(f"Received order update: {symbol} {side} {status} ps {order_data.get('ps')}")
+            logging.info(f"Received order update: {symbol} {side} {status} ps {order_data.get('ps')} {str(order_type).lower()}")
             
-            # Process only NEW orders or CANCELED orders (and FILLED for immediate execution)
-            if status in ['NEW', 'CANCELED', 'FILLED']:
-                self.process_order_update(
-                    symbol, side, order_type, quantity, 
-                    price, stop_price, status, order_id, leverage, time_in_force
-                )
-                
+            # Mirror only when policy matches to avoid duplicates
+            if not self._should_mirror_event(order_type, status):
+                logging.debug(f"Skip mirroring for type={order_type}, status={status}")
+                return
+
+            self.process_order_update(
+                symbol, side, order_type, quantity,
+                price, stop_price, status, order_id, leverage, time_in_force
+            )
+
         except Exception as e:
             logging.error(f"Error handling order update: {e}")
     
+    def _should_mirror_event(self, order_type: str, status: str) -> bool:
+        """Mirror rules:
+        - MARKET-like: mirror only when FILLED (to avoid double NEW/FILLED)
+        - LIMIT-like: mirror only when NEW
+        """
+        ot = (order_type or '').upper()
+        st = (status or '').upper()
+        market_like = {'MARKET', 'STOP_MARKET', 'TAKE_PROFIT_MARKET'}
+        if ot in market_like:
+            return st == 'FILLED'
+        # LIMIT, STOP_LIMIT, TAKE_PROFIT (limit), others
+        return st == 'NEW'
+
+    def _dedup_key(self, exchange_type: str, account_id, symbol: str, side: str, order_type: str, source_order_id) -> str:
+        return f"{exchange_type}:{account_id}:{symbol}:{side}:{(order_type or '').upper()}:{source_order_id}"
+
     def process_order_update(self, symbol, side, order_type, quantity, price, stop_price, status, source_order_id, leverage = 10, time_in_force='GTC'):
         """Process order update and mirror to target accounts across all exchanges"""
         try:
-            logging.info(f"🔄 Starting process_order_update for {symbol} {side} {order_type} {quantity} {price} {stop_price} {status} {source_order_id} {leverage} {time_in_force}")
+            logging.info(f"Starting process_order_update for {symbol} {side} {order_type} {quantity} {price} {stop_price} {status} {source_order_id} {leverage} {time_in_force}")
+
+            # Guard again by policy (in case called from elsewhere)
+            if not self._should_mirror_event(order_type, status):
+                logging.debug(f"Skip processing by policy for type={order_type}, status={status}")
+                return
 
             # Get all target accounts from all exchanges
             all_accounts = self.db.get_all_trading_accounts()
-            logging.info(f"📊 Retrieved accounts: type={type(all_accounts)}, value={all_accounts}")
+            logging.info(f"Retrieved accounts: type={type(all_accounts)}, value={all_accounts}")
             
             # Validate accounts result
             if all_accounts is None:
                 logging.error(" CRITICAL: get_all_trading_accounts returned None")
                 return
-            
             if not isinstance(all_accounts, list):
                 logging.error(f"No trading accounts")
                 return
-            
             if len(all_accounts) == 0:
                 logging.warning("No target accounts found for trade mirroring")
                 return
@@ -750,6 +774,12 @@ class SourceAccountListener:
                     account_id = account.get('id')
                     
                     logging.info(f" Processing account ID {account_id} on {exchange_type}")
+
+                    # De-dup per target account + source order
+                    key = self._dedup_key(exchange_type, account_id, symbol, side, order_type, source_order_id)
+                    if key in self._mirror_dedup:
+                        logging.info(f"Skip duplicate mirror for key={key}")
+                        continue
                     
                     # Create appropriate client based on exchange type
                     if exchange_type == 'binance':
@@ -758,56 +788,47 @@ class SourceAccountListener:
                             secret_key=account['secret_key']
                         )
                         client_type = "Binance"
-                        
                     elif exchange_type == 'phemex':
                         target_client = PhemexClient(
                             api_key=account['api_key'],
                             api_secret=account['secret_key']
                         )
                         client_type = "Phemex"
-                        
                     else:
                         logging.warning(f"Unsupported exchange type: {exchange_type} for account {account_id}")
                         failed_mirrors += 1
                         continue
                     
-                    if status in ['NEW', 'FILLED']:
-                        # Set leverage first (for both exchanges)
-                        try:
-                            if exchange_type == 'binance':
-                                target_client.set_leverage(symbol, leverage)
-                            elif exchange_type == 'phemex':
-                                leverage_result = target_client.set_leverage(symbol, 10)
-                                if leverage_result:
-                                    logging.info(f" Leverage set for {client_type} account {account_id}: {leverage}x")
-                                else:
-                                    logging.warning(f" Leverage setting failed for {client_type} account {account_id}: {leverage_result.get('error', 'Unknown error')}")
-                        except Exception as leverage_error:
-                            logging.warning(f"Failed to set leverage for {client_type} account {account_id}: {leverage_error}")
-                        
-                        # Mirror the trade based on order type
-                        response = self._execute_mirror_trade(
-                            target_client, exchange_type, symbol, side, order_type, 
-                            quantity, price, stop_price, time_in_force
-                        )
-                        
-                        if response:
-                            # Log successful trade to appropriate table
-                            print('response: ', response)
-                            self._log_trade_to_database(
-                                account, exchange_type, symbol, side, order_type, 
-                                quantity, price, stop_price, response, source_order_id
-                            )
-                            successful_mirrors += 1
-                            logging.info(f" Trade mirrored to {client_type} account {account_id}: {symbol} {side} {quantity}")
-                        else:
-                            failed_mirrors += 1
-                            logging.error(f" Failed to mirror trade to {client_type} account {account_id}")
+                    # Set leverage first (best effort)
+                    try:
+                        if exchange_type == 'binance':
+                            target_client.set_leverage(symbol, leverage)
+                        elif exchange_type == 'phemex':
+                            target_client.set_leverage(symbol, 10)
+                    except Exception as leverage_error:
+                        logging.warning(f"Failed to set leverage for {client_type} account {account_id}: {leverage_error}")
                     
-                    elif status == 'CANCELED':
-                        logging.info(f"Order cancelled in source account: {symbol} {source_order_id}")
-                        # Could implement order cancellation mirroring here if needed
-                        
+                    # Mirror the trade based on order type
+                    response = self._execute_mirror_trade(
+                        target_client, exchange_type, symbol, side, order_type,
+                        quantity, price, stop_price, time_in_force
+                    )
+                    
+                    if response:
+                        # Mark as mirrored to prevent duplicates across subsequent events
+                        self._mirror_dedup.add(key)
+                        # Log successful trade
+                        print('response: ', response)
+                        self._log_trade_to_database(
+                            account, exchange_type, symbol, side, order_type,
+                            quantity, price, stop_price, response, source_order_id
+                        )
+                        successful_mirrors += 1
+                        logging.info(f" Trade mirrored to {client_type} account {account_id}: {symbol} {side} {quantity}")
+                    else:
+                        failed_mirrors += 1
+                        logging.error(f" Failed to mirror trade to {client_type} account {account_id}")
+                    
                 except Exception as account_error:
                     failed_mirrors += 1
                     exchange_type = account.get('exchange_type', 'unknown')
