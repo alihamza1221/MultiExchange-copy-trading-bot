@@ -724,7 +724,7 @@ class SourceAccountListener:
         """
         ot = (order_type or '').upper()
         st = (status or '').upper()
-        market_like = {'MARKET', 'STOP_MARKET', 'TAKE_PROFIT_MARKET'}
+        market_like = {'MARKET'}
         if ot in market_like:
             return st == 'FILLED'
         # LIMIT, STOP_LIMIT, TAKE_PROFIT (limit), others
