@@ -584,7 +584,7 @@ class BinanceClient:
                 }
                 if reduce_only:
                     order_params['reduceOnly'] = reduce_only
-            elif order_type in ['LIMIT', 'STOP_MARKET', 'TAKE_PROFIT_MARKET']:
+            elif order_type in ['LIMIT']:
                 order_params = {
                     'symbol': symbol,
                     'side': side,
@@ -730,8 +730,11 @@ class SourceAccountListener:
         st = (status or '').upper()
         market_like = {'MARKET'}
         if ot in market_like:
-            return st == 'FILLED'
+            return st == 'NEW'
         # LIMIT, STOP_LIMIT, TAKE_PROFIT (limit), others
+        if ot in {'STOP_MARKET', 'TAKE_PROFIT_MARKET'}:
+            return False
+        
         return st == 'NEW'
 
     def _dedup_key(self, exchange_type: str, account_id, symbol: str, side: str, order_type: str, source_order_id) -> str:
@@ -891,19 +894,19 @@ class SourceAccountListener:
                     price=price,
                     time_in_force=time_in_force
                 )
-            elif order_type in ['STOP_MARKET', 'TAKE_PROFIT_MARKET']:
-                if not stop_price or stop_price == '0':
-                    logging.error(f"{order_type} order requires stop_price for {symbol}")
-                    return None
-                return binance_client.place_order(
-                    symbol=symbol,
-                    side=side,
-                    order_type=order_type,
-                    quantity=quantity,
-                    stop_price=stop_price,
-                    time_in_force=time_in_force,
-                    reduce_only=reduce_only
-                )
+            # elif order_type in ['STOP_MARKET', 'TAKE_PROFIT_MARKET']:
+            #     if not stop_price or stop_price == '0':
+            #         logging.error(f"{order_type} order requires stop_price for {symbol}")
+            #         return None
+            #     return binance_client.place_order(
+            #         symbol=symbol,
+            #         side=side,
+            #         order_type=order_type,
+            #         quantity=quantity,
+            #         stop_price=stop_price,
+            #         time_in_force=time_in_force,
+            #         reduce_only=reduce_only
+            #    )
             else:
                 logging.warning(f"Unsupported Binance order type: {order_type}")
                 return None
@@ -918,8 +921,6 @@ class SourceAccountListener:
         try:
             # Use CCXT place_order_ccxt method
             result = phemex_client.place_order_ccxt(
-
-
                 symbol=symbol,
                 side=side,
                 order_type=order_type,
