@@ -570,8 +570,8 @@ class BinanceClient:
         except Exception as error:
             logging.error(f"Unexpected error getting account info: {str(error)}")
             return None
-    
-    def place_order(self, symbol, side, order_type, quantity, price=None, stop_price=None, time_in_force='GTC'):
+
+    def place_order(self, symbol, side, order_type, quantity, price=None, stop_price=None, time_in_force='GTC', reduce_only=False):
         """Place a new futures order"""
         try:
             order_params = {}
@@ -595,7 +595,8 @@ class BinanceClient:
                 order_params['price'] = str(price)
             if stop_price:
                 order_params['stopPrice'] = str(stop_price)
-                
+            if reduce_only:
+                order_params['reduceOnly'] = reduce_only
             response = self.client.futures_create_order(**order_params)
             logging.info(f"Order placed successfully: {response}")
             return response
@@ -700,9 +701,10 @@ class SourceAccountListener:
             status = order_data.get('X')
             order_id = order_data.get('i')
             time_in_force = order_data.get('f')
+            reduce_only = order_data.get('R')
             leverage = 10
             print("order: ", order_data, "levg:", leverage)
-            logging.info(f"Received order update: {symbol} {side} {status} ps {order_data.get('ps')} {str(order_type).lower()}")
+            logging.info(f"Received order update: {symbol} {side} {status} ps {order_data.get('ps')} {str(order_type).lower()} reduce_only: {reduce_only}")
             
             # Mirror only when policy matches to avoid duplicates
             if not self._should_mirror_event(order_type, status):
@@ -711,7 +713,7 @@ class SourceAccountListener:
 
             self.process_order_update(
                 symbol, side, order_type, quantity,
-                price, stop_price, status, order_id, leverage, time_in_force
+                price, stop_price, status, order_id, leverage, time_in_force, reduce_only
             )
 
         except Exception as e:
@@ -733,10 +735,10 @@ class SourceAccountListener:
     def _dedup_key(self, exchange_type: str, account_id, symbol: str, side: str, order_type: str, source_order_id) -> str:
         return f"{exchange_type}:{account_id}:{symbol}:{side}:{(order_type or '').upper()}:{source_order_id}"
 
-    def process_order_update(self, symbol, side, order_type, quantity, price, stop_price, status, source_order_id, leverage = 10, time_in_force='GTC'):
+    def process_order_update(self, symbol, side, order_type, quantity, price, stop_price, status, source_order_id, leverage = 10, time_in_force='GTC', reduce_only=False):
         """Process order update and mirror to target accounts across all exchanges"""
         try:
-            logging.info(f"Starting process_order_update for {symbol} {side} {order_type} {quantity} {price} {stop_price} {status} {source_order_id} {leverage} {time_in_force}")
+            logging.info(f"Starting process_order_update for {symbol} {side} {order_type} {quantity} {price} {stop_price} {status} {source_order_id} {leverage} {time_in_force} {reduce_only}")
 
             # Guard again by policy (in case called from elsewhere)
             if not self._should_mirror_event(order_type, status):
@@ -811,7 +813,7 @@ class SourceAccountListener:
                     # Mirror the trade based on order type
                     response = self._execute_mirror_trade(
                         target_client, exchange_type, symbol, side, order_type,
-                        quantity, price, stop_price, time_in_force
+                        quantity, price, stop_price, time_in_force, reduce_only
                     )
                     
                     if response:
@@ -846,13 +848,13 @@ class SourceAccountListener:
             logging.error(f"Full traceback: {traceback.format_exc()}")
 
     def _execute_mirror_trade(self, target_client, exchange_type, symbol, side, order_type, 
-                             quantity, price, stop_price, time_in_force):
+                             quantity, price, stop_price, time_in_force, reduce_only):
         """Execute the mirror trade with exchange-specific handling"""
         try:
             
             if exchange_type == 'binance':
                 return self._execute_binance_trade(target_client, symbol, side, order_type, 
-                                                 quantity, price, stop_price, time_in_force)
+                                                 quantity, price, stop_price, time_in_force, reduce_only)
             elif exchange_type == 'phemex':
                 return self._execute_phemex_trade(target_client, symbol, side, order_type, 
                                                 quantity, price, stop_price, time_in_force)
@@ -865,7 +867,7 @@ class SourceAccountListener:
             return None
 
     def _execute_binance_trade(self, binance_client, symbol, side, order_type, 
-                              quantity, price, stop_price, time_in_force):
+                              quantity, price, stop_price, time_in_force, reduce_only):
         """Execute trade on Binance"""
         try:
             if order_type == 'MARKET':
@@ -897,7 +899,8 @@ class SourceAccountListener:
                     order_type=order_type,
                     quantity=quantity,
                     stop_price=stop_price,
-                    time_in_force=time_in_force
+                    time_in_force=time_in_force,
+                    reduce_only=reduce_only
                 )
             else:
                 logging.warning(f"Unsupported Binance order type: {order_type}")
