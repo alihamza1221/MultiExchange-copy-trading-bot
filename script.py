@@ -853,6 +853,39 @@ class UserDashboard:
                         4. Enable trading permissions
                         """)
                     st.markdown("---")
+                     # Detailed PDF guide button
+                    col1, = st.columns(1)
+                    pdf_path = os.path.join(os.path.dirname(__file__), "binance.pdf")
+
+                    if os.path.exists(pdf_path):
+                        try:
+                            # Read PDF file as bytes for download
+                            with open(pdf_path, 'rb') as pdf_file:
+                                pdf_bytes = pdf_file.read()
+
+                            st.success("📄 PDF Guide Available - Download to view complete instructions with images")
+                            with col1:
+                                # File info
+                                file_size_mb = len(pdf_bytes) / (1024 * 1024)
+                                st.markdown(f"**📋 File Size:** {file_size_mb:.2f} MB")
+                                st.markdown("**📄 Format:** PDF with images and screenshots")
+
+                                # Primary download button with unique key
+                                st.download_button(
+                                    label="Download Step by Step Phemex Guide",
+                                    data=pdf_bytes,
+                                    file_name="phemex.pdf",
+                                    mime="application/pdf",
+                                    use_container_width=True,
+                                    type="primary",
+                                    help="Downloads the complete PDF guide with step-by-step instructions",
+                                    key="Download Step by Step Phemex Guide"
+                                )
+
+                                st.caption("💡 **Tip:** Open with your default PDF reader for best viewing experience")
+                        except Exception as e:
+                            st.info(f"Error loading PDF guide: {e}")
+                    st.markdown("---")
                     st.markdown("### Add Phemex Account")
                     
                     with st.form("add_phemex_account_form", clear_on_submit=True):
