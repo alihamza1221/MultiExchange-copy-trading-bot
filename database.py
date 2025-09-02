@@ -18,7 +18,7 @@ class Database:
         self.connection = None
         
         # Log connection details (without password) for debugging
-        logging.info(f"Database config - Host: {self.host}, Database: {self.database}, User: {self.user}, Port: {self.port}")
+        #logging.info(f"Database config - Host: {self.host}, Database: {self.database}, User: {self.user}, Port: {self.port}")
         
     def connect(self):
         try:
@@ -35,7 +35,7 @@ class Database:
                 auth_plugin='mysql_native_password'
             )
             if self.connection.is_connected():
-                logging.info("Successfully connected to Railway MySQL database")
+                #logging.info("Successfully connected to Railway MySQL database")
                 return True
         except Error as e:
             logging.error(f"Error while connecting to Railway MySQL: {e}")
@@ -44,7 +44,7 @@ class Database:
     def disconnect(self):
         if self.connection and self.connection.is_connected():
             self.connection.close()
-            logging.info("MySQL connection is closed")
+            #logging.info("MySQL connection is closed")
     
     def create_tables(self):
         if not self.connect():
@@ -116,7 +116,7 @@ class Database:
             cursor.execute(admin_user_query, (admin_email, admin_password))
             self.connection.commit()
             
-            logging.info("Database tables created successfully")
+            #logging.info("Database tables created successfully")
             return True
         except Error as e:
             logging.error(f"Error creating tables: {e}")
@@ -161,7 +161,7 @@ class Database:
         try:
             cursor.execute(query, (email, password))
             self.connection.commit()
-            logging.info(f"User registered with pending status: {email}")
+            #logging.info(f"User registered with pending status: {email}")
             return cursor.lastrowid
         except Error as e:
             logging.error(f"Error registering user: {e}")
@@ -298,7 +298,7 @@ class Database:
                 cursor.execute(query, (user_email, api_key, secret_key, account_name))
             
             self.connection.commit()
-            logging.info(f"Account added for {user_email} on {exchange_type}")
+            #logging.info(f"Account added for {user_email} on {exchange_type}")
             return cursor.lastrowid
             
         except Error as e:
@@ -464,7 +464,7 @@ class Database:
             self.disconnect()
     
     def add_trade(self, account_id, symbol, side, order_type, quantity, 
-                  price=None, stop_price=None, order_id=None, status='PENDING', source_order_id=None):
+                  price=None, stop_price=None, order_id=None, status='PENDING', source_order_id=None, start_balance=0):
         """Add a trade record to the database"""
         if not self.connect():
             return False
@@ -472,14 +472,14 @@ class Database:
         cursor = self.connection.cursor()
         query = """
         INSERT INTO trades (account_id, symbol, side, order_type, quantity, 
-                           price, stop_price, order_id, status, source_order_id, trade_time)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())
+                           price, stop_price, order_id, status, source_order_id, trade_time, start_balance)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), %s)
         """
         
         try:
             cursor.execute(query, (
                 account_id, symbol, side, order_type, quantity,
-                price, stop_price, order_id, status, source_order_id
+                price, stop_price, order_id, status, source_order_id, start_balance
             ))
             self.connection.commit()
             
@@ -491,7 +491,7 @@ class Database:
             """, (account_id,))
             self.connection.commit()
             
-            logging.info(f"Trade recorded for account {account_id}: {symbol} {side} {quantity}")
+            #logging.info(f"Trade recorded for account {account_id}: {symbol} {side} {quantity}")
             return cursor.lastrowid
         except Error as e:
             logging.error(f"Error adding trade: {e}")
@@ -535,7 +535,7 @@ class Database:
                         INDEX idx_created_at (created_at)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
                 """)
-                logging.info("Created phemex_accounts table")
+                #logging.info("Created phemex_accounts table")
             
             # Insert into Phemex table
             query = """
@@ -545,7 +545,7 @@ class Database:
             cursor.execute(query, (user_email, exchange_type, api_key, secret_key, account_name))
             
             self.connection.commit()
-            logging.info(f"Phemex account added for {user_email}")
+            #logging.info(f"Phemex account added for {user_email}")
             return cursor.lastrowid
             
         except Error as e:
@@ -557,7 +557,7 @@ class Database:
     
     def get_all_phemex_accounts(self):
         """Get all Phemex trading accounts with enhanced error handling"""
-        logging.info("Getting Phemex accounts from db....")
+        #logging.info("Getting Phemex accounts from db....")
         
         if not self.connect():
             logging.error(" Failed to establish database connection")
@@ -577,20 +577,20 @@ class Database:
             ORDER BY pa.created_at DESC
             """
             
-            logging.info(f"Executing query: {query}")
+            #logging.info(f"Executing query: {query}")
             cursor.execute(query)
             
             results = cursor.fetchall()
-            logging.info(f"Raw query results: type={type(results)}, count={len(results) if results else 0}")
+            #logging.info(f"Raw query results: type={type(results)}, count={len(results) if results else 0}")
             
-            if results and len(results) > 0:
-                logging.info(f"✅ Successfully found {len(results)} Phemex accounts")
-                for i, account in enumerate(results):
-                    logging.info(f"   Account {i+1}: ID={account.get('id')}, User={account.get('user_email')}, Name={account.get('account_name')}")
-                return list(results)
-            else:
-                logging.info("📝 No Phemex accounts found in database")
-                return []
+            # if results and len(results) > 0:
+            #     #logging.info(f"✅ Successfully found {len(results)} Phemex accounts")
+            #     for i, account in enumerate(results):
+            #         #logging.info(f"   Account {i+1}: ID={account.get('id')}, User={account.get('user_email')}, Name={account.get('account_name')}")
+            #     return list(results)
+            # else:
+            #     logging.info("📝 No Phemex accounts found in database")
+            #     return []
                 
         except Error as e:
             logging.error(f"❌ Database error getting all Phemex accounts: {e}")
@@ -606,6 +606,7 @@ class Database:
             if cursor:
                 cursor.close()
             self.disconnect()
+    
     
     def get_user_phemex_accounts(self, user_email):
         if not self.connect():
@@ -643,7 +644,7 @@ class Database:
             self.connection.commit()
             
             if cursor.rowcount > 0:
-                logging.info(f"Phemex account {account_id} deleted for {user_email}")
+                #logging.info(f"Phemex account {account_id} deleted for {user_email}")
                 return True
             else:
                 logging.warning(f"No Phemex account found with id {account_id} for {user_email}")
@@ -678,24 +679,97 @@ class Database:
             cursor.close()
             self.disconnect()
     
+    def find_matching_trade(self, account_id, symbol, side, quantity, exchange_type):
+        try:
+            opposite_side = 'SELL' if side == 'BUY' else 'BUY'
+            if not self.connect():
+                return None
+
+            cursor = self.connection.cursor(dictionary=True)
+            if exchange_type == "binance":
+                query = """
+                SELECT t.* FROM trades t 
+                WHERE t.account_id = %s AND t.symbol = %s AND t.side = %s AND t.quantity = %s
+                AND t.status != 'CLOSED'
+                ORDER BY t.trade_time DESC
+                LIMIT 1
+                """
+                cursor.execute(query, (account_id, symbol, opposite_side, quantity))
+
+            elif exchange_type == "phemex":
+                query = """
+                SELECT pt.* FROM phemex_trades pt 
+                WHERE pt.account_id = %s AND pt.symbol = %s AND pt.side = %s AND pt.quantity = %s
+                AND pt.status != 'CLOSED'
+                ORDER BY pt.trade_time DESC
+                LIMIT 1
+                """
+                cursor.execute(query, (account_id, symbol, opposite_side, quantity))
+
+            result = cursor.fetchone()
+            return result
+        except Error as e:
+            logging.error(f"Error finding matching trade: {e}")
+            return None
+    def update_trade_pnl(self, trade_id, pnl_value, exchange_type, end_balance=0):
+        """Update the PnL for a specific trade"""
+        try:
+            if not self.connect():
+                return False
+
+            cursor = self.connection.cursor()
+
+            if exchange_type == "binance":
+                query = """
+                UPDATE trades
+                SET pnl = %s, end_balance = %s
+                WHERE id = %s
+                """
+            elif exchange_type == "phemex":
+                query = """
+                UPDATE phemex_trades
+                SET pnl = %s, end_balance = %s
+                WHERE id = %s
+                """
+            else:
+                logging.error(f"Unsupported exchange type: {exchange_type}")
+                return False
+
+            cursor.execute(query, (pnl_value, end_balance, trade_id))
+            self.connection.commit()
+            
+            if cursor.rowcount > 0:
+                logging.info(f"Updated PnL for {exchange_type} trade ID {trade_id}: {pnl_value}, end_balance: {end_balance}")
+                return True
+            else:
+                logging.warning(f"No trade found to update PnL for ID {trade_id}")
+                return False
+                
+        except Error as e:
+            logging.error(f"Error updating trade PnL: {e}")
+            return False
+        finally:
+            cursor.close()
+            self.disconnect()
+
     def get_all_trading_accounts(self):
         """Get all trading accounts from all exchanges with robust error handling"""
         accounts = []
         
         try:
-            logging.info("Starting get_all_trading_accounts")
+            #logging.info("Starting binance accounts........")
             
             # Get Binance accounts with error handling
             try:
                 binance_accounts = self.get_all_binance_accounts()
-                logging.info(f"Binance accounts result: type={type(binance_accounts)}, count={len(binance_accounts) if binance_accounts else 0}")
+                #logging.info(f"Binance accounts result: type={type(binance_accounts)}, count={len(binance_accounts) if binance_accounts else 0}")
                 
                 if binance_accounts and isinstance(binance_accounts, list):
                     for account in binance_accounts:
                         if isinstance(account, dict):
                             account['exchange_type'] = account.get('exchange_type', 'binance')
                             accounts.append(account)
-                            logging.info(f"Added Binance account ID {account.get('id')}")
+                            #logging.info(f"Added Binance account ID {account.get('id')}")
                         else:
                             logging.warning(f"Invalid Binance account format: {type(account)}")
                 else:
@@ -706,14 +780,14 @@ class Database:
             # Get Phemex accounts with error handling
             try:
                 phemex_accounts = self.get_all_phemex_accounts()
-                logging.info(f"Phemex accounts result: type={type(phemex_accounts)}, count={len(phemex_accounts) if phemex_accounts else 0}")
+                #logging.info(f"Phemex accounts result: type={type(phemex_accounts)}, count={len(phemex_accounts) if phemex_accounts else 0}")
                 
                 if phemex_accounts and isinstance(phemex_accounts, list):
                     for account in phemex_accounts:
                         if isinstance(account, dict):
                             account['exchange_type'] = 'phemex'
                             accounts.append(account)
-                            logging.info(f"Added Phemex account ID {account.get('id')}")
+                            #logging.info(f"Added Phemex account ID {account.get('id')}")
                         else:
                             logging.warning(f"Invalid Phemex account format: {type(account)}")
                 else:
@@ -721,7 +795,7 @@ class Database:
             except Exception as e:
                 logging.error(f"Error fetching Phemex accounts: {e}")
             
-            logging.info(f"✅ get_all_trading_accounts returning {len(accounts)} total accounts")
+            #logging.info(f"✅ get_all_trading_accounts returning {len(accounts)} total accounts")
             return accounts
             
         except Exception as e:
@@ -729,8 +803,8 @@ class Database:
             import traceback
             logging.error(f"Full traceback: {traceback.format_exc()}")
             return []
-    
-    def add_phemex_trade(self, account_id, symbol, side, order_type, quantity, price=None, stop_price=None, order_id=None, status='pending', source_order_id=None, trade_time=None):
+
+    def add_phemex_trade(self, account_id, symbol, side, order_type, quantity, price=None, stop_price=None, order_id=None, status='pending', source_order_id=None, trade_time=None, start_balance=0):
         """Add a new Phemex trade to the database"""
         try:
             self.connect()
@@ -743,15 +817,15 @@ class Database:
             
             query = """
             INSERT INTO phemex_trades 
-            (account_id, symbol, side, order_type, quantity, price, stop_price, order_id, status, source_order_id, trade_time)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            (account_id, symbol, side, order_type, quantity, price, stop_price, order_id, status, source_order_id, trade_time, start_balance)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
             
-            cursor.execute(query, (account_id, symbol, side, order_type, quantity, price, stop_price, order_id, status, source_order_id, trade_time))
+            cursor.execute(query, (account_id, symbol, side, order_type, quantity, price, stop_price, order_id, status, source_order_id, trade_time, start_balance))
             self.connection.commit()
             
             trade_id = cursor.lastrowid
-            logging.info(f"✅ Added Phemex trade: ID={trade_id}, Account={account_id}, Symbol={symbol}, Side={side}")
+            #logging.info(f"✅ Added Phemex trade: ID={trade_id}, Account={account_id}, Symbol={symbol}, Side={side}")
             return trade_id
             
         except Exception as e:
@@ -790,7 +864,7 @@ class Database:
             cursor.execute(query, params)
             trades = cursor.fetchall()
             
-            logging.info(f"✅ Retrieved {len(trades)} Phemex trades")
+            #logging.info(f"✅ Retrieved {len(trades)} Phemex trades")
             return trades
             
         except Exception as e:

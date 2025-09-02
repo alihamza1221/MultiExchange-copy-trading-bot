@@ -35,7 +35,7 @@ class PhemexClient:
 
         try:
             self.phemex_client.load_markets()
-            logging.info("Phemex markets loaded successfully")
+            #logging.info("Phemex markets loaded successfully")
         except Exception as e:
             logging.warning(f" Could not load Phemex markets: {e}")        
     def test_connection(self):
@@ -47,19 +47,19 @@ class PhemexClient:
                 logging.error("Phemex public API test failed - no markets found")
                 return False
             
-            logging.info(f"✅ Phemex public API accessible - found {len(markets)} markets")
+            #logging.info(f"✅ Phemex public API accessible - found {len(markets)} markets")
             
             # Test 2: Authentication test with balance
             try:
                 balance = self.phemex_client.fetch_balance()
-                logging.info(" Phemex authentication successful")
+                #logging.info(" Phemex authentication successful")
                 logging.debug(f"Balance info: {balance}")
                 return True
             except Exception as auth_error:
                 # Check if it's a permission issue (auth worked but no permission)
                 error_msg = str(auth_error).lower()
                 if any(keyword in error_msg for keyword in ['permission', 'unauthorized', 'forbidden', 'api']):
-                    logging.info("✅ Phemex authentication successful (limited permissions)")
+                    #logging.info("✅ Phemex authentication successful (limited permissions)")
                     return True
                 else:
                     logging.error(f"Phemex authentication failed: {auth_error}")
@@ -94,7 +94,7 @@ class PhemexClient:
             # Check if we get a valid response (even if it's an error about permissions)
             if 'code' in result:
                 if result.get('code') in [0, 10404, 11007]:  # Success or permission errors (means auth worked)
-                    logging.info("Phemex connection test successful (alternative method)")
+                    #logging.info("Phemex connection test successful (alternative method)")
                     return True
                 else:
                     logging.error(f"Phemex connection test failed: {result}")
@@ -125,13 +125,13 @@ class PhemexClient:
                 hashlib.sha256
             ).hexdigest()
             
-            logging.debug(f"🔴 Signature generation - String to sign: {s}")
-            logging.debug(f"🔴 Generated signature: {signature}")
+            logging.debug(f"--Signature generation - String to sign: {s}")
+            logging.debug(f"--Generated signature: {signature}")
             
             return signature
             
         except Exception as e:
-            logging.error(f"❌ Error generating signature: {e}")
+            logging.error(f" Error generating signature: {e}")
             raise
 
     def fetch_all_price_scales(self):
@@ -213,7 +213,7 @@ class PhemexClient:
             ccxt_amount = float(quantity)
 
 
-            logging.info(f" Placing CCXT order: {symbol} → {phemex_symbol} | {ccxt_side} {ccxt_type} {ccxt_amount} at price {price} and sp = {stop_price}")
+            #logging.info(f" Placing CCXT order: {symbol} → {phemex_symbol} | {ccxt_side} {ccxt_type} {ccxt_amount} at price {price} and sp = {stop_price}")
 
             # Convert order parameters to CCXT format
             
@@ -235,14 +235,14 @@ class PhemexClient:
             # Place order based on type
             if ccxt_type == 'market':
                 order =self.phemex_client.create_order(phemex_symbol, ccxt_type, ccxt_side, ccxt_amount)
-                logging.info("successfully placed market order")
+                #logging.info(f"successfully placed market order for {phemex_symbol} on phemex")
                 #self.phemex_client.set_leverage(phemex_symbol, 10)
                 
             elif ccxt_type == 'limit':
                 # Use create_order instead of create_limit_order
                 if not price:
                     raise ValueError("Limit order requires price")
-                logging.info(f"placing limit order --------------\n symbol {phemex_symbol} type : limit side : {ccxt_side} amount : {ccxt_amount} price : {float(price)}")
+                #logging.info(f"placing limit order --------------\n symbol {phemex_symbol} type : limit side : {ccxt_side} amount : {ccxt_amount} price : {float(price)}")
                 order = self.phemex_client.create_order(
                     symbol=phemex_symbol,
                     type='limit', 
@@ -251,7 +251,7 @@ class PhemexClient:
                     price=float(price),
                 )
             elif order_type == "STOP_MARKET":
-                    logging.info(f" Placing STOP_MARKET order: {phemex_symbol} | {ccxt_amount} @ {stop_price}")
+                    #logging.info(f" Placing STOP_MARKET order: {phemex_symbol} | {ccxt_amount} @ {stop_price}")
                     order = self.create_stop_market_order(phemex_symbol, ccxt_amount, float(stop_price)) if ccxt_side == "sell" else self.create_stop_short_order(phemex_symbol, ccxt_amount, float(stop_price))
                         
             elif ccxt_type == 'stop':
@@ -282,12 +282,12 @@ class PhemexClient:
             else:
                 # Generic order creation
                 if order_type == "TAKE_PROFIT_MARKET" :
-                    logging.info(f" Placing TAKE_PROFIT_MARKET order: {phemex_symbol} | {ccxt_amount} @ {stop_price}")
+                    #logging.info(f" Placing TAKE_PROFIT_MARKET order: {phemex_symbol} | {ccxt_amount} @ {stop_price}")
                     order = self.create_take_profit_market_order(phemex_symbol, ccxt_amount, float(stop_price)) if ccxt_side == "sell" else self.create_take_profit_short_order(phemex_symbol, ccxt_amount, float(stop_price))
                
 
                 else:
-                    logging.info('placing generic order on phemex....')
+                    #logging.info('placing generic order on phemex....')
 
                     order = self.phemex_client.create_order(
                         symbol=phemex_symbol,
@@ -298,8 +298,8 @@ class PhemexClient:
                         params=params
                     )
             
-            logging.info(f" CCXT order placed successfully: {order['id']} | Status: {order['status']}")
-            logging.debug(f"Order details: {order}")
+            #logging.info(f" CCXT order placed successfully: {order['id']} | Status: {order['status']}")
+            #logging.debug(f"Order details: {order}")
             
             return {
                 'success': True,
@@ -330,7 +330,7 @@ class PhemexClient:
             'reduceOnly': True
         }
         
-        logging.info(f'Placing stop loss market order for LONG: SELL {amount} {symbol} at trigger {stop_price}')
+        #logging.info(f'Placing stop loss market order for LONG: SELL {amount} {symbol} at trigger {stop_price}')
         
         order = self.phemex_client.create_order(
             symbol=symbol,
@@ -353,7 +353,7 @@ class PhemexClient:
             'reduceOnly': True
         }
         
-        logging.info(f'Placing stop loss market order for SHORT: BUY {amount} {symbol} at trigger {stop_price}')
+        #logging.info(f'Placing stop loss market order for SHORT: BUY {amount} {symbol} at trigger {stop_price}')
         
         order = self.phemex_client.create_order(
             symbol=symbol,
@@ -437,7 +437,7 @@ class PhemexClient:
         try:
             symbol = self.Convert_to_ccxt_symbol(symbol)
             self.phemex_client.set_leverage(leverage, symbol)
-            logging.info(f"Leverage is set to {leverage} for {symbol} in phemex client")
+            #logging.info(f"Leverage is set to {leverage} for {symbol} in phemex client")
             return True
         except Exception as e:
             logging.error(f" Phemex set_leverage failed: {e}")
@@ -448,7 +448,7 @@ class PhemexClient:
             # Test markets fetch (public endpoint)
             markets = self.phemex_client.fetch_markets()
             if markets and len(markets) > 0:
-                logging.info(f" Phemex connection test successful - {len(markets)} markets")
+                #logging.info(f" Phemex connection test successful - {len(markets)} markets")
                 return True
             else:
                 logging.error(" Phemex connection test failed - no markets found")
@@ -461,7 +461,7 @@ class PhemexClient:
         """Get account balance using CCXT"""
         try:
             balance = self.phemex_client.fetch_balance()
-            logging.info("CCXT balance retrieved successfully")
+            #logging.info("CCXT balance retrieved successfully")
             return balance
         except Exception as e:
             logging.error(f" CCXT get_account_balance failed: {e}")
@@ -476,7 +476,7 @@ class PhemexClient:
             else:
                 order = self.phemex_client.fetch_order(order_id)
         
-            logging.info(f" CCXT order fetched: {order_id}")
+            #logging.info(f" CCXT order fetched: {order_id}")
             return order
         except Exception as e:
             logging.error(f" CCXT fetch_order failed: {e}")
@@ -487,7 +487,7 @@ class PhemexClient:
         try:
             phemex_symbol = symbol
             result = self.phemex_client.cancel_order(order_id, phemex_symbol)
-            logging.info(f"CCXT order cancelled: {order_id}")
+            #logging.info(f"CCXT order cancelled: {order_id}")
             return result
         except Exception as e:
             logging.error(f" CCXT cancel_order failed: {e}")
@@ -552,7 +552,7 @@ class BinanceClient:
         """Test if the API credentials are valid"""
         try:
             account_info = self.client.futures_account()
-            logging.info(f"Binance connection test successful for {'source' if self.is_source else 'target'} account")
+            logging.info(f"*****Binance connection test successful for {'source' if self.is_source else 'target'} account")
             return True
         except Exception as error:
             logging.error(f"Unexpected error during connection test: {str(error)}")
@@ -561,7 +561,9 @@ class BinanceClient:
     def get_account_info(self):
         """Get account information"""
         try:
-            return self.client.futures_account()
+            result = self.client.futures_account()
+            print(f"result........... {result}")
+            return result
         except BinanceAPIException as error:
             logging.error(
                 f"Error getting account info - Code: {error.code}, Message: {error.message}"
@@ -571,6 +573,20 @@ class BinanceClient:
             logging.error(f"Unexpected error getting account info: {str(error)}")
             return None
 
+    def get_account_balance(self):
+        """Get account balance information"""
+        try:
+            result_list = self.client.futures_account_balance()
+            print(f"result........... {result_list}")
+            return result_list
+        except BinanceAPIException as error:
+            logging.error(
+                f"Error getting account info - Code: {error.code}, Message: {error.message}"
+            )
+            return None
+        except Exception as error:
+            logging.error(f"Unexpected error getting account info: {str(error)}")
+            return None
     def place_order(self, symbol, side, order_type, quantity, price=None, stop_price=None, time_in_force='GTC', reduce_only=False):
         """Place a new futures order"""
         try:
@@ -600,7 +616,7 @@ class BinanceClient:
             if reduce_only:
                 order_params['reduceOnly'] = reduce_only
             response = self.client.futures_create_order(**order_params)
-            logging.info(f"Order placed successfully: {response}")
+            #logging.info(f"Order placed successfully: {response}")
             return response
             
         except BinanceAPIException as error:
@@ -616,7 +632,7 @@ class BinanceClient:
         """Cancel an existing order"""
         try:
             response = self.client.futures_cancel_order(symbol=symbol, orderId=order_id)
-            logging.info(f"Order cancelled successfully: {response}")
+            #logging.info(f"Order cancelled successfully: {response}")
             return response
         except BinanceAPIException as error:
             logging.error(
@@ -650,7 +666,7 @@ class BinanceClient:
         try:
             # Set leverage
             response = self.client.futures_change_leverage(symbol=symbol, leverage=leverage)
-            logging.info(f"Leverage set for {symbol} to {leverage}x")
+            #logging.info(f"Leverage set for {symbol} to {leverage}x")
             
             return response
         
@@ -702,11 +718,12 @@ class SourceAccountListener:
             stop_price = order_data.get('sp')
             status = order_data.get('X')
             order_id = order_data.get('i')
+            last_filled_price = order_data.get('L')
             time_in_force = order_data.get('f')
             reduce_only = order_data.get('R')
             leverage = 10
-            print("order: ", order_data, "levg:", leverage)
-            logging.info(f"Received order update: {symbol} {side} {status} ps {order_data.get('ps')} {str(order_type).lower()} reduce_only: {reduce_only}")
+            print("**********order: ", order_data, "leverage:", leverage)
+            #logging.info(f"(start)--Received order update: {symbol} {side} {status} ps {order_data.get('ps')} {str(order_type).lower()} reduce_only: {reduce_only}")
             
             # Mirror only when policy matches to avoid duplicates
             if not self._should_mirror_event(order_type, status):
@@ -715,7 +732,7 @@ class SourceAccountListener:
 
             self.process_order_update(
                 symbol, side, order_type, quantity,
-                price, stop_price, status, order_id, leverage, time_in_force, reduce_only
+                price, stop_price, status, order_id, last_filled_price, leverage, time_in_force, reduce_only
             )
 
         except Exception as e:
@@ -730,20 +747,19 @@ class SourceAccountListener:
         st = (status or '').upper()
         market_like = {'MARKET'}
         if ot in market_like:
-            return st == 'NEW'
+            return st == 'FILLED'
         # LIMIT, STOP_LIMIT, TAKE_PROFIT (limit), others
         if ot in {'STOP_MARKET', 'TAKE_PROFIT_MARKET'}:
             return False
-        
-        return st == 'NEW'
+
+        return st == 'FILLED'
 
     def _dedup_key(self, exchange_type: str, account_id, symbol: str, side: str, order_type: str, source_order_id) -> str:
         return f"{exchange_type}:{account_id}:{symbol}:{side}:{(order_type or '').upper()}:{source_order_id}"
 
-    def process_order_update(self, symbol, side, order_type, quantity, price, stop_price, status, source_order_id, leverage = 10, time_in_force='GTC', reduce_only=False):
+    def process_order_update(self, symbol, side, order_type, quantity, price, stop_price, status, source_order_id,last_filled_price, leverage = 10, time_in_force='GTC', reduce_only=False):
         """Process order update and mirror to target accounts across all exchanges"""
         try:
-            logging.info(f"Starting process_order_update for {symbol} {side} {order_type} {quantity} {price} {stop_price} {status} {source_order_id} {leverage} {time_in_force} {reduce_only}")
 
             # Guard again by policy (in case called from elsewhere)
             if not self._should_mirror_event(order_type, status):
@@ -752,8 +768,8 @@ class SourceAccountListener:
 
             # Get all target accounts from all exchanges
             all_accounts = self.db.get_all_trading_accounts()
-            logging.info(f"Retrieved accounts: type={type(all_accounts)}, value={all_accounts}")
-            
+            #logging.info(f"Retrieved accounts: type={type(all_accounts)}, value={all_accounts}")
+
             # Validate accounts result
             if all_accounts is None:
                 logging.error(" CRITICAL: get_all_trading_accounts returned None")
@@ -768,7 +784,7 @@ class SourceAccountListener:
             successful_mirrors = 0
             failed_mirrors = 0
             
-            logging.info(f"📊 Found {len(all_accounts)} target accounts to mirror to")
+            #logging.info(f"📊 Found {len(all_accounts)} target accounts to mirror to")
             
             for account in all_accounts:
                 try:
@@ -816,22 +832,58 @@ class SourceAccountListener:
                         logging.warning(f"Failed to set leverage for {client_type} account {account_id}: {leverage_error}")
                     
                     # Mirror the trade based on order type
+                    log_price = price if price and price != '0' else last_filled_price
                     response = self._execute_mirror_trade(
                         target_client, exchange_type, symbol, side, order_type,
                         quantity, price, stop_price, time_in_force, reduce_only
                     )
-                    
+
+                    if(order_type == "MARKET" and reduce_only == True):
+                        # Find the match from db with same quantity, side opposite, symbol same
+                        matching_trade = self.db.find_matching_trade(
+                            account_id=account['id'],
+                            symbol=symbol,
+                            side=side,
+                            quantity=quantity,
+                            exchange_type=exchange_type
+                        )
+                        if matching_trade:
+                            # You can now calculate and update PnL for matching_trade
+                            logging.info(f"Found matching trade for PnL calculation: {matching_trade}")
+                            current_trade = {
+                                'account_id': account['id'],  # You'll need to get this from your add_trade function
+                                'side': side,
+                                'price': log_price,
+                                'symbol': symbol,
+                                'quantity': quantity,
+                                'exchange_type': exchange_type
+                            }
+
+                            pnl_value = self.calculate_and_update_pnl(matching_trade, current_trade, exchange_type)
+                            end_balance = 0
+                            if exchange_type == 'binance':
+                                end_balance = target_client.get_account_info().get('totalWalletBalance', 0)
+                                #target_client.get_account_balance()
+                            elif exchange_type == 'phemex':
+                                balance_info = target_client.get_account_balance_ccxt()
+                                end_balance = balance_info.get('total', 0)
+                            self.db.update_trade_pnl(matching_trade['id'], pnl_value, exchange_type, end_balance)
+                            return
                     if response:
                         # Mark as mirrored to prevent duplicates across subsequent events
+                        start_balance = 0
+                        if exchange_type == 'binance':
+                            start_balance = target_client.get_account_info().get('totalWalletBalance', 0)
+                        elif exchange_type == 'phemex':
+                            balance_info = target_client.get_account_balance_ccxt()
+                            start_balance = balance_info.get('total', 0)
                         self._mirror_dedup.add(key)
-                        # Log successful trade
-                        print('response: ', response)
                         self._log_trade_to_database(
                             account, exchange_type, symbol, side, order_type,
-                            quantity, price, stop_price, response, source_order_id
+                            quantity, log_price, stop_price, response, source_order_id, start_balance
                         )
                         successful_mirrors += 1
-                        logging.info(f" Trade mirrored to {client_type} account {account_id}: {symbol} {side} {quantity}")
+                        #logging.info(f" Trade mirrored to {client_type} account {account_id}: {symbol} {side} {quantity}")
                     else:
                         failed_mirrors += 1
                         logging.error(f" Failed to mirror trade to {client_type} account {account_id}")
@@ -845,13 +897,51 @@ class SourceAccountListener:
             
             # Summary logging
             total_accounts = len(all_accounts)
-            logging.info(f"📊 Mirror summary: {successful_mirrors}/{total_accounts} successful, {failed_mirrors} failed")
+            logging.info(f"********Order placed for all accounts {symbol} {side} {order_type} {quantity} {price} {stop_price} {status} {source_order_id} {leverage} {time_in_force} {reduce_only}")
+
+            logging.info(f"Mirror summary: {successful_mirrors}/{total_accounts} successful, {failed_mirrors} failed")
                     
         except Exception as e:
             logging.error(f" Critical error processing order update: {e}")
             import traceback
             logging.error(f"Full traceback: {traceback.format_exc()}")
+    def calculate_and_update_pnl(self, opening_trade, closing_trade, exchange_type):
+        """Calculate PnL between opening and closing trades and update both"""
+        try:
+            if not opening_trade or not closing_trade:
+                logging.error("Missing opening or closing trade data")
+                return False
 
+            # Extract prices
+            opening_price = float(opening_trade.get('price', 0))
+            closing_price = float(closing_trade.get('price', 0))
+            quantity = float(opening_trade.get('quantity', 0))
+
+            if opening_price == 0 or closing_price == 0 or quantity == 0:
+                logging.error("Invalid price or quantity data for PnL calculation")
+                return False
+
+            # Calculate PnL based on position side
+            opening_side = opening_trade.get('side', '').upper()
+
+            if opening_side == 'BUY':
+                pnl = (closing_price - opening_price) * quantity
+            elif opening_side == 'SELL':
+                pnl = (opening_price - closing_price) * quantity
+            else:
+                logging.error(f"Invalid opening side: {opening_side}")
+                return False
+            
+            pnl = round(pnl, 8)
+
+            logging.info(f"Calculated PnL: {pnl} (Opening: {opening_price}, Closing: {closing_price}, Qty: {quantity})")
+
+
+            return pnl
+
+        except Exception as e:
+            logging.error(f"Error calculating and updating PnL: {e}")
+            return False
     def _execute_mirror_trade(self, target_client, exchange_type, symbol, side, order_type, 
                              quantity, price, stop_price, time_in_force, reduce_only):
         """Execute the mirror trade with exchange-specific handling"""
@@ -931,7 +1021,7 @@ class SourceAccountListener:
             )
             
             if result['success']:
-                logging.info(f" CCXT Phemex trade executed: {result['order_id']} | Status: {result['status']}")
+                #logging.info(f" CCXT Phemex trade executed: {result['order_id']} | Status: {result['status']}")
                 return {
                     'code': 0,
                     'data': {
@@ -947,10 +1037,10 @@ class SourceAccountListener:
             return None
 
     def _log_trade_to_database(self, account, exchange_type, symbol, side, order_type, 
-                              quantity, price, stop_price, response, source_order_id):
+                              quantity, price, stop_price, response, source_order_id, start_balance):
         """Log successful trade to database with exchange-specific handling"""
         try:
-            logging.debug(f"Trade LOGGING........ to database for {exchange_type} account {source_order_id}")
+            #logging.debug(f"Trade LOGGING........ to database for {exchange_type} account {source_order_id}")
             # Extract order ID based on exchange response format
             if exchange_type == 'binance':
                 order_id = response.get('orderId')
@@ -958,11 +1048,11 @@ class SourceAccountListener:
                 order_id = response.get('data', {}).get('orderID') if response.get('code') == 0 else None
             else:
                 order_id = str(response.get('id', 'unknown'))
-            
-            
-            logging.debug(f"Trade LOGGING........ to database for {exchange_type} account {source_order_id} with order ID {order_id}")
-            
-            
+
+
+            logging.debug(f"(DB)Trade Successful adding to database for {exchange_type} account {source_order_id} with order ID {order_id}")
+
+
             # Add trade record
             if exchange_type == 'binance':
                 self.db.add_trade(
@@ -975,7 +1065,8 @@ class SourceAccountListener:
                     stop_price=float(stop_price) if stop_price and stop_price != '0' else   None,
                     order_id=order_id,
                     status='MIRRORED',
-                    source_order_id=source_order_id
+                    source_order_id=source_order_id,
+                    start_balance=start_balance
                 )
             elif exchange_type == 'phemex':
                 self.db.add_phemex_trade(
@@ -988,10 +1079,11 @@ class SourceAccountListener:
                     stop_price=float(stop_price) if stop_price and stop_price != '0' else   None,
                     order_id=order_id,
                     status='MIRRORED',
-                    source_order_id=source_order_id
+                    source_order_id=source_order_id,
+                    start_balance=start_balance
                 )
             
-            logging.debug(f"Trade logged to database for {exchange_type} account {account['id']}")
+            #logging.debug(f"Trade logged to database for {exchange_type} account {account['id']}")
             
         except Exception as e:
             logging.error(f"Error logging trade to database: {e}")
@@ -1011,14 +1103,14 @@ class SourceAccountListener:
                 callback=self.handle_socket_message
             )
 
-            logging.info("Started listening to source account order updates")
+            logging.info("**************Started listening to source account order updates*************")
             
             # Keep alive loop in a separate thread
             def keep_alive():
                 while True:
-                    time.sleep(900)  # 15 minutes
+                    time.sleep(600)  # 10 minutes
                     if not self.source_client.keep_alive_user_stream(self.listen_key):
-                        logging.error("Failed to keep stream alive")
+                        logging.error("*******************Failed to keep stream alive********************")
                         break
             
             alive_thread = Thread(target=keep_alive, daemon=True, name="KeepAliveThread")

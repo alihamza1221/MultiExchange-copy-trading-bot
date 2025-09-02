@@ -42,10 +42,9 @@ def safe_datetime_to_string(dt_value):
     try:
         # If it's a datetime object, format it
         if hasattr(dt_value, 'strftime'):
-            return dt_value.strftime('%Y-%m-%d')
-        # If it's already a string, return as-is (but clean it)
+            return str(dt_value)
         elif isinstance(dt_value, str):
-            return str(dt_value).split('.')[0][:19]  # Remove microseconds and limit length
+            return str(dt_value)  # Remove microseconds and limit length
         # For anything else, convert to string
         else:
             return str(dt_value)
@@ -447,9 +446,9 @@ class AdminDashboard:
                     accounts = db.get_all_binance_accounts()
                     
                     if accounts:
-                        st.info(f"📊 **Binance Accounts**: {len(accounts)}")
+                        st.info(f"**Binance Accounts**: {len(accounts)}")
                         for account in accounts:
-                            with st.expander(f"💳 {account['account_name'] or 'Unnamed Account'} - {account['user_email']}"):
+                            with st.expander(f" {account['account_name'] or 'Unnamed Account'} - {account['user_email']}"):
                                 col1, col2 = st.columns(2)
                                 with col1:
                                     st.write("**Account Details:**")
@@ -1166,35 +1165,27 @@ class UserDashboard:
                             
                             with col2:
                                 side = trade.get('side', 'N/A')
-                                side_color = "🟢" if side == "BUY" else "🔴" if side == "SELL" else "⚪"
-                                st.write(f"{side_color} {side}")
+                                st.write(f"{side}")
+                            
                             
                             with col3:
-                                order_type = trade.get('order_type', 'N/A')
-                                st.write(f"📋 {order_type}")
+                                quantity = trade.get('quantity', 0)
+                                st.write(f"{quantity}")
                             
                             with col4:
-                                quantity = trade.get('quantity', 0)
-                                st.write(f"📊 {quantity}")
-                            
-                            with col5:
                                 price = trade.get('price')
                                 if price:
-                                    st.write(f"💰 ${price}")
+                                    st.write(f"${price}")
                                 else:
-                                    st.write("💰 Market")
+                                    st.write("Market")
                             
-                            with col6:
-                                status = trade.get('status', 'N/A')
-                                status_colors = {
-                                    'FILLED': '✅',
-                                    'MIRRORED': '🔄',
-                                    'PENDING': '⏳',
-                                    'CANCELED': '❌',
-                                    'REJECTED': '🚫'
-                                }
-                                status_icon = status_colors.get(status, '⚪')
-                                st.write(f"{status_icon} {status}")
+                            with col5:
+                                pnl = trade.get('pnl', '0')
+                                #round to 2 decimal places
+                                if not pnl or pnl == 'None':
+                                    pnl = 0
+                                pnl = round(float(pnl), 3)
+                                st.write(f"{pnl}")
                                 
                                 trade_time = trade.get('trade_time', 'N/A')
                                 formatted_time = safe_datetime_to_string(trade_time)
@@ -1210,7 +1201,9 @@ class UserDashboard:
                                         st.caption(f" {formatted_time}")
                                 else:
                                     st.caption("N/A")
-                            
+                            with col6:
+                                st.write(f"${trade.get('start_balance', 0)} ->")
+                                st.write(f"${trade.get('end_balance', 0)}")
                             st.divider()
                     
                     # Show pagination info
@@ -1563,7 +1556,7 @@ class UserDashboard:
             return
         
         # Filter options
-        st.markdown("### 🔍 Filter Options")
+        st.markdown("### Filter Options")
         col1, col2, col3, col4 = st.columns(4)
         
         with col1:
@@ -1599,7 +1592,7 @@ class UserDashboard:
         filtered_trades.sort(key=lambda x: x.get('trade_time', ''), reverse=True)
         
         # Display summary
-        st.markdown(f"### 📋 {exchange_name} Trades ({len(filtered_trades)} shown)")
+        st.markdown(f"### {exchange_name} Trades ({len(filtered_trades)} shown)")
         
         if filtered_trades:
             # Quick stats
@@ -1607,19 +1600,19 @@ class UserDashboard:
             
             with col1:
                 buy_orders = len([t for t in filtered_trades if t.get('side') == 'BUY'])
-                st.metric("📈 Buy Orders", buy_orders)
+                st.metric("Buy Orders", buy_orders)
             
             with col2:
                 sell_orders = len([t for t in filtered_trades if t.get('side') == 'SELL'])
-                st.metric("📉 Sell Orders", sell_orders)
+                st.metric("Sell Orders", sell_orders)
             
             with col3:
                 successful = len([t for t in filtered_trades if t.get('status') in ['FILLED', 'MIRRORED']])
-                st.metric("✅ Successful", successful)
+                st.metric("Successful", successful)
             
             with col4:
                 total_volume = sum([float(t.get('quantity', 0)) for t in filtered_trades])
-                st.metric("📊 Total Volume", f"{total_volume:.4f}")
+                st.metric("Total Volume", f"{total_volume:.4f}")
             
             st.markdown("---")
             
@@ -1639,54 +1632,43 @@ class UserDashboard:
                     # Symbol
                     with cols[col_idx]:
                         symbol = trade.get('symbol', 'N/A')
-                        st.write(f"**{symbol}**")
-                        order_id = trade.get('order_id', 'N/A')
-                        if len(str(order_id)) > 15:
-                            st.caption(f"ID: {str(order_id)[:12]}...")
-                        else:
-                            st.caption(f"ID: {order_id}")
+                        st.write(f"*{i}-{symbol}*")
+                        # order_id = trade.get('order_id', 'N/A')
+                        # if len(str(order_id)) > 15:
+                        #     st.caption(f"ID: {str(order_id)[:12]}...")
+                        # else:
+                        #     st.caption(f"ID: {order_id}")
                     col_idx += 1
                     
                     # Side
                     with cols[col_idx]:
                         side = trade.get('side', 'N/A')
-                        side_color = "🟢" if side == "BUY" else "🔴" if side == "SELL" else "⚪"
-                        st.write(f"{side_color} {side}")
+                        st.write(f"{side}")
                     col_idx += 1
-                    
-                    # Type
-                    with cols[col_idx]:
-                        order_type = trade.get('order_type', 'N/A')
-                        st.write(f"📋 {order_type}")
-                    col_idx += 1
-                    
+                                        
                     # Quantity
                     with cols[col_idx]:
                         quantity = trade.get('quantity', 0)
-                        st.write(f"📊 {quantity}")
+                        st.write(f"q={quantity}")
                     col_idx += 1
                     
                     # Price
                     with cols[col_idx]:
                         price = trade.get('price')
                         if price and float(price) > 0:
-                            st.write(f"💰 ${float(price):,.4f}")
+                            st.write(f"p = ${float(price):,.4f}")
                         else:
-                            st.write("💰 Market")
+                            st.write("Market")
                     col_idx += 1
                     
                     # Status
                     with cols[col_idx]:
-                        status = trade.get('status', 'N/A')
-                        status_colors = {
-                            'FILLED': '✅',
-                            'MIRRORED': '🔄',
-                            'PENDING': '⏳',
-                            'CANCELED': '❌',
-                            'REJECTED': '🚫'
-                        }
-                        status_icon = status_colors.get(status, '⚪')
-                        st.write(f"{status_icon} {status}")
+                        pnl = trade.get('pnl', '0')
+                        #round to 2 decimal places
+                        if not pnl or pnl == 'None':
+                            pnl = 0
+                        pnl = round(float(pnl), 3)
+                        st.write(f"PNL={pnl}")
                     col_idx += 1
                     
                     # Time
@@ -1698,11 +1680,11 @@ class UserDashboard:
                                 date_part = formatted_time[5:10].replace('-', '/')
                                 time_part = formatted_time[11:16] if len(formatted_time) > 11 else ""
                                 short_display = f"{date_part} {time_part}".strip()
-                                st.write(f"⏰ {short_display}")
+                                st.write(f" {short_display}")
                             except:
-                                st.write(f"⏰ {formatted_time}")
+                                st.write(f"{formatted_time}")
                         else:
-                            st.write("⏰ N/A")
+                            st.write(" N/A")
                     col_idx += 1
                     
                     # Account (if showing)
@@ -1710,9 +1692,9 @@ class UserDashboard:
                         with cols[col_idx]:
                             account_name = trade.get('account_name', 'Unknown')
                             if len(account_name) > 15:
-                                st.caption(f"👤 {account_name[:12]}...")
+                                st.caption(f"{account_name[:12]}...")
                             else:
-                                st.caption(f"👤 {account_name}")
+                                st.caption(f"{account_name}")
                         col_idx += 1
                     
                     # Exchange (if showing)
@@ -1722,7 +1704,13 @@ class UserDashboard:
                             exchange_icons = {'Binance': '🔶', 'Phemex': '🔴'}
                             icon = exchange_icons.get(exchange, '🔗')
                             st.caption(f"{icon} {exchange}")
-                    
+                    with cols[col_idx]:
+                        start_balance = round(float(trade.get('start_balance', 0)  if trade.get('start_balance', 0) != None else 0), 3)
+                        end_balance = round(float(trade.get('end_balance', 0) if trade.get('end_balance', 0) != None else 0), 3)
+
+                        st.write(f"{start_balance} -> {end_balance}$")
+                        col_idx += 1
+
                     if i < len(filtered_trades) - 1:  # Don't add divider after last item
                         st.divider()
         else:
