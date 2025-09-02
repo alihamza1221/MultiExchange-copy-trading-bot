@@ -673,8 +673,11 @@ class BinanceClient:
         except BinanceAPIException as e:
             logging.error(f"Error setting leverage for {symbol}: {e}") 
     
-    def keep_alive_user_stream(self, listen_key):
+    def keep_alive_user_stream(self, listen_key, retry_idx= 0):
         """Keep user data stream alive"""
+        if retry_idx > 5:
+            logging.error("**********Max retries reached for renewing listen key*********")
+            return False
         try:
             self.client.futures_stream_keepalive(listenKey=listen_key)
             return True
@@ -685,6 +688,7 @@ class BinanceClient:
             return False
         except Exception as error:
             logging.error(f"Unexpected error renewing listen key: {str(error)}")
+            self.keep_alive_user_stream(listen_key, retry_idx + 1)
             return False
 
 class SourceAccountListener:
@@ -1108,11 +1112,10 @@ class SourceAccountListener:
             # Keep alive loop in a separate thread
             def keep_alive():
                 while True:
-                    time.sleep(600)  # 10 minutes
+                    time.sleep(300)  # 5 minutes
                     if not self.source_client.keep_alive_user_stream(self.listen_key):
                         logging.error("*******************Failed to keep stream alive********************")
-                        break
-            
+                        
             alive_thread = Thread(target=keep_alive, daemon=True, name="KeepAliveThread")
             alive_thread.start()
             
