@@ -688,7 +688,7 @@ class BinanceClient:
             return False
         except Exception as error:
             logging.error(f"Unexpected error renewing listen key: {str(error)}")
-            self.keep_alive_user_stream(listen_key, retry_idx + 1)
+            # self.keep_alive_user_stream(listen_key, retry_idx + 1)
             return False
 
 class SourceAccountListener:
@@ -707,6 +707,17 @@ class SourceAccountListener:
             if msg.get('e') == 'ORDER_TRADE_UPDATE':
                 order_data = msg.get('o', {})
                 self.handle_order_update(order_data)
+            elif msg.get('e') == 'error':
+                logging.error(f"WebSocket error received: {msg}")
+                self.stop()
+                self.start_listening()
+
+            elif msg.get('e') == 'listenKeyExpired':
+                logging.warning("Listen key expired - ThreadedWebsocketManager will handle renewal")
+                self.stop()
+                self.start_listening()
+
+    
         except Exception as e:
             logging.error(f"Error handling socket message: {e}")
     
@@ -1100,7 +1111,9 @@ class SourceAccountListener:
                 api_key=self.source_client.api_key,
                 api_secret=self.source_client.secret_key
             )
+            
             self.twm.start()
+
 
             # Start futures user data stream (no listen_key arg needed!)
             self.twm.start_futures_user_socket(
@@ -1109,24 +1122,29 @@ class SourceAccountListener:
 
             logging.info("**************Started listening to source account order updates*************")
             
-            # Keep alive loop in a separate thread
-            def keep_alive():
-                while True:
-                    time.sleep(300)  # 5 minutes
-                    if not self.source_client.keep_alive_user_stream(self.listen_key):
-                        logging.error("*******************Failed to keep stream alive********************")
-                        
-            alive_thread = Thread(target=keep_alive, daemon=True, name="KeepAliveThread")
-            alive_thread.start()
-            
+            # # Keep alive loop in a separate thread
+            # def keep_alive():
+            #     while True:
+            #         time.sleep(600)  # 10 minutes
+            #         if not self.source_client.keep_alive_user_stream(self.listen_key):
+            #             logging.error("*******************Failed to keep stream alive********************")
+
+            # alive_thread = Thread(target=keep_alive, daemon=True, name="KeepAliveThread")
+            # alive_thread.start()
+
+
         except Exception as e:
             logging.error(f"Error starting listener: {e}")
+            self.stop()
+            self.start_listening()
         
     def stop(self):
         """Stop the WebSocket manager"""
         try:
             if self.twm:
-                self.twm.stop()
+                self.twm.stop() 
+                time.sleep(2)  # Give time for cleanup
+                self.twm = None
                 logging.info("WebSocket manager stopped")
         except Exception as e:
             logging.error(f"Error stopping WebSocket manager: {e}")
